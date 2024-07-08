@@ -13,7 +13,6 @@ import SignUp from './Pages/SignUp';
 import { useEffect } from "react";
 import Aos from 'aos';
 import "aos/dist/aos.css";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
   return (
     <div className="App">
     <Analytics/>
-    <SpeedInsights/>
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/AboutUs' element={<AboutUs />} />
