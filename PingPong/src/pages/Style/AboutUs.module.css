@@ -1,0 +1,117 @@
+.aboutPage {
+  margin: auto;
+  margin-top: 8em;
+  margin-bottom: 10em;
+  width: 80%;
+}
+
+.aboutContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.aboutTxt {
+  width: 40%;
+  box-sizing: border-box; /* Ensures padding and borders are included in the width */
+}
+
+.title {
+  color: rgb(7, 27, 83);
+  margin-bottom: 1em;
+  font-weight: 600;
+  font-size: 2em;
+}
+
+.txt {
+  line-height: 25px;
+  font-size: 17px;
+}
+
+.sliderContainer {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.sliderImage {
+  height: 750px;
+}
+
+.photo {
+  width: 43vw;
+  box-sizing: border-box;
+}
+
+.photo img {
+  width: 100%;
+  border-radius: 2em;
+  box-shadow: 0 0 10px rgb(7, 56, 121);
+}
+
+@media (max-width: 1024px) {
+  .aboutPage {
+    width: 90%;
+    margin-top: 6em;
+    margin-bottom: 8em;
+  }
+
+  .sliderImage {
+    height: auto; /* Adjust height for smaller screens */
+  }
+
+  .photo {
+    width: 100%;
+  }
+
+  .aboutTxt {
+    width: 100%;
+    margin-top: 2em;
+  }
+
+  .sliderContainer {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 767px) {
+  .aboutPage {
+    margin-top: 2em;
+    margin-bottom: 3em;
+    width: 90%; /* Adjust width for smaller screens */
+  }
+
+  .aboutContainer {
+    display: block;
+    text-align: center; /* Center content on smaller screens */
+  }
+
+  .photo {
+    width: 100%;
+  }
+
+  .aboutTxt {
+    width: 100%;
+    margin-top: 1em;
+  }
+
+  .title {
+    margin-bottom: 0.3em;
+  }
+
+  .sliderContainer {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.videoContainer {
+  text-align: center;
+}
+
+.video {
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+}

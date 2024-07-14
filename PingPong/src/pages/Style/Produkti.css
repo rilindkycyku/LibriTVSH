@@ -1,0 +1,279 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.teDhenatProduktit h1 {
+  font-size: 1em;
+}
+
+.emriProd {
+  text-align: left;
+}
+
+.ContainerTeDhenat {
+  margin-left: 2em;
+}
+
+.teDhenatProduktit td {
+  border-bottom: 2px solid #dddddd;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.foto {
+  width: 100%;
+  max-width: 27.5em;
+}
+
+.foto .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.produkti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+  gap: 1.3em;
+  border: none;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #d3d3d3;
+  background-color: white;
+  flex-direction: column;
+  width: 90%;
+}
+
+.detajet {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  flex-direction: row;
+  width: 100%;
+}
+
+.blerja {
+  margin-top: 2em;
+}
+
+.pershkrimi {
+  width: 100%;
+  font-size: 0.8em;
+}
+
+.pershkrimi h2 {
+  font-size: 1.4em;
+}
+
+.mesazhiZbritjes {
+  margin-top: 1em;
+  font-size: 8pt;
+}
+
+.footer {
+  width: 100%;
+}
+
+.qmimiPaZbritje {
+  text-decoration: line-through;
+  color: #777;
+}
+
+@media (max-width: 1024px) {
+  .produkti {
+    width: 100%;
+    padding: 1em;
+  }
+
+  .detajet {
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+  }
+
+  .foto {
+    width: 100%;
+    max-width: 23em; 
+  }
+
+  .pershkrimi {
+    width: 100%;
+  }
+
+  .teDhenatProduktit h1 {
+    font-size: 12pt;
+  }
+
+  .mesazhiZbritjes {
+    width: 90%;
+  }
+}
+
+.artikujt {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 0 auto;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
+.titulliArtikuj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 2em;
+  width: 100%;
+  padding-left: 1em;
+}
+
+.titulliArtikuj h1 {
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  color: #0f243b;
+}
+.artikujt {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 0 auto;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
+.titulliArtikuj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 2em;
+  width: 100%;
+  padding-left: 1em;
+}
+
+.titulliArtikuj h1 {
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  color: #0f243b;
+}
+
+.artikulli {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  flex-basis: 205px;
+  background-color: #fff;
+  box-shadow: 0 0 10px #d3d3d3;
+  box-sizing: border-box;
+  margin: 0.5em;
+  padding: 1em;
+  border-radius: 25px;
+}
+
+
+.artikulliLabel {
+  text-align: center;
+  font-size: 10pt;
+  color: rgb(99, 93, 93);
+}
+
+.artikulli img {
+  width: 90%;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+  margin-bottom: 0.8em;
+}
+
+.artikulli a {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+}
+
+.cmimet{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items:center;
+  gap: 0.5em;
+  margin-top: auto;
+
+}
+
+.cmimi {
+  font-weight: bold;
+  color:#676464;
+  font-size: 13pt;
+}
+
+.cmimiPaZbritje{
+  font-size: 10pt;
+  text-decoration: line-through;
+}
+
+.navigimiFaqev {
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.navKerkimi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.searchBar {
+  width: 23em;
+  padding: 1em 2em;
+  border: 1px solid #d3d3d3;
+  border-radius: 25px;
+}
+
+.button-kategoria {
+  margin: 2em;
+}
+
+.button-kategoria span {
+  font-size: 15pt;
+}
+
+.zbritjaBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px;
+  border-radius: 0 25px 0 10px ;
+  background-color: #ec3d08;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.zbritjaBadge p{
+  margin: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
