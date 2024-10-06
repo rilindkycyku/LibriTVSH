@@ -1,0 +1,105 @@
+{
+  "shitjetDitore": {
+    "shitjetDitoreSipasOperatorit": [
+      {
+        "stafi": {
+          "userID": 9,
+          "emri": "Menaxher",
+          "mbiemri": "Menaxher",
+          "email": "menaxher.menaxher@financare.com",
+          "username": "menaxher.menaxher",
+          "aspNetUserID": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+          "aspNetUser": null,
+          "faturat": [],
+          "teDhenatPerdoruesit": null,
+          "kartelat": null
+        },
+        "numriBlerjeve": 2,
+        "totaliBlerjeveEuro": 10.16
+      }
+    ],
+    "shitjetDitoreParagon": 2,
+    "shitjetDitoreEuro": 10.16
+  },
+  "shitjetJavore": {
+    "shitjetJavoreSipasOperatorit": [
+      {
+        "stafi": {
+          "userID": 10,
+          "emri": "Arkatar",
+          "mbiemri": "Arkatar",
+          "email": "arkatar.arkatar@financare.com",
+          "username": "arkatar.arkatar",
+          "aspNetUserID": "1545403d-e285-4247-812d-2c7cd81c80f4",
+          "aspNetUser": null,
+          "faturat": [],
+          "teDhenatPerdoruesit": null,
+          "kartelat": null
+        },
+        "numriBlerjeve": 4,
+        "totaliBlerjeveEuro": 24.08
+      },
+      {
+        "stafi": {
+          "userID": 9,
+          "emri": "Menaxher",
+          "mbiemri": "Menaxher",
+          "email": "menaxher.menaxher@financare.com",
+          "username": "menaxher.menaxher",
+          "aspNetUserID": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+          "aspNetUser": null,
+          "faturat": [],
+          "teDhenatPerdoruesit": null,
+          "kartelat": null
+        },
+        "numriBlerjeve": 3,
+        "totaliBlerjeveEuro": 10.16
+      }
+    ],
+    "shitjetJavoreParagon": 7,
+    "shitjetJavoreEuro": 34.24
+  },
+  "shitjetMujore": {
+    "shitjetMujoreSipasOperatorit": [
+      {
+        "stafi": {
+          "userID": 10,
+          "emri": "Arkatar",
+          "mbiemri": "Arkatar",
+          "email": "arkatar.arkatar@financare.com",
+          "username": "arkatar.arkatar",
+          "aspNetUserID": "1545403d-e285-4247-812d-2c7cd81c80f4",
+          "aspNetUser": null,
+          "faturat": [],
+          "teDhenatPerdoruesit": null,
+          "kartelat": null
+        },
+        "numriBlerjeve": 4,
+        "totaliBlerjeveEuro": 24.08
+      },
+      {
+        "stafi": {
+          "userID": 9,
+          "emri": "Menaxher",
+          "mbiemri": "Menaxher",
+          "email": "menaxher.menaxher@financare.com",
+          "username": "menaxher.menaxher",
+          "aspNetUserID": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+          "aspNetUser": null,
+          "faturat": [],
+          "teDhenatPerdoruesit": null,
+          "kartelat": null
+        },
+        "numriBlerjeve": 3,
+        "totaliBlerjeveEuro": 10.16
+      }
+    ],
+    "shitjetMujoreParagon": 7,
+    "shitjetMujoreEuro": 34.24
+  },
+  "startOfWeek": "2024-09-30T00:00:00+02:00",
+  "today": "2024-10-06T00:00:00+02:00",
+  "endOfWeek": "2024-10-06T00:00:00+02:00",
+  "startOfMonth": "2024-10-01T00:00:00",
+  "endOfMonth": "2024-10-31T00:00:00"
+}

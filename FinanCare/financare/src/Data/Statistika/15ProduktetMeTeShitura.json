@@ -1,0 +1,182 @@
+[
+  {
+    "produkti": {
+      "produktiID": 18,
+      "emriProduktit": "Vaj luledielli 1/1 Zvijezda",
+      "sasiaNeStok": 55,
+      "qmimiBleres": 1.39,
+      "qmimiProduktit": 1.65,
+      "rabati": null
+    },
+    "totaliPorosive": 20,
+    "totaliBlerjeve": 33
+  },
+  {
+    "produkti": {
+      "produktiID": 17,
+      "emriProduktit": "Mish pule pjek Kotanyi 40g",
+      "sasiaNeStok": 9,
+      "qmimiBleres": 0.74,
+      "qmimiProduktit": 0.95,
+      "rabati": null
+    },
+    "totaliPorosive": 15,
+    "totaliBlerjeve": 14.25
+  },
+  {
+    "produkti": {
+      "produktiID": 19,
+      "emriProduktit": "Hudhra Kotanyi 70g",
+      "sasiaNeStok": 1,
+      "qmimiBleres": 1.67,
+      "qmimiProduktit": 2.15,
+      "rabati": null
+    },
+    "totaliPorosive": 12,
+    "totaliBlerjeve": 25.8
+  },
+  {
+    "produkti": {
+      "produktiID": 11,
+      "emriProduktit": "Lezita Chicken Nugget 1KG",
+      "sasiaNeStok": -1,
+      "qmimiBleres": 3.97,
+      "qmimiProduktit": 5.09,
+      "rabati": null
+    },
+    "totaliPorosive": 10,
+    "totaliBlerjeve": 50.9
+  },
+  {
+    "produkti": {
+      "produktiID": 24,
+      "emriProduktit": "Schmand Magic Ice 180gr 18%",
+      "sasiaNeStok": 8,
+      "qmimiBleres": 0.62,
+      "qmimiProduktit": 0.75,
+      "rabati": null
+    },
+    "totaliPorosive": 10,
+    "totaliBlerjeve": 7.5
+  },
+  {
+    "produkti": {
+      "produktiID": 25,
+      "emriProduktit": "Perutnina copeza pule 400gr",
+      "sasiaNeStok": 0,
+      "qmimiBleres": 0,
+      "qmimiProduktit": 0,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 26,
+      "emriProduktit": "Perutnina stejk pule 900gr",
+      "sasiaNeStok": 0,
+      "qmimiBleres": 0,
+      "qmimiProduktit": 0,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 12,
+      "emriProduktit": "GULLON Biskota me Fruta 300gr",
+      "sasiaNeStok": 32,
+      "qmimiBleres": 1.35,
+      "qmimiProduktit": 1.8,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 13,
+      "emriProduktit": "HOPLA pa sheqel 1L",
+      "sasiaNeStok": 48,
+      "qmimiBleres": 3.22,
+      "qmimiProduktit": 4.19,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 14,
+      "emriProduktit": "FRONDI maxi limon 250gr",
+      "sasiaNeStok": 24,
+      "qmimiBleres": 1.75,
+      "qmimiProduktit": 2.25,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 15,
+      "emriProduktit": "ALBRED Slim Tea Acai Berry",
+      "sasiaNeStok": 0,
+      "qmimiBleres": 0,
+      "qmimiProduktit": 0,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 16,
+      "emriProduktit": "ALBRED Slim Tea Blueberry",
+      "sasiaNeStok": 0,
+      "qmimiBleres": 0,
+      "qmimiProduktit": 0,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 20,
+      "emriProduktit": "Mish pule pjek Kotanyi 110g",
+      "sasiaNeStok": 4,
+      "qmimiBleres": 1.21,
+      "qmimiProduktit": 1.55,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 21,
+      "emriProduktit": "Chips Classic 130g",
+      "sasiaNeStok": 60,
+      "qmimiBleres": 0.93,
+      "qmimiProduktit": 1.19,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  },
+  {
+    "produkti": {
+      "produktiID": 22,
+      "emriProduktit": "Chips Ribbed Ketchup 130g",
+      "sasiaNeStok": 60,
+      "qmimiBleres": 0.93,
+      "qmimiProduktit": 1.19,
+      "rabati": null
+    },
+    "totaliPorosive": 0,
+    "totaliBlerjeve": 0
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "partneri": {
+    "idPartneri": 15,
+    "emriBiznesit": "Rilind Kyçyku",
+    "nui": "0",
+    "tvsh": "0",
+    "nrf": "0",
+    "email": "rilindkycyku@gmail.com",
+    "adresa": "Komandant Zefi 69, Kaçanik",
+    "nrKontaktit": "+38343710410",
+    "llojiPartnerit": "B",
+    "shkurtesaPartnerit": "RK",
+    "kartela": {
+      "idKartela": 5,
+      "kodiKartela": "B000015000004",
+      "llojiKarteles": "Bonus",
+      "rabati": 4,
+      "stafiID": 9,
+      "partneriID": 15,
+      "dataKrijimit": "2024-10-05T11:35:21.4209124",
+      "stafi": null,
+      "partneri": null
+    }
+  },
+  "kalkulimet": [
+    {
+      "idRegjistrimit": 23,
+      "dataRegjistrimit": "2024-10-05T13:04:53.9957096",
+      "totaliPaTVSH": 6.66,
+      "tvsh": 1.2,
+      "rabati": 0.33,
+      "llojiKalkulimit": "PARAGON",
+      "statusiPageses": "E Paguar",
+      "llojiPageses": "Borxh",
+      "statusiKalkulimit": "true",
+      "nrRendorFatures": 1,
+      "pershkrimShtese": "",
+      "nrFatures": "051024-10-1"
+    },
+    {
+      "idRegjistrimit": 25,
+      "dataRegjistrimit": "2024-10-05T13:07:59.1208501",
+      "totaliPaTVSH": 8.53,
+      "tvsh": 1.54,
+      "rabati": 0.42,
+      "llojiKalkulimit": "PARAGON",
+      "statusiPageses": "E Paguar",
+      "llojiPageses": "Banke",
+      "statusiKalkulimit": "true",
+      "nrRendorFatures": 3,
+      "pershkrimShtese": "",
+      "nrFatures": "051024-10-3"
+    },
+    {
+      "idRegjistrimit": 26,
+      "dataRegjistrimit": "2024-10-05T13:07:59.1208501",
+      "totaliPaTVSH": 9.65,
+      "tvsh": 0,
+      "rabati": 0,
+      "llojiKalkulimit": "PAGES",
+      "statusiPageses": "E Paguar",
+      "llojiPageses": "Banke",
+      "statusiKalkulimit": "true",
+      "nrRendorFatures": 4,
+      "pershkrimShtese": " Pagese per Faturen: 051024-10-3",
+      "nrFatures": "PAGES-051024-10-3"
+    },
+    {
+      "idRegjistrimit": 29,
+      "dataRegjistrimit": "2024-10-05T13:11:48.9964023",
+      "totaliPaTVSH": 7.53,
+      "tvsh": 0,
+      "rabati": 0,
+      "llojiKalkulimit": "PAGES",
+      "statusiPageses": "E Paguar",
+      "llojiPageses": "Cash",
+      "statusiKalkulimit": "true",
+      "nrRendorFatures": 0,
+      "pershkrimShtese": "Pagesa e Borgjit",
+      "nrFatures": null
+    }
+  ],
+  "totaliHyrese": 17.18,
+  "totaliDalese": 17.18
+}

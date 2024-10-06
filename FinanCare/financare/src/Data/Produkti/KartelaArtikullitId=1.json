@@ -1,0 +1,61 @@
+{
+  "produkti": {
+    "produktiID": 1,
+    "emriProduktit": "STR8 Deo Rise 150ml",
+    "emriBiznesit": "Passable SH.P.K.",
+    "emriNjesiaMatese": "Copë",
+    "barkodi": "5201314107231",
+    "kodiProduktit": "PSB0001",
+    "llojiTVSH": 18,
+    "sasiaNeStok": 12,
+    "qmimiProduktit": 3.25,
+    "qmimiBleres": 2.39,
+    "qmimiMeShumic": 3.25,
+    "rabati": 6,
+    "sasiaShumices": 6,
+    "grupiIProduktit": "Higjen"
+  },
+  "kalkulimet": [
+    {
+      "id": 1,
+      "sasiaStokut": 12,
+      "qmimiBleres": 2.39,
+      "qmimiShites": 3.25,
+      "qmimiShitesMeShumic": 3.25,
+      "rabati1": 0,
+      "rabati2": 0,
+      "rabati3": 0,
+      "dataRegjistrimit": "2024-09-06T00:00:00",
+      "llojiKalkulimit": "HYRJE",
+      "nrRendorFatures": 1,
+      "emriBiznesit": "Passable SH.P.K."
+    }
+  ],
+  "zbritjet": [
+    {
+      "dataZbritjes": "2024-10-05T13:13:26.2434773",
+      "dataSkadimit": "2024-11-05T00:00:00",
+      "rabati": 6
+    }
+  ],
+  "totaliHyrese": 12,
+  "totaliDalese": 0,
+  "hisotriaZbritjes": [
+    {
+      "historiaZbritjesProduktitID": 0,
+      "produktiID": 1,
+      "dataZbritjes": "2024-10-05T13:14:26.243",
+      "dataSkadimit": "2024-11-05T00:00:00",
+      "rabati": 6,
+      "produkti": null
+    },
+    {
+      "historiaZbritjesProduktitID": 1,
+      "produktiID": 1,
+      "dataZbritjes": "2024-09-05T13:13:26.243",
+      "dataSkadimit": "2024-10-05T00:00:00",
+      "rabati": 2,
+      "produkti": null
+    }
+  ]
+}

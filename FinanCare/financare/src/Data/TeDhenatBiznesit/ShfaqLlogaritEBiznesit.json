@@ -1,0 +1,41 @@
+[
+  {
+    "idLlogariaBankare": 1,
+    "numriLlogaris": "1290012345678900",
+    "adresaBankes": "P.A.",
+    "valuta": "Euro",
+    "bankaID": 4,
+    "banka": {
+      "bankaID": 4,
+      "emriBankes": "Banka Ekonomike",
+      "lokacioniBankes": "Kombetare",
+      "isDeleted": "false"
+    }
+  },
+  {
+    "idLlogariaBankare": 2,
+    "numriLlogaris": "1290012345678900",
+    "adresaBankes": "P.A.",
+    "valuta": "Dollar",
+    "bankaID": 5,
+    "banka": {
+      "bankaID": 5,
+      "emriBankes": "ProCredit Bank",
+      "lokacioniBankes": "Kombetare",
+      "isDeleted": "false"
+    }
+  },
+  {
+    "idLlogariaBankare": 3,
+    "numriLlogaris": "1290012345678900",
+    "adresaBankes": "P.A.",
+    "valuta": "Franga Zvicerane",
+    "bankaID": 2,
+    "banka": {
+      "bankaID": 2,
+      "emriBankes": "Raiffeisen Bank Kosovo",
+      "lokacioniBankes": "Kombetare",
+      "isDeleted": "false"
+    }
+  }
+]

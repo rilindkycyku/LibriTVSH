@@ -1,0 +1,70 @@
+[
+  {
+    "idPartneri": 1,
+    "emriBiznesit": "Bleres Qytetar",
+    "nui": "112233445",
+    "nrf": "112233445",
+    "tvsh": "112233445",
+    "email": "info@financare.com",
+    "adresa": "P.A., Prishtine, 10000 Kosove",
+    "nrKontaktit": "38344111222",
+    "llojiPartnerit": "B",
+    "shkurtesaPartnerit": "BQ",
+    "isDeleted": "false",
+    "faturat": [],
+    "produkti": [],
+    "kartela": null
+  },
+  {
+    "idPartneri": 14,
+    "emriBiznesit": "BESA NJË SH.P.K.",
+    "nui": "812085688",
+    "nrf": "0",
+    "tvsh": "0",
+    "email": "supermarketbesa1978@gmail.com",
+    "adresa": "Rr. Agim Bajrami, P.N., Kaçanik",
+    "nrKontaktit": "+38344279504",
+    "llojiPartnerit": "B",
+    "shkurtesaPartnerit": "BESA",
+    "isDeleted": "false",
+    "faturat": [],
+    "produkti": [],
+    "kartela": {
+      "idKartela": 4,
+      "kodiKartela": "B000014000003",
+      "llojiKarteles": "Bonus",
+      "rabati": 2,
+      "stafiID": 9,
+      "partneriID": 14,
+      "dataKrijimit": "2024-10-05T11:31:38.7937661",
+      "stafi": null,
+      "partneri": null
+    }
+  },
+  {
+    "idPartneri": 15,
+    "emriBiznesit": "Rilind Kyçyku",
+    "nui": "0",
+    "nrf": "0",
+    "tvsh": "0",
+    "email": "rilindkycyku@gmail.com",
+    "adresa": "Komandant Zefi 69, Kaçanik",
+    "nrKontaktit": "+38343710410",
+    "llojiPartnerit": "B",
+    "shkurtesaPartnerit": "RK",
+    "isDeleted": "false",
+    "faturat": [],
+    "produkti": [],
+    "kartela": {
+      "idKartela": 5,
+      "kodiKartela": "B000015000004",
+      "llojiKarteles": "Bonus",
+      "rabati": 4,
+      "stafiID": 9,
+      "partneriID": 15,
+      "dataKrijimit": "2024-10-05T11:35:21.4209124",
+      "stafi": null,
+      "partneri": null
+    }
+  }
+]

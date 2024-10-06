@@ -1,0 +1,582 @@
+[
+  {
+    "perdoruesi": {
+      "userID": 1,
+      "emri": "Financa",
+      "mbiemri": "Financa",
+      "email": "financa.financa@financare.com",
+      "username": "financa.financa",
+      "aspNetUserID": "7553cfb4-093e-428c-ae2f-68aea8b8767a",
+      "aspNetUser": {
+        "id": "7553cfb4-093e-428c-ae2f-68aea8b8767a",
+        "userName": "financa.financa",
+        "normalizedUserName": "FINANCA.FINANCA",
+        "email": "financa.financa@financare.com",
+        "normalizedEmail": "FINANCA.FINANCA@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEFtpleq07mtta7xasI6UD9vq6Y82J0GwYUnhzwLnGEJNEapjmUK4pOI2jeyyP0if1w==",
+        "securityStamp": "JFUF2AFOE3VCHXH4ECOGJSXIFTPSWPQZ",
+        "concurrencyStamp": "2bf6aee1-e6de-4a89-9d51-0e0bcdfbfb8d",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 1,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 4,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 4,
+          "emriBankes": "Banka Ekonomike",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Financa",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 2,
+      "emri": "Mbeshtetje",
+      "mbiemri": "Klientit",
+      "email": "mbeshtetje.klientit@financare.com",
+      "username": "mbeshtetje.klientit",
+      "aspNetUserID": "c8f9f05e-3d2f-407b-b082-f5405fd97d9c",
+      "aspNetUser": {
+        "id": "c8f9f05e-3d2f-407b-b082-f5405fd97d9c",
+        "userName": "mbeshtetje.klientit",
+        "normalizedUserName": "MBESHTETJE.KLIENTIT",
+        "email": "mbeshtetje.klientit@financare.com",
+        "normalizedEmail": "MBESHTETJE.KLIENTIT@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEGvIHxztRzV2W5xNIGLnBIdb4kplt+pKEAtPwRI3+weuudHWYeymXISHENZfcdN7Tg==",
+        "securityStamp": "7E5QTAGIXY7PXCEQZ4VLBTUOHLHIJDOT",
+        "concurrencyStamp": "20fdcec7-a7b4-4022-9d3c-0a9c9e914225",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 2,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 1,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 1,
+          "emriBankes": "NLB Banka SH. A.",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Mbeshtetje e Klientit",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 3,
+      "emri": "Qmimore",
+      "mbiemri": "Qmimore",
+      "email": "qmimore.qmimore@financare.com",
+      "username": "qmimore.qmimore",
+      "aspNetUserID": "d8918bff-7926-456f-bec0-cf3356a62824",
+      "aspNetUser": {
+        "id": "d8918bff-7926-456f-bec0-cf3356a62824",
+        "userName": "qmimore.qmimore",
+        "normalizedUserName": "QMIMORE.QMIMORE",
+        "email": "qmimore.qmimore@financare.com",
+        "normalizedEmail": "QMIMORE.QMIMORE@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEJlYRvbOR+Wra3z7s0yxDLBSuI9wMLf5TKUIOk5BsBGjnnkgZhvVFX2Ui6jsH7wRGQ==",
+        "securityStamp": "2C6FP5XXUUF2MUML6UVH6FSHQ7AH2KUG",
+        "concurrencyStamp": "afb80062-a616-48c2-89cf-76f42ebb0fe0",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 3,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 5,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 5,
+          "emriBankes": "ProCredit Bank",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Qmimore",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 4,
+      "emri": "Faturist",
+      "mbiemri": "Faturist",
+      "email": "faturist.faturist@financare.com",
+      "username": "faturist.faturist",
+      "aspNetUserID": "f6c341aa-79e4-42fb-bcd1-be031b7d8357",
+      "aspNetUser": {
+        "id": "f6c341aa-79e4-42fb-bcd1-be031b7d8357",
+        "userName": "faturist.faturist",
+        "normalizedUserName": "FATURIST.FATURIST",
+        "email": "faturist.faturist@financare.com",
+        "normalizedEmail": "FATURIST.FATURIST@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEGC2cHyofurlLcCUwVQlLlwyrEn/NkS3MBhlYVA2XgRh1/n/SwMxXTethQHoGQW/0g==",
+        "securityStamp": "GYZYC76TVRDXGPQWIXWKX23IAYPCNKVM",
+        "concurrencyStamp": "7b3dc7b0-9a5c-41a2-8bcd-078364773b8d",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 4,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 5,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 5,
+          "emriBankes": "ProCredit Bank",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Faturist",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 5,
+      "emri": "Puntor",
+      "mbiemri": "Thjeshte",
+      "email": "puntor.thjeshte@financare.com",
+      "username": "puntor.thjeshte",
+      "aspNetUserID": "8c3e98d7-f7cc-45c2-bf09-3bc3dfb89e5c",
+      "aspNetUser": {
+        "id": "8c3e98d7-f7cc-45c2-bf09-3bc3dfb89e5c",
+        "userName": "puntor.thjeshte",
+        "normalizedUserName": "PUNTOR.THJESHTE",
+        "email": "puntor.thjeshte@financare.com",
+        "normalizedEmail": "PUNTOR.THJESHTE@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAELOnOPnFvOVJ0fzGbKdBj15kLvUgETtzgMHzKtnamff4n8pEUvRq2EAhxTbAkH6Y4w==",
+        "securityStamp": "V2IS4SMJQ2BK4JCRGY2CFHBNHJ5MYBO3",
+        "concurrencyStamp": "4fbfc099-f066-4c91-8051-c4e74c67403f",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 5,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 2,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 2,
+          "emriBankes": "Raiffeisen Bank Kosovo",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Puntor i Thjeshte",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 6,
+      "emri": "Burime",
+      "mbiemri": "Njerzore",
+      "email": "burime.njerzore@financare.com",
+      "username": "burime.njerzore",
+      "aspNetUserID": "d677de99-762e-430a-abee-0c48c6595b58",
+      "aspNetUser": {
+        "id": "d677de99-762e-430a-abee-0c48c6595b58",
+        "userName": "burime.njerzore",
+        "normalizedUserName": "BURIME.NJERZORE",
+        "email": "burime.njerzore@financare.com",
+        "normalizedEmail": "BURIME.NJERZORE@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEBCQGgM8DcQ3RZY8F3L6VJToDyHzB0KM7ET/S/h5+n6AwzENNzorSIwKcW/OEmTZFw==",
+        "securityStamp": "YXNSR47VEH7WYWUDQYM3GXAIETXKGBZH",
+        "concurrencyStamp": "dfff55b5-da42-43c9-88e6-55ae80841b7b",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 6,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 3,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 3,
+          "emriBankes": "Banka për Biznes",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Burime Njerzore",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 7,
+      "emri": "Komercialist",
+      "mbiemri": "Komercialist",
+      "email": "komercialist.komercialist@financare.com",
+      "username": "komercialist.komercialist",
+      "aspNetUserID": "d833b2ff-e681-4266-8c99-792c54a93ef1",
+      "aspNetUser": {
+        "id": "d833b2ff-e681-4266-8c99-792c54a93ef1",
+        "userName": "komercialist.komercialist",
+        "normalizedUserName": "KOMERCIALIST.KOMERCIALIST",
+        "email": "komercialist.komercialist@financare.com",
+        "normalizedEmail": "KOMERCIALIST.KOMERCIALIST@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEOC5hPEvjUF7ToxB6T+Nd8bYONKgXR3VhUo+OGHCHUyBmOT4LZZZkuZqlifRQc2Z2w==",
+        "securityStamp": "KWNR6BXX2MYNDZEQQICABNY6V2KGEISV",
+        "concurrencyStamp": "ba2cc0b6-be99-4229-96f5-3589942b858b",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 7,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 2,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 2,
+          "emriBankes": "Raiffeisen Bank Kosovo",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Komercialist",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 8,
+      "emri": "Kalkulant",
+      "mbiemri": "Kalkulant",
+      "email": "kalkulant.kalkulant@financare.com",
+      "username": "kalkulant.kalkulant",
+      "aspNetUserID": "e3a0fcb7-296a-4458-aad5-ef1143205642",
+      "aspNetUser": {
+        "id": "e3a0fcb7-296a-4458-aad5-ef1143205642",
+        "userName": "kalkulant.kalkulant",
+        "normalizedUserName": "KALKULANT.KALKULANT",
+        "email": "kalkulant.kalkulant@financare.com",
+        "normalizedEmail": "KALKULANT.KALKULANT@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEO5JlCd0RD33NUUMMt4GhizK3gCQkxj6ZZenZe4ljep1NGPt6plFO0MaXEzPFf9/rw==",
+        "securityStamp": "JGAPOQDNFFHO5IBNNSSAHFWCEJRQFQA4",
+        "concurrencyStamp": "cdd454d6-6776-4ba6-a5e3-76e27bd363d3",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 8,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 4,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 4,
+          "emriBankes": "Banka Ekonomike",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "Kalkulant",
+      "User"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 9,
+      "emri": "Menaxher",
+      "mbiemri": "Menaxher",
+      "email": "menaxher.menaxher@financare.com",
+      "username": "menaxher.menaxher",
+      "aspNetUserID": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+      "aspNetUser": {
+        "id": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+        "userName": "menaxher.menaxher",
+        "normalizedUserName": "MENAXHER.MENAXHER",
+        "email": "menaxher.menaxher@financare.com",
+        "normalizedEmail": "MENAXHER.MENAXHER@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAEM787no6o/qmE0NxPpA8q8fD5wdkJnU4+cWHcMwC6o5v0rgSUh7fIEDVTf43OOjQSg==",
+        "securityStamp": "ZFKAJS5CFYGKSYUSOGXEFPIGGIYPTVRL",
+        "concurrencyStamp": "dd3dbde5-a09d-4762-88e5-746630538f25",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 9,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 3,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 3,
+          "emriBankes": "Banka për Biznes",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": {
+        "idKartela": 1,
+        "kodiKartela": "M000029000001",
+        "llojiKarteles": "Fshirje",
+        "rabati": null,
+        "stafiID": 9,
+        "partneriID": null,
+        "dataKrijimit": "1900-09-01T00:00:00",
+        "stafi": null,
+        "partneri": null
+      }
+    },
+    "rolet": [
+      "User",
+      "Menaxher"
+    ]
+  },
+  {
+    "perdoruesi": {
+      "userID": 10,
+      "emri": "Arkatar",
+      "mbiemri": "Arkatar",
+      "email": "arkatar.arkatar@financare.com",
+      "username": "arkatar.arkatar",
+      "aspNetUserID": "1545403d-e285-4247-812d-2c7cd81c80f4",
+      "aspNetUser": {
+        "id": "1545403d-e285-4247-812d-2c7cd81c80f4",
+        "userName": "arkatar.arkatar",
+        "normalizedUserName": "ARKATAR.ARKATAR",
+        "email": "arkatar.arkatar@financare.com",
+        "normalizedEmail": "ARKATAR.ARKATAR@FINANCARE.COM",
+        "emailConfirmed": false,
+        "passwordHash": "AQAAAAEAACcQAAAAENR/nFR3o0tT/SpbY54Co0WWoxWLv9Lzqsp/CGr9XdjZ/clq0QbQiiMZSR2zLbKYKQ==",
+        "securityStamp": "HZSEG5KQF5AIXLALZZQBGBCZJJJ7QC6I",
+        "concurrencyStamp": "b49cbfdb-820c-4df2-a435-2d9e5a449bb8",
+        "phoneNumber": "+38344123456",
+        "phoneNumberConfirmed": false,
+        "twoFactorEnabled": false,
+        "lockoutEnd": null,
+        "lockoutEnabled": true,
+        "accessFailedCount": 0
+      },
+      "faturat": [],
+      "teDhenatPerdoruesit": {
+        "userID": 10,
+        "nrKontaktit": "+38344123456",
+        "adresa": "P.A.",
+        "emailPrivat": "email@domain.com",
+        "datelindja": "1900-09-01T00:00:00",
+        "dataFillimitKontrates": "1900-09-01T00:00:00",
+        "dataMbarimitKontrates": "1900-09-01T00:00:00",
+        "paga": 99999.99,
+        "profesioni": "P.P.",
+        "specializimi": "P.S.",
+        "kualifikimi": "P.K.",
+        "bankaID": 3,
+        "numriLlogarisBankare": "1290012345678900",
+        "nrPersonal": "1122334455",
+        "eshtePuntorAktive": "true",
+        "user": null,
+        "banka": {
+          "bankaID": 3,
+          "emriBankes": "Banka për Biznes",
+          "lokacioniBankes": "Kombetare",
+          "isDeleted": "false"
+        }
+      },
+      "kartelat": null
+    },
+    "rolet": [
+      "User",
+      "Arkatar"
+    ]
+  }
+]

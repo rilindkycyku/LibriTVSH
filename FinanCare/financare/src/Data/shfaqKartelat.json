@@ -1,0 +1,76 @@
+[
+  {
+    "idKartela": 1,
+    "kodiKartela": "M000029000001",
+    "llojiKarteles": "Fshirje",
+    "rabati": null,
+    "stafiID": null,
+    "partneriID": null,
+    "dataKrijimit": "1900-09-01T00:00:00",
+    "stafi": null,
+    "partneri": null
+  },
+  {
+    "idKartela": 4,
+    "kodiKartela": "B000014000003",
+    "llojiKarteles": "Bonus",
+    "rabati": 2,
+    "stafiID": null,
+    "partneriID": 14,
+    "dataKrijimit": "2024-10-05T11:31:38.7937661",
+    "stafi": null,
+    "partneri": {
+      "idPartneri": 14,
+      "emriBiznesit": "BESA NJË SH.P.K.",
+      "nui": "812085688",
+      "nrf": "0",
+      "tvsh": "0",
+      "email": "supermarketbesa1978@gmail.com",
+      "adresa": "Rr. Agim Bajrami, P.N., Kaçanik",
+      "nrKontaktit": "+38344279504",
+      "llojiPartnerit": "B",
+      "shkurtesaPartnerit": "BESA",
+      "isDeleted": "false",
+      "faturat": [],
+      "produkti": [],
+      "kartela": null
+    }
+  },
+  {
+    "idKartela": 5,
+    "kodiKartela": "B000015000004",
+    "llojiKarteles": "Bonus",
+    "rabati": 4,
+    "stafiID": 9,
+    "partneriID": 15,
+    "dataKrijimit": "2024-10-05T11:35:21.4209124",
+    "stafi": {
+      "userID": 9,
+      "emri": "Menaxher",
+      "mbiemri": "Menaxher",
+      "email": "menaxher.menaxher@financare.com",
+      "username": "menaxher.menaxher",
+      "aspNetUserID": "a62e8d51-48fa-44af-b70e-d9f3b01591e7",
+      "aspNetUser": null,
+      "faturat": [],
+      "teDhenatPerdoruesit": null,
+      "kartelat": null
+    },
+    "partneri": {
+      "idPartneri": 15,
+      "emriBiznesit": "Rilind Kyçyku",
+      "nui": "0",
+      "nrf": "0",
+      "tvsh": "0",
+      "email": "rilindkycyku@gmail.com",
+      "adresa": "Komandant Zefi 69, Kaçanik",
+      "nrKontaktit": "+38343710410",
+      "llojiPartnerit": "B",
+      "shkurtesaPartnerit": "RK",
+      "isDeleted": "false",
+      "faturat": [],
+      "produkti": [],
+      "kartela": null
+    }
+  }
+]

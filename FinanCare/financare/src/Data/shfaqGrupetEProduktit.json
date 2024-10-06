@@ -1,0 +1,42 @@
+[
+  {
+    "idGrupiProduktit": 1,
+    "grupiIProduktit": "Ushqimore",
+    "totaliProdukteve": 19
+  },
+  {
+    "idGrupiProduktit": 2,
+    "grupiIProduktit": "Plastika",
+    "totaliProdukteve": 0
+  },
+  {
+    "idGrupiProduktit": 3,
+    "grupiIProduktit": "Auto Kozmetik",
+    "totaliProdukteve": 0
+  },
+  {
+    "idGrupiProduktit": 4,
+    "grupiIProduktit": "Kozmetik",
+    "totaliProdukteve": 0
+  },
+  {
+    "idGrupiProduktit": 5,
+    "grupiIProduktit": "Higjen",
+    "totaliProdukteve": 6
+  },
+  {
+    "idGrupiProduktit": 6,
+    "grupiIProduktit": "Duhan",
+    "totaliProdukteve": 0
+  },
+  {
+    "idGrupiProduktit": 7,
+    "grupiIProduktit": "Bujqesore",
+    "totaliProdukteve": 0
+  },
+  {
+    "idGrupiProduktit": 8,
+    "grupiIProduktit": "Pije Alkolike",
+    "totaliProdukteve": 1
+  }
+]
