@@ -33,6 +33,7 @@ import LlogaritBankareBiznesit from "./Pages/Gjenerale/TeDhenat/LlogaritBankareB
 import NukKeniAkses from "./Components/TeTjera/ErrorPages/403";
 import NukUGjet from "./Components/TeTjera/ErrorPages/404";
 import ShikimiQmimeve from "./Pages/ShikimiQmimeve";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
 
   return (
     <div className="App">
+      <Analytics />
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         <Route path="*" element={<Navigate to="/" />} />
