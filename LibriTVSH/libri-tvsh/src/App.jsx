@@ -138,22 +138,6 @@ function App() {
     }
   };
 
-  const handleFurnitoriKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const selectInstance = furnitoriRef.current;
-      if (
-        selectInstance.state.menuIsOpen &&
-        selectInstance.state.focusedOption
-      ) {
-        setFurnitori(selectInstance.state.focusedOption.value);
-        setTimeout(() => datePickerRef.current.focus(), 0);
-      } else if (furnitori) {
-        datePickerRef.current.focus();
-      }
-    }
-  };
-
   const customStyles = {
     menu: (provided) => ({
       ...provided,
@@ -225,7 +209,6 @@ function App() {
                           inputId="furnitoriSelect-input"
                           styles={customStyles}
                           ref={furnitoriRef}
-                          onKeyDown={handleFurnitoriKeyDown}
                         />
                       </Form.Group>
                     </Col>
@@ -342,7 +325,7 @@ function App() {
             <Card className="h-100">
               <Card.Body>
                 <Card.Title>Tabela e Faturave</Card.Title>
-                <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+                <div style={{ maxHeight: "500px", overflowY: "auto" }}>
                   <Table striped bordered hover>
                     <thead className="sticky-top bg-white">
                       <tr>
