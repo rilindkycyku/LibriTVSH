@@ -221,7 +221,7 @@ function App() {
                           type="date"
                           value={data}
                           onChange={(e) =>
-                            setData(e.target.value || "2025-01-20")
+                            setData(e.target.value)
                           }
                           onKeyDown={(e) => handleKeyDown(e, nrFaturesRef)}
                           ref={datePickerRef}
