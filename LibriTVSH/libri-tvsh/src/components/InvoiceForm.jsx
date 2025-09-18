@@ -131,7 +131,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions }) {
                   dispatch({
                     type: "SET_FIELD",
                     field: "data",
-                    value: e.target.value || "2025-01-20",
+                    value: e.target.value,
                   })
                 }
                 onKeyDown={(e) => handleKeyDown(e, nrFaturesRef)}
