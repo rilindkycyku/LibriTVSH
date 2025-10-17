@@ -12,6 +12,7 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [furnitoriOptions, setFurnitoriOptions] = useState([]);
+  const [editingInvoice, setEditingInvoice] = useState(null);
 
   useEffect(() => {
     fetchFurnitori()
@@ -22,6 +23,20 @@ function App() {
   useEffect(() => {
     localStorage.setItem("invoices", JSON.stringify(invoices));
   }, [invoices]);
+
+  const handleEdit = (invoice) => {
+    const selectedOption = furnitoriOptions.find(
+      (opt) => opt.value === invoice.furnitori
+    );
+    console.log("Editing invoice:", invoice);
+    setEditingInvoice({
+      ...invoice,
+      optionsSelected: selectedOption || null,
+      vlPaTvshInput: invoice.vlPaTvsh.toString(),
+      tvsh18Input: invoice.tvsh18.toString(),
+      tvsh8Input: invoice.tvsh8.toString(),
+    });
+  };
 
   return (
     <>
@@ -59,6 +74,8 @@ function App() {
               invoices={invoices}
               setInvoices={setInvoices}
               furnitoriOptions={furnitoriOptions}
+              editingInvoice={editingInvoice}
+              setEditingInvoice={setEditingInvoice}
             />
           </Col>
           <Col md={6}>
@@ -66,6 +83,7 @@ function App() {
               invoices={invoices}
               setInvoices={setInvoices}
               furnitoriOptions={furnitoriOptions}
+              onEdit={handleEdit}
             />
           </Col>
         </Row>

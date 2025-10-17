@@ -1,4 +1,4 @@
-import { useReducer, useRef} from "react";
+import { useReducer, useRef, useEffect } from "react";
 import { Form, Card, Button, InputGroup, Alert } from "react-bootstrap";
 import Select from "react-select";
 import CalculatorModal from "./CalculatorModal";
@@ -22,7 +22,7 @@ const initialState = {
   optionsSelected: null,
 };
 
-function InvoiceForm({ invoices, setInvoices, furnitoriOptions }) {
+function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, setEditingInvoice }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const {
     furnitori,
@@ -81,8 +81,27 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions }) {
       vlPaTvshCalcButtonRef,
       tvsh18CalcButtonRef,
       tvsh8CalcButtonRef,
-    }
+    },
+    editingInvoice,
+    setEditingInvoice
   );
+
+  useEffect(() => {
+    if (editingInvoice) {
+      console.log("Populating form with invoice:", editingInvoice);
+      dispatch({
+        type: "SET_EDIT_INVOICE",
+        payload: editingInvoice,
+      });
+      furnitoriRef.current.focus();
+    }
+  }, [editingInvoice]);
+
+  const handleCancelEdit = () => {
+    dispatch({ type: "RESET_FORM" });
+    setEditingInvoice(null);
+    furnitoriRef.current.focus();
+  };
 
   const customStyles = {
     menu: (provided) => ({
@@ -95,7 +114,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions }) {
     <>
       <Card className="h-100">
         <Card.Body>
-          <Card.Title>Shtoni Faturen</Card.Title>
+          <Card.Title>{editingInvoice ? "Modifiko Faturen" : "Shtoni Faturen"}</Card.Title>
           {showAlert && (
             <Alert
               variant="danger"
@@ -237,15 +256,26 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions }) {
                 <InputGroup.Text>€</InputGroup.Text>
               </InputGroup>
             </Form.Group>
-            <Button
-              variant="primary"
-              onClick={handleAdd}
-              className="w-100"
-              disabled={!!vlPaTvshError || !!tvsh18Error || !!tvsh8Error}
-              ref={addButtonRef}
-            >
-              Shtoni Faturen
-            </Button>
+            <div className="d-flex gap-2">
+              <Button
+                variant="primary"
+                onClick={handleAdd}
+                className="w-100"
+                disabled={!!vlPaTvshError || !!tvsh18Error || !!tvsh8Error}
+                ref={addButtonRef}
+              >
+                {editingInvoice ? "Përditëso Faturen" : "Shtoni Faturen"}
+              </Button>
+              {editingInvoice && (
+                <Button
+                  variant="secondary"
+                  onClick={handleCancelEdit}
+                  className="w-100"
+                >
+                  Anulo
+                </Button>
+              )}
+            </div>
           </Form>
         </Card.Body>
       </Card>
@@ -290,6 +320,11 @@ function formReducer(state, action) {
       };
     case "SET_SHOW_ALERT":
       return { ...state, showAlert: action.payload };
+    case "SET_EDIT_INVOICE":
+      return {
+        ...state,
+        ...action.payload,
+      };
     case "RESET_FORM":
       return {
         ...initialState,
