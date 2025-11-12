@@ -1,4 +1,3 @@
-
 [
   { "key": 1, "Name": "Abi SH.P.K." },
   { "key": 2, "Name": "Adi SH.P.K." },
@@ -100,5 +99,6 @@
   { "key": 98, "Name": "ERC TRADE L.L.C." },
 { "key": 99, "Name": "Ask Foods - N.T.P. \"Ask Foods\" -  Erton Namoni B.I." },
 { "key": 100, "Name": "Anor SH.P.K." },
-{ "key": 101, "Name": "British American Tobacco Kosovo SH.P.K." }
+{ "key": 101, "Name": "British American Tobacco Kosovo SH.P.K." },
+{ "key": 102, "Name": "CITY.SA SH.P.K." }
 ]
