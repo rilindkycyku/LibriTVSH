@@ -1,8 +1,8 @@
 <body>
 
-<h1>LibriTVSH - Besa Një SH.P.K.</h1>
+<h1>LibriTVSH - BESA NJË SH.P.K.</h1>
     
-<p><strong>LibriTVSH</strong> është një aplikacion web i krijuar posaçërisht për nevojat e <strong>Besa Një SH.P.K.</strong>, për të ruajtur dhe menaxhuar detajet kryesore të faturave të blerjes (Libri i Blerjes për TVSH).</p>
+<p><strong>LibriTVSH</strong> është një aplikacion web i krijuar posaçërisht për nevojat e <strong>BESA NJË SH.P.K.</strong>, për të ruajtur dhe menaxhuar detajet kryesore të faturave të blerjes (Libri i Blerjes për TVSH).</p>
     
 <p>Ky aplikacion ndihmon në regjistrimin e saktë të të dhënave të nevojshme dhe ruajtjen e tyre, duke u fokusuar ekskluzivisht te faturat e blerjes së biznesit tonë.</p>
 
@@ -44,6 +44,6 @@
         <li>Pa nevojë për regjistrim ose server</li>
     </ul>
 
-<p>Ky aplikacion është zhvilluar dhe mirëmbahet ekskluzivisht për përdorim nga <strong>Besa Një SH.P.K.</strong>.</p>
+<p>Ky aplikacion është zhvilluar dhe mirëmbahet ekskluzivisht për përdorim nga <strong>BESA NJË SH.P.K.</strong>.</p>
 
 </body>
