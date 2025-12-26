@@ -15,7 +15,7 @@
             <pre><code>git clone https://github.com/rilindkycyku/LibriTVSH.git</code></pre>
         </li>
         <li>Hyni në folderin e projektit:
-            <pre><code>cd LibriTVSH</code></pre>
+            <pre><code>cd LibriTVSH/libri-tvsh</code></pre>
         </li>
         <li>Instaloni dependencat:
             <pre><code>npm install</code></pre>
