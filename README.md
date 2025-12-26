@@ -44,6 +44,6 @@
         <li>Pa nevojë për regjistrim ose server</li>
     </ul>
 
-<p>Ky aplikacion është zhvilluar dhe mirëmbahet ekskluzivisht për përdorim të brendshëm nga <strong>Besa Një SH.P.K.</strong>.</p>
+<p>Ky aplikacion është zhvilluar dhe mirëmbahet ekskluzivisht për përdorim nga <strong>Besa Një SH.P.K.</strong>.</p>
 
 </body>
