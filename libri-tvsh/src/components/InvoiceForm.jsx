@@ -6,7 +6,7 @@ import useInvoiceForm from "../hooks/useInvoiceForm";
 
 const initialState = {
   furnitori: "",
-  data: "2025-01-20",
+  data: "2026-01-20",
   nrFatures: "",
   vlPaTvsh: 0,
   vlPaTvshInput: "",
