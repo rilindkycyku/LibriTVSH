@@ -49,7 +49,7 @@ function App() {
             style={{ maxWidth: "50%", height: "auto" }}
           />
           <h1 className="display-4 fw-bold gradient-text mb-2">Blerjet me TVSH</h1>
-          <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil</p>
+          <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil!</p>
         </header>
 
         <Row className="g-4">
