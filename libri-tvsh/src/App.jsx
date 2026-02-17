@@ -48,7 +48,7 @@ function App() {
             className="d-block mx-auto mb-4"
             style={{ maxWidth: "50%", height: "auto" }}
           />
-          <h1 className="display-4 fw-bold gradient-text mb-2">Libri i TVSH</h1>
+          <h1 className="display-4 fw-bold gradient-text mb-2">Blerjet me TVSH</h1>
           <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil</p>
         </header>
 
