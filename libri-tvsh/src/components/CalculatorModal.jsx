@@ -27,31 +27,37 @@ function CalculatorModal({
       keyboard={false}
       restoreFocus={false}
       autoFocus={false}
+      centered
+      className="premium-modal"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Calculator</Modal.Title>
+      <Modal.Header closeButton className="border-0 pb-0">
+        <Modal.Title className="fw-bold fs-4">Llogaritësi</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="pt-4">
         {calculatorError && (
-          <Alert variant="danger" className="mb-3">
+          <Alert variant="danger" className="rounded-4 mb-4">
             {calculatorError}
           </Alert>
         )}
-        <Form.Control
-          type="text"
-          value={calculatorValue}
-          onChange={onInputChange}
-          onKeyDown={onKeyDown}
-          className="calculator-input"
-          ref={calculatorInputRef}
-          placeholder="Shkruani shprehjen (p.sh., 12.5 + 3 * 2)"
-        />
+        <Form.Group>
+          <Form.Label className="text-muted fw-medium mb-2">Shprehja matematike</Form.Label>
+          <Form.Control
+            type="text"
+            value={calculatorValue}
+            onChange={onInputChange}
+            onKeyDown={onKeyDown}
+            className="form-control-lg rounded-4 shadow-sm"
+            ref={calculatorInputRef}
+            placeholder="Psh. 12.5 + 3 * 2"
+          />
+          <div className="form-text mt-2">Përdorni +, -, *, / për llogaritje të shpejta.</div>
+        </Form.Group>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
+      <Modal.Footer className="border-0 pt-0 pb-4">
+        <Button variant="light" onClick={onClose} className="premium-button me-2">
           Mbyll
         </Button>
-        <Button variant="primary" onClick={onApply}>
+        <Button variant="primary" onClick={onApply} className="premium-button premium-button-primary px-4">
           Apliko
         </Button>
       </Modal.Footer>

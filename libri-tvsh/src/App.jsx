@@ -39,57 +39,48 @@ function App() {
   };
 
   return (
-    <>
-      <style>
-        {`
-          .highlight-row {
-            background-color: #e0f7fa;
-            transition: background-color 1s ease;
-          }
-          .header-image {
-            max-width: 50%;
-            height: auto;
-            margin-bottom: 1rem;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-          }
-          .error-message {
-            font-size: 0.875rem;
-            color: #dc3545;
-            margin-top: 0.25rem;
-          }
-        `}
-      </style>
-      <Container className="py-4">
-        <img
-          src="/logo.png"
-          alt="Invoice Management Logo"
-          className="header-image"
-        />
-        <h2 className="mb-4">Blerjet me TVSH</h2>
-        <Row className="g-3">
-          <Col md={6}>
-            <InvoiceForm
-              invoices={invoices}
-              setInvoices={setInvoices}
-              furnitoriOptions={furnitoriOptions}
-              editingInvoice={editingInvoice}
-              setEditingInvoice={setEditingInvoice}
-            />
+    <div className="min-h-screen pb-12">
+      <Container className="py-5 animate-fade-in">
+        <header className="text-center mb-10">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="d-block mx-auto mb-4"
+            style={{ maxWidth: "50%", height: "auto" }}
+          />
+          <h1 className="display-4 fw-bold gradient-text mb-2">Libri i TVSH</h1>
+          <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil</p>
+        </header>
+
+        <Row className="g-4">
+          <Col lg={4} className="mb-4">
+            <div className="h-100">
+              <InvoiceForm
+                invoices={invoices}
+                setInvoices={setInvoices}
+                furnitoriOptions={furnitoriOptions}
+                editingInvoice={editingInvoice}
+                setEditingInvoice={setEditingInvoice}
+              />
+            </div>
           </Col>
-          <Col md={6}>
-            <InvoiceTable
-              invoices={invoices}
-              setInvoices={setInvoices}
-              furnitoriOptions={furnitoriOptions}
-              onEdit={handleEdit}
-            />
+          <Col lg={8}>
+            <div className="h-100">
+              <InvoiceTable
+                invoices={invoices}
+                setInvoices={setInvoices}
+                furnitoriOptions={furnitoriOptions}
+                onEdit={handleEdit}
+              />
+            </div>
           </Col>
         </Row>
-        <Footer />
+
+        <div className="mt-12">
+          <Footer />
+        </div>
       </Container>
-    </>
+    </div>
   );
 }
 
