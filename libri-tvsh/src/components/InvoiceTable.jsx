@@ -13,7 +13,8 @@ import {
   faBuilding,
   faHashtag,
   faEuroSign,
-  faFilter
+  faFilter,
+  faUndo
 } from "@fortawesome/free-solid-svg-icons";
 import exportFromJSON from "export-from-json";
 
@@ -23,7 +24,9 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   const [invoiceToDelete, setInvoiceToDelete] = useState(null);
   const [showClearAllModal, setShowClearAllModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortConfig, setSortConfig] = useState({ key: "data", direction: "desc" });
+  
+  // FIXED: Defaulting to ID descending so new items stay at the top
+  const [sortConfig, setSortConfig] = useState({ key: "id", direction: "desc" });
 
   useEffect(() => {
     if (highlightedId) {
@@ -34,12 +37,19 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
 
   const handleSort = (key) => {
     let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === "asc") {
+        direction = "desc";
+      } else {
+        // Reset to ID sorting if clicked a third time
+        setSortConfig({ key: "id", direction: "desc" });
+        return;
+      }
     }
     setSortConfig({ key, direction });
   };
 
+  // Logic for filtering and sorting
   const filteredAndSortedInvoices = [...invoices]
     .filter((item) => {
       const furnitori = (furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "").toString();
@@ -54,10 +64,11 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
       );
     })
     .sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
+      const key = sortConfig.key || "id";
+      if (a[key] < b[key]) {
         return sortConfig.direction === "asc" ? -1 : 1;
       }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
+      if (a[key] > b[key]) {
         return sortConfig.direction === "asc" ? 1 : -1;
       }
       return 0;
@@ -65,10 +76,10 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
 
   const totals = filteredAndSortedInvoices.reduce(
     (acc, curr) => ({
-      paTvsh: acc.paTvsh + curr.vlPaTvsh,
-      tvsh18: acc.tvsh18 + curr.tvsh18,
-      tvsh8: acc.tvsh8 + curr.tvsh8,
-      total: acc.total + curr.total,
+      paTvsh: acc.paTvsh + (curr.vlPaTvsh || 0),
+      tvsh18: acc.tvsh18 + (curr.tvsh18 || 0),
+      tvsh8: acc.tvsh8 + (curr.tvsh8 || 0),
+      total: acc.total + (curr.total || 0),
     }),
     { paTvsh: 0, tvsh18: 0, tvsh8: 0, total: 0 }
   );
@@ -80,9 +91,9 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   };
   const handleDeleteAllCancel = () => setShowClearAllModal(false);
 
+  // FIXED: Now exports the filtered and sorted version
   const handleExport = (type) => {
-    const dataToExport = filteredAndSortedInvoices.length > 0 ? filteredAndSortedInvoices : invoices;
-    const formattedList = dataToExport.map((item) => ({
+    const formattedList = filteredAndSortedInvoices.map((item) => ({
       Data: new Date(item.data).toLocaleDateString("en-GB"),
       Furnitori: furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori,
       "Nr. Fatures": item.nrFatures,
@@ -166,6 +177,21 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
               </div>
 
               <div className="d-flex gap-2 align-items-center">
+                {/* Reset Sort Button UI */}
+                {sortConfig.key !== "id" && (
+                  <OverlayTrigger placement="top" overlay={<Tooltip>Kthehu te renditja origjinale</Tooltip>}>
+                    <Button 
+                      variant="link" 
+                      size="sm" 
+                      className="text-decoration-none text-muted me-2"
+                      onClick={() => setSortConfig({ key: "id", direction: "desc" })}
+                    >
+                      <FontAwesomeIcon icon={faUndo} className="me-1" />
+                      Pastro
+                    </Button>
+                  </OverlayTrigger>
+                )}
+
                 <div className="input-group input-group-sm rounded-pill overflow-hidden border shadow-sm" style={{ width: '220px' }}>
                   <span className="input-group-text bg-white border-0 text-muted ps-3">
                     <FontAwesomeIcon icon={faSearch} />
@@ -280,12 +306,16 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                       </td>
                       <td>
                         <div className="d-flex justify-content-center gap-1">
-                          <button className="btn-icon-action edit" onClick={() => handleEditClick(item)}>
-                            <FontAwesomeIcon icon={faPencilAlt} size="sm" />
-                          </button>
-                          <button className="btn-icon-action delete" onClick={() => handleDeleteClick(item.id)}>
-                            <FontAwesomeIcon icon={faTrash} size="sm" />
-                          </button>
+                          <OverlayTrigger placement="top" overlay={<Tooltip>Edito</Tooltip>}>
+                            <button className="btn-icon-action edit" onClick={() => handleEditClick(item)}>
+                                <FontAwesomeIcon icon={faPencilAlt} size="sm" />
+                            </button>
+                          </OverlayTrigger>
+                          <OverlayTrigger placement="top" overlay={<Tooltip>Fshi</Tooltip>}>
+                            <button className="btn-icon-action delete" onClick={() => handleDeleteClick(item.id)}>
+                                <FontAwesomeIcon icon={faTrash} size="sm" />
+                            </button>
+                          </OverlayTrigger>
                         </div>
                       </td>
                     </tr>
@@ -295,7 +325,6 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
             </Table>
           </div>
 
-          {/* Subtle Mobile Hint */}
           <div className="px-4 py-2 bg-light text-center border-top">
             <span className="small text-muted" style={{ fontSize: '0.7rem' }}>
               Sugjerim: Klikoni mbi koka e tabelës për të renditur faturat.
