@@ -1,3 +1,9 @@
+﻿
+## Statusi i Projektit
+
+> [!WARNING]
+> **KUJDES:** Ky projekt është ende në zhvillim e sipër (Work in Progress / Unfinished). Mund të ketë ndryshime dhe nuk është gati për t'u përdorur në produksion.
+
 <body>
 
 <h1>LibriTVSH - BESA NJË SH.P.K.</h1>
@@ -47,3 +53,7 @@
 <p>Ky aplikacion është zhvilluar dhe mirëmbahet ekskluzivisht për përdorim nga <strong>BESA NJË SH.P.K.</strong>.</p>
 
 </body>
+
+## Të Drejtat e Autorit (Copyright & License)
+
+Ky projekt është pronë intelektuale e **Rilind Kyçyku**. Nuk lejohet përdorimi, kopjimi, modifikimi apo shpërndarja e këtij kodi pa pëlqimin paraprak dhe miratimin me shkrim nga autori. Çdo përdorim i paautorizuar është rreptësisht i ndaluar.
