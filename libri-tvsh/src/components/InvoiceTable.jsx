@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencilAlt,
   faTrash,
-  faFileCsv,
   faFileExcel,
   faSearch,
   faArrowUp,
@@ -16,7 +15,7 @@ import {
   faFilter,
   faUndo
 } from "@fortawesome/free-solid-svg-icons";
-import exportFromJSON from "export-from-json";
+import { exportInvoicesExcel } from "../utils/exportExcel";
 
 function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   const [highlightedId, setHighlightedId] = useState(null);
@@ -91,23 +90,8 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   };
   const handleDeleteAllCancel = () => setShowClearAllModal(false);
 
-  // FIXED: Now exports the filtered and sorted version
-  const handleExport = (type) => {
-    const formattedList = filteredAndSortedInvoices.map((item) => ({
-      Data: new Date(item.data).toLocaleDateString("en-GB"),
-      Furnitori: furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori,
-      "Nr. Fatures": item.nrFatures,
-      "VL. Pa TVSH": item.vlPaTvsh.toFixed(2),
-      "TVSH 18%": item.tvsh18.toFixed(2),
-      "TVSH 8%": item.tvsh8.toFixed(2),
-      Totali: item.total.toFixed(2),
-    }));
-    exportFromJSON({
-      data: formattedList,
-      fileName: `LibriTVSH_${new Date().toLocaleDateString("en-CA")}`,
-      exportType: type,
-      withBOM: true,
-    });
+  const handleExportExcel = () => {
+    exportInvoicesExcel(filteredAndSortedInvoices, furnitoriOptions, totals);
   };
 
   const handleDeleteClick = (id) => {
@@ -206,22 +190,11 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                 </div>
 
                 <div className="d-flex gap-2 ms-2">
-                  <OverlayTrigger placement="top" overlay={<Tooltip>Ruaj si CSV</Tooltip>}>
-                    <Button
-                      variant="light"
-                      className="premium-action-chip csv d-flex align-items-center gap-2"
-                      onClick={() => handleExport("csv")}
-                    >
-                      <FontAwesomeIcon icon={faFileCsv} />
-                      <span className="d-none d-xl-inline">CSV</span>
-                    </Button>
-                  </OverlayTrigger>
-
                   <OverlayTrigger placement="top" overlay={<Tooltip>Ruaj si Excel</Tooltip>}>
                     <Button
                       variant="light"
                       className="premium-action-chip excel d-flex align-items-center gap-2"
-                      onClick={() => handleExport("xls")}
+                      onClick={handleExportExcel}
                     >
                       <FontAwesomeIcon icon={faFileExcel} />
                       <span className="d-none d-xl-inline">Excel</span>

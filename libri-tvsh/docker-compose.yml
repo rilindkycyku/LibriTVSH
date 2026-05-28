@@ -1,0 +1,9 @@
+services:
+  libri-tvsh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: libri-tvsh
+    restart: unless-stopped
+    ports:
+      - "3300:80"
