@@ -15,6 +15,19 @@
 <h2>Aplikacioni Live</h2>
     <p>Përdorni aplikacionin direkt këtu: <a href="https://libritvsh.rilindkycyku.dev/" target="_blank">https://libritvsh.rilindkycyku.dev/</a></p>
 
+<h2>Ekzekutimi me Docker</h2>
+    <p>Ky projekt mbeshtet ekzekutimin me Docker! Per te ngritur aplikacionin pa pasur nevoje per <code>npm</code> apo Node.js lokalisht, ndiqni keto hapa:</p>
+    <ol>
+        <li>Sigurohuni qe keni <strong>Docker Desktop</strong> te instaluar.</li>
+        <li>Hyni ne folderin <code>libri-tvsh</code>:
+            <pre><code>cd LibriTVSH/libri-tvsh</code></pre>
+        </li>
+        <li>Ekzekutoni komanden:
+            <pre><code>docker compose up -d --build</code></pre>
+        </li>
+        <li>Hapni <a href="http://localhost:3300" target="_blank">http://localhost:3300</a> ne shfletuesin tuaj.</li>
+    </ol>
+
 <h2>Si të instaloni dhe ekzekutoni lokalisht</h2>
     <ol>
         <li>Klononi repository-n:
