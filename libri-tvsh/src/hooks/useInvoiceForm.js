@@ -75,7 +75,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
     };
 
     if (editingInvoice) {
-      console.log("Perditesimi i Fatures:", newItem);
       setInvoices(
         invoices.map((invoice) =>
           invoice.id === editingInvoice.id ? newItem : invoice
@@ -83,7 +82,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
       );
       setEditingInvoice(null);
     } else {
-      console.log("Duke shtuar faturen e re:", newItem);
       setInvoices([newItem, ...invoices]);
     }
     dispatch({ type: "RESET_FORM" });
@@ -162,7 +160,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
             : tvsh8CalcButtonRef;
         if (calcButtonRef.current) {
           calcButtonRef.current.blur();
-          console.log(`Blurred ${field} calculator button`);
         }
         dispatch({
           type: "SET_CALCULATOR",
@@ -180,10 +177,7 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
               ? tvsh8Ref
               : addButtonRef;
           if (nextRef.current) {
-            console.log(`Focusing ${field === "vlPaTvsh" ? "TVSH 18%" : field === "tvsh18" ? "TVSH 8%" : "Shtoni/Përditëso Faturen"}`);
             nextRef.current.focus();
-          } else {
-            console.error(`${field === "vlPaTvsh" ? "tvsh18Ref" : field === "tvsh18" ? "tvsh8Ref" : "addButtonRef"} is not available`);
           }
         }, 200);
       } else {

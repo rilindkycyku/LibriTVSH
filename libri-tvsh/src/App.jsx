@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTable from "./components/InvoiceTable";
-import Footer from "./components/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { fetchFurnitori } from "./utils";
+
+const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
   const [invoices, setInvoices] = useState(() => {
@@ -12,12 +14,18 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [furnitoriOptions, setFurnitoriOptions] = useState([]);
+  const [furnitoriLoading, setFurnitoriLoading] = useState(true);
+  const [furnitoriError, setFurnitoriError] = useState(false);
   const [editingInvoice, setEditingInvoice] = useState(null);
 
   useEffect(() => {
     fetchFurnitori()
       .then((options) => setFurnitoriOptions(options))
-      .catch((error) => console.error("Error fetching furnitori:", error));
+      .catch((error) => {
+        console.error("Error fetching furnitori:", error);
+        setFurnitoriError(true);
+      })
+      .finally(() => setFurnitoriLoading(false));
   }, []);
 
   useEffect(() => {
@@ -28,7 +36,6 @@ function App() {
     const selectedOption = furnitoriOptions.find(
       (opt) => opt.value === invoice.furnitori
     );
-    console.log("Editing invoice:", invoice);
     setEditingInvoice({
       ...invoice,
       optionsSelected: selectedOption || null,
@@ -44,40 +51,50 @@ function App() {
         <header className="text-center mb-10">
           <img
             src="/logo.png"
-            alt="Logo"
-            className="d-block mx-auto mb-4"
-            style={{ maxWidth: "50%", height: "auto" }}
+            alt="Logoja e Blerjet me TVSH"
+            className="d-block mx-auto mb-4 app-logo"
           />
           <h1 className="display-4 fw-bold gradient-text mb-2">Blerjet me TVSH</h1>
           <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil!</p>
         </header>
 
-        <Row className="g-4">
-          <Col lg={4} className="mb-4">
-            <div className="h-100">
-              <InvoiceForm
-                invoices={invoices}
-                setInvoices={setInvoices}
-                furnitoriOptions={furnitoriOptions}
-                editingInvoice={editingInvoice}
-                setEditingInvoice={setEditingInvoice}
-              />
-            </div>
-          </Col>
-          <Col lg={8}>
-            <div className="h-100">
-              <InvoiceTable
-                invoices={invoices}
-                setInvoices={setInvoices}
-                furnitoriOptions={furnitoriOptions}
-                onEdit={handleEdit}
-              />
-            </div>
-          </Col>
-        </Row>
+        {furnitoriError && (
+          <div className="alert alert-warning text-center" role="alert">
+            Furnitorët nuk u ngarkuan. Provoni të rifreskoni faqen.
+          </div>
+        )}
+
+        <ErrorBoundary>
+          <Row className="g-4">
+            <Col lg={4} className="mb-4">
+              <div className="h-100">
+                <InvoiceForm
+                  invoices={invoices}
+                  setInvoices={setInvoices}
+                  furnitoriOptions={furnitoriOptions}
+                  furnitoriLoading={furnitoriLoading}
+                  editingInvoice={editingInvoice}
+                  setEditingInvoice={setEditingInvoice}
+                />
+              </div>
+            </Col>
+            <Col lg={8}>
+              <div className="h-100">
+                <InvoiceTable
+                  invoices={invoices}
+                  setInvoices={setInvoices}
+                  furnitoriOptions={furnitoriOptions}
+                  onEdit={handleEdit}
+                />
+              </div>
+            </Col>
+          </Row>
+        </ErrorBoundary>
 
         <div className="mt-12">
-          <Footer />
+          <Suspense fallback={<div className="text-center py-4"><Spinner animation="border" size="sm" /></div>}>
+            <Footer />
+          </Suspense>
         </div>
       </Container>
     </div>

@@ -1,8 +1,15 @@
-import { useReducer, useRef, useEffect } from "react";
+import { useReducer, useRef, useEffect, useCallback } from "react";
 import { Form, Card, Button, InputGroup, Alert } from "react-bootstrap";
 import Select from "react-select";
 import CalculatorModal from "./CalculatorModal";
 import useInvoiceForm from "../hooks/useInvoiceForm";
+
+const selectStyles = {
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 1050,
+  }),
+};
 
 const initialState = {
   furnitori: "",
@@ -22,7 +29,7 @@ const initialState = {
   optionsSelected: null,
 };
 
-function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, setEditingInvoice }) {
+function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading, editingInvoice, setEditingInvoice }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const {
     furnitori,
@@ -88,7 +95,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
 
   useEffect(() => {
     if (editingInvoice) {
-      console.log("Populating form with invoice:", editingInvoice);
       dispatch({
         type: "SET_EDIT_INVOICE",
         payload: editingInvoice,
@@ -97,18 +103,11 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
     }
   }, [editingInvoice]);
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = useCallback(() => {
     dispatch({ type: "RESET_FORM" });
     setEditingInvoice(null);
     furnitoriRef.current.focus();
-  };
-
-  const customStyles = {
-    menu: (provided) => ({
-      ...provided,
-      zIndex: 1050,
-    }),
-  };
+  }, [setEditingInvoice]);
 
   return (
     <>
@@ -134,11 +133,12 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
                 value={optionsSelected}
                 onChange={handleFurnitoriChange}
                 options={furnitoriOptions}
+                isLoading={furnitoriLoading}
                 id="furnitoriSelect"
                 inputId="furnitoriSelect-input"
-                styles={customStyles}
+                styles={selectStyles}
                 ref={furnitoriRef}
-                placeholder="Zgjidh furnitorin..."
+                placeholder={furnitoriLoading ? "Duke ngarkuar..." : "Zgjidh furnitorin..."}
               />
             </Form.Group>
 
@@ -208,8 +208,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
                       onClick={() => openCalculator("vlPaTvsh", vlPaTvshInput)}
                       ref={vlPaTvshCalcButtonRef}
                       tabIndex={-1}
+                      aria-label="Hap kalkulatorin për Vlerën Pa TVSH"
                     >
-                      🧮
+                      <span aria-hidden="true">🧮</span>
                     </Button>
                     <InputGroup.Text className="bg-light text-muted border-start-0">€</InputGroup.Text>
                   </InputGroup>
@@ -241,8 +242,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
                       onClick={() => openCalculator("tvsh18", tvsh18Input)}
                       ref={tvsh18CalcButtonRef}
                       tabIndex={-1}
+                      aria-label="Hap kalkulatorin për TVSH 18%"
                     >
-                      🧮
+                      <span aria-hidden="true">🧮</span>
                     </Button>
                     <InputGroup.Text className="bg-light text-muted">€</InputGroup.Text>
                   </InputGroup>
@@ -269,8 +271,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, editingInvoice, 
                       onClick={() => openCalculator("tvsh8", tvsh8Input)}
                       ref={tvsh8CalcButtonRef}
                       tabIndex={-1}
+                      aria-label="Hap kalkulatorin për TVSH 8%"
                     >
-                      🧮
+                      <span aria-hidden="true">🧮</span>
                     </Button>
                     <InputGroup.Text className="bg-light text-muted">€</InputGroup.Text>
                   </InputGroup>

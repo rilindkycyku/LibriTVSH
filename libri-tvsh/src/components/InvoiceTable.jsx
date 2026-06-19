@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Card, Table, Button, OverlayTrigger, Tooltip, Modal, Form, Badge } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -49,38 +49,44 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   };
 
   // Logic for filtering and sorting
-  const filteredAndSortedInvoices = [...invoices]
-    .filter((item) => {
-      const furnitori = (furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "").toString();
-      const nrFatures = (item.nrFatures || "").toString();
-      const data = (item.data || "").toString();
-      const term = (searchTerm || "").toLowerCase();
+  const filteredAndSortedInvoices = useMemo(() => {
+    return [...invoices]
+      .filter((item) => {
+        const furnitori = (furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "").toString();
+        const nrFatures = (item.nrFatures || "").toString();
+        const data = (item.data || "").toString();
+        const term = (searchTerm || "").toLowerCase();
 
-      return (
-        furnitori.toLowerCase().includes(term) ||
-        nrFatures.toLowerCase().includes(term) ||
-        data.includes(term)
-      );
-    })
-    .sort((a, b) => {
-      const key = sortConfig.key || "id";
-      if (a[key] < b[key]) {
-        return sortConfig.direction === "asc" ? -1 : 1;
-      }
-      if (a[key] > b[key]) {
-        return sortConfig.direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
+        return (
+          furnitori.toLowerCase().includes(term) ||
+          nrFatures.toLowerCase().includes(term) ||
+          data.includes(term)
+        );
+      })
+      .sort((a, b) => {
+        const key = sortConfig.key || "id";
+        if (a[key] < b[key]) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (a[key] > b[key]) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+  }, [invoices, furnitoriOptions, searchTerm, sortConfig]);
 
-  const totals = filteredAndSortedInvoices.reduce(
-    (acc, curr) => ({
-      paTvsh: acc.paTvsh + (curr.vlPaTvsh || 0),
-      tvsh18: acc.tvsh18 + (curr.tvsh18 || 0),
-      tvsh8: acc.tvsh8 + (curr.tvsh8 || 0),
-      total: acc.total + (curr.total || 0),
-    }),
-    { paTvsh: 0, tvsh18: 0, tvsh8: 0, total: 0 }
+  const totals = useMemo(
+    () =>
+      filteredAndSortedInvoices.reduce(
+        (acc, curr) => ({
+          paTvsh: acc.paTvsh + (curr.vlPaTvsh || 0),
+          tvsh18: acc.tvsh18 + (curr.tvsh18 || 0),
+          tvsh8: acc.tvsh8 + (curr.tvsh8 || 0),
+          total: acc.total + (curr.total || 0),
+        }),
+        { paTvsh: 0, tvsh18: 0, tvsh8: 0, total: 0 }
+      ),
+    [filteredAndSortedInvoices]
   );
 
   const handleDeleteAllClick = () => setShowClearAllModal(true);
@@ -90,9 +96,15 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
   };
   const handleDeleteAllCancel = () => setShowClearAllModal(false);
 
-  const handleExportExcel = () => {
-    exportInvoicesExcel(filteredAndSortedInvoices, furnitoriOptions, totals);
-  };
+  const [isExporting, setIsExporting] = useState(false);
+  const handleExportExcel = useCallback(async () => {
+    setIsExporting(true);
+    try {
+      await exportInvoicesExcel(filteredAndSortedInvoices, furnitoriOptions, totals);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [filteredAndSortedInvoices, furnitoriOptions, totals]);
 
   const handleDeleteClick = (id) => {
     setInvoiceToDelete(id);
@@ -176,13 +188,14 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                   </OverlayTrigger>
                 )}
 
-                <div className="input-group input-group-sm rounded-pill overflow-hidden border shadow-sm" style={{ width: '220px' }}>
+                <div className="input-group input-group-sm rounded-pill overflow-hidden border shadow-sm search-input-group">
                   <span className="input-group-text bg-white border-0 text-muted ps-3">
                     <FontAwesomeIcon icon={faSearch} />
                   </span>
                   <Form.Control
                     type="text"
                     placeholder="Kërko faturën..."
+                    aria-label="Kërko faturën"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="border-0 shadow-none py-2"
@@ -195,8 +208,14 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                       variant="light"
                       className="premium-action-chip excel d-flex align-items-center gap-2"
                       onClick={handleExportExcel}
+                      disabled={isExporting}
+                      aria-label="Ruaj regjistrin si Excel"
                     >
-                      <FontAwesomeIcon icon={faFileExcel} />
+                      {isExporting ? (
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+                      ) : (
+                        <FontAwesomeIcon icon={faFileExcel} />
+                      )}
                       <span className="d-none d-xl-inline">Excel</span>
                     </Button>
                   </OverlayTrigger>
@@ -216,7 +235,7 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
             </div>
           </div>
 
-          <div className="table-responsive flex-grow-1" style={{ maxHeight: '420px' }}>
+          <div className="table-responsive flex-grow-1 table-scroll">
             <Table hover className="premium-table m-0 align-middle">
               <thead className="sticky-top z-2">
                 <tr>
@@ -234,6 +253,19 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                       key={i}
                       className={`text-${h.align || 'start'} ${h.key ? 'cursor-pointer select-none' : ''}`}
                       onClick={() => h.key && handleSort(h.key)}
+                      onKeyDown={(e) => {
+                        if (h.key && (e.key === "Enter" || e.key === " ")) {
+                          e.preventDefault();
+                          handleSort(h.key);
+                        }
+                      }}
+                      tabIndex={h.key ? 0 : undefined}
+                      role={h.key ? "button" : undefined}
+                      aria-sort={
+                        h.key && sortConfig.key === h.key
+                          ? sortConfig.direction === "asc" ? "ascending" : "descending"
+                          : undefined
+                      }
                     >
                       <div className={`d-flex align-items-center gap-2 ${h.align === 'end' ? 'justify-content-end' : h.align === 'center' ? 'justify-content-center' : ''}`}>
                         <FontAwesomeIcon icon={h.icon || faHashtag} style={{ fontSize: '0.7rem', opacity: 0.5 }} />

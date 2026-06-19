@@ -18,6 +18,8 @@ const CLR = {
   tableHeadFg: "FF000000",
 };
 
+const COLS = ["A", "B", "C", "D", "E", "F"];
+
 const border = (color = CLR.border) => ({
   top:    { style: "thin", color: { argb: color } },
   left:   { style: "thin", color: { argb: color } },
@@ -63,19 +65,17 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
 
   // ── Column widths ───────────────────────────────────────────────────────────
   ws.columns = [
-    { width: 22 }, // A  Nr. / Info label col 1
-    { width: 14 }, // B  Data / Info value col 1
-    { width: 24 }, // C  Furnitori
-    { width: 20 }, // D  Nr. Faturës / Info label col 2
-    { width: 16 }, // E  VL. Pa TVSH € / Info value col 2
-    { width: 16 }, // F  TVSH 18% € / Spacer
-    { width: 20 }, // G  TVSH 8% € / Info label col 3
-    { width: 16 }, // H  Totali € / Info value col 3
+    { width: 14 }, // A  Data
+    { width: 28 }, // B  Furnitori
+    { width: 20 }, // C  Nr. Faturës
+    { width: 18 }, // D  VL. Pa TVSH €
+    { width: 16 }, // E  TVSH 18% €
+    { width: 16 }, // F  TVSH 8% €
   ];
 
   // ── ROW 1: Title ────────────────────────────────────────────────────────────
-  const titleRow = ws.addRow(["Libri TVSH - Regjistri i Faturave", "", "", "", "", "", "", ""]);
-  ws.mergeCells("A1:H1");
+  const titleRow = ws.addRow(["Libri TVSH - Regjistri i Faturave", "", "", "", "", ""]);
+  ws.mergeCells("A1:F1");
   titleRow.height = 34;
   const titleCell = titleRow.getCell("A");
   titleCell.font  = { bold: true, color: { argb: CLR.titleFg }, size: 16, name: "Calibri" };
@@ -85,22 +85,27 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
   // ── ROW 2: Blank spacer ─────────────────────────────────────────────────────
   ws.addRow([]).height = 6;
 
+<<<<<<< Updated upstream
   // ── INFO BLOCK: 3 rows × 3 label-value pairs ────────────────────────────────
   const exportDate = formatKosovoDate(new Date(), "."); // dd.mm.yyyy for header
+=======
+  // ── INFO BLOCK: 2 rows × 3 label-value pairs ─────────────────────────────────
+  const exportDate = new Date().toLocaleDateString("sq-AL");
+>>>>>>> Stashed changes
   const infoData = [
-    ["Data e Eksportit:",  exportDate,                    "Totali Pa TVSH (€):", fmt(totals.paTvsh), "Totali Gjithsej (€):", fmt(totals.total)],
-    ["Nr. Faturave:",      String(invoices.length),       "TVSH 18% (€):",       fmt(totals.tvsh18), "TVSH 8% (€):",         fmt(totals.tvsh8)],
+    ["Data e Eksportit:", exportDate,              "Totali Pa TVSH (€):", fmt(totals.paTvsh)],
+    ["Nr. Faturave:",     String(invoices.length), "Totali Gjithsej (€):", fmt(totals.total)],
   ];
 
-  infoData.forEach(([lA, vA, lD, vD, lG, vG]) => {
-    const row = ws.addRow([lA, vA, "", lD, vD, "", lG, vG]);
+  infoData.forEach(([lA, vA, lC, vC]) => {
+    const row = ws.addRow([lA, vA, lC, vC, "", ""]);
     row.height = 20;
 
-    // Fill all cells with dark navy
-    ["A","B","C","D","E","F","G","H"].forEach(c => {
+    COLS.forEach(c => {
       row.getCell(c).fill = fill(CLR.headerBg);
     });
 
+<<<<<<< Updated upstream
     // Label cells - soft grey, bold
     ["A","D","G"].forEach(c => {
       row.getCell(c).font      = font(true, CLR.labelFg, 9);
@@ -115,20 +120,30 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
     ["C","F"].forEach(c => {
       row.getCell(c).font = font(false, CLR.headerBg, 9);
     });
+=======
+    ["A", "C"].forEach(c => {
+      row.getCell(c).font      = font(true, CLR.labelFg, 9);
+      row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
+    });
+    ["B", "D"].forEach(c => {
+      row.getCell(c).font      = font(false, CLR.valueFg, 9);
+      row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
+    });
+>>>>>>> Stashed changes
   });
 
   // ── ROW 5: Blank spacer ─────────────────────────────────────────────────────
   const blank = ws.addRow([]);
   blank.height = 6;
-  ["A","B","C","D","E","F","G","H"].forEach(c => blank.getCell(c).fill = fill(CLR.headerBg));
+  COLS.forEach(c => blank.getCell(c).fill = fill(CLR.headerBg));
 
   // ── ROW 6: Table header ─────────────────────────────────────────────────────
   const tHead = ws.addRow([
-    "Nr.", "Data", "Furnitori", "Nr. Faturës",
-    "VL. Pa TVSH (€)", "TVSH 18% (€)", "TVSH 8% (€)", "Totali (€)",
+    "Data", "Furnitori", "Nr. Faturës",
+    "VL. Pa TVSH (€)", "TVSH 18% (€)", "TVSH 8% (€)",
   ]);
   tHead.height = 24;
-  ["A","B","C","D","E","F","G","H"].forEach((c) => {
+  COLS.forEach((c) => {
     const cell = tHead.getCell(c);
     cell.fill  = fill(CLR.tableHead);
     cell.font  = font(true, CLR.tableHeadFg, 11);
@@ -142,6 +157,7 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
     const furnLabel = furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "-";
 
     const row = ws.addRow([
+<<<<<<< Updated upstream
       idx + 1,
       formatKosovoDate(item.data), // dd.mm.yyyy
       furnLabel,
@@ -150,14 +166,23 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
       parseFloat(item.tvsh18   || 0), // Passed as pure number
       parseFloat(item.tvsh8    || 0), // Passed as pure number
       parseFloat(item.total    || 0), // Passed as pure number
+=======
+      new Date(item.data).toLocaleDateString("en-GB"),
+      furnLabel,
+      item.nrFatures || "—",
+      parseFloat(item.vlPaTvsh || 0).toFixed(2),
+      parseFloat(item.tvsh18   || 0).toFixed(2),
+      parseFloat(item.tvsh8    || 0).toFixed(2),
+>>>>>>> Stashed changes
     ]);
     row.height = 19;
 
-    ["A","B","C","D","E","F","G","H"].forEach((c) => {
+    COLS.forEach((c) => {
       const cell = row.getCell(c);
       cell.fill   = fill(bgArgb);
       cell.font   = font(false, CLR.valueFg);
       cell.border = border();
+<<<<<<< Updated upstream
       
       if (["E","F","G","H"].includes(c)) {
         cell.alignment = { horizontal: "right" };
@@ -165,28 +190,43 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
       } else {
         cell.alignment = { horizontal: "left" };
       }
+=======
+      // Right-align numeric columns
+      cell.alignment = { horizontal: ["D", "E", "F"].includes(c) ? "right" : "left" };
+>>>>>>> Stashed changes
     });
   });
 
   // ── Totals row ──────────────────────────────────────────────────────────────
   const totRow = ws.addRow([
+<<<<<<< Updated upstream
     "", "TOTALI", "", "",
     totals.paTvsh,
     totals.tvsh18,
     totals.tvsh8,
     totals.total,
+=======
+    "TOTALI", "", "",
+    totals.paTvsh.toFixed(2),
+    totals.tvsh18.toFixed(2),
+    totals.tvsh8.toFixed(2),
+>>>>>>> Stashed changes
   ]);
   totRow.height = 24;
-  ["A","B","C","D","E","F","G","H"].forEach((c) => {
+  COLS.forEach((c) => {
     const cell = totRow.getCell(c);
     cell.fill   = fill(CLR.totBg);
     cell.font   = font(true, CLR.totFg, 11);
     cell.border = border("FF047857");
+<<<<<<< Updated upstream
     
     if (["E","F","G","H"].includes(c)) {
       cell.alignment = { horizontal: "right" };
       cell.numFmt = '#,##0.00'; 
     }
+=======
+    if (["D", "E", "F"].includes(c)) cell.alignment = { horizontal: "right" };
+>>>>>>> Stashed changes
   });
 
   // ── Branding ────────────────────────────────────────────────────────────────
@@ -194,6 +234,7 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
   
   // Placed WWW in column 6 (F) so it isn't lost during the merge
   const brandRow = ws.addRow([
+<<<<<<< Updated upstream
     "© LibriTVSH by Rilind Kyçyku", "", "", "", "", "WWW.RILINDKYCYKU.DEV", "", "",
   ]);
   brandRow.height = 20;
@@ -213,6 +254,18 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
     hyperlink: "https://www.rilindkycyku.dev",
     tooltip: "Visit Website"
   };
+=======
+    "© LibriTVSH by Rilind Kyçyku", "", "", "", "", "WWW.RILINDKYCYKU.DEV",
+  ]);
+  brandRow.height = 20;
+  ws.mergeCells(brandRow.number, 1, brandRow.number, 4);
+  ws.mergeCells(brandRow.number, 5, brandRow.number, 6);
+
+  brandRow.getCell(1).font = { italic: true, size: 9, color: { argb: "FF94A3B8" }, name: "Calibri" };
+  brandRow.getCell(1).alignment = { horizontal: "left", vertical: "middle" };
+  brandRow.getCell(6).font = { bold: true, size: 9, color: { argb: "FF10B981" }, name: "Calibri" };
+  brandRow.getCell(6).alignment = { horizontal: "right", vertical: "middle" };
+>>>>>>> Stashed changes
 
   // ── Save ────────────────────────────────────────────────────────────────────
   const buffer = await wb.xlsx.writeBuffer();

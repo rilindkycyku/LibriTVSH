@@ -200,3 +200,32 @@ body {
 
 .premium-action-chip.delete { color: var(--danger); border-color: rgba(239, 68, 68, 0.1); }
 .premium-action-chip.delete:hover { background: rgba(239, 68, 68, 0.05); }
+
+.app-logo {
+  max-width: 220px;
+  width: 50%;
+  height: auto;
+}
+
+.table-scroll {
+  max-height: 420px;
+}
+
+@media (max-width: 576px) {
+  .table-scroll {
+    max-height: 320px;
+  }
+}
+
+.search-input-group {
+  width: 220px;
+  max-width: 100%;
+  flex: 1 1 160px;
+}
+
+.btn-icon-action:focus-visible,
+.premium-action-chip:focus-visible,
+.cursor-pointer:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

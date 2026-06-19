@@ -14,7 +14,6 @@ function CalculatorModal({
 
   useEffect(() => {
     if (show && calculatorInputRef.current) {
-      console.log("Focusing calculator input");
       calculatorInputRef.current.focus();
     }
   }, [show]);
