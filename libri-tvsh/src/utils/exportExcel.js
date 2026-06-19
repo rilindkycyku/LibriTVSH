@@ -85,13 +85,8 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
   // ── ROW 2: Blank spacer ─────────────────────────────────────────────────────
   ws.addRow([]).height = 6;
 
-<<<<<<< Updated upstream
-  // ── INFO BLOCK: 3 rows × 3 label-value pairs ────────────────────────────────
+  // ── INFO BLOCK: 2 rows × 2 label-value pairs ─────────────────────────────────
   const exportDate = formatKosovoDate(new Date(), "."); // dd.mm.yyyy for header
-=======
-  // ── INFO BLOCK: 2 rows × 3 label-value pairs ─────────────────────────────────
-  const exportDate = new Date().toLocaleDateString("sq-AL");
->>>>>>> Stashed changes
   const infoData = [
     ["Data e Eksportit:", exportDate,              "Totali Pa TVSH (€):", fmt(totals.paTvsh)],
     ["Nr. Faturave:",     String(invoices.length), "Totali Gjithsej (€):", fmt(totals.total)],
@@ -105,22 +100,6 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
       row.getCell(c).fill = fill(CLR.headerBg);
     });
 
-<<<<<<< Updated upstream
-    // Label cells - soft grey, bold
-    ["A","D","G"].forEach(c => {
-      row.getCell(c).font      = font(true, CLR.labelFg, 9);
-      row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
-    });
-    // Value cells - near-white, normal weight
-    ["B","E","H"].forEach(c => {
-      row.getCell(c).font      = font(false, CLR.valueFg, 9);
-      row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
-    });
-    // Spacer cells - just fill, no text
-    ["C","F"].forEach(c => {
-      row.getCell(c).font = font(false, CLR.headerBg, 9);
-    });
-=======
     ["A", "C"].forEach(c => {
       row.getCell(c).font      = font(true, CLR.labelFg, 9);
       row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
@@ -129,7 +108,6 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
       row.getCell(c).font      = font(false, CLR.valueFg, 9);
       row.getCell(c).alignment = { vertical: "middle", horizontal: "left" };
     });
->>>>>>> Stashed changes
   });
 
   // ── ROW 5: Blank spacer ─────────────────────────────────────────────────────
@@ -157,23 +135,12 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
     const furnLabel = furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "-";
 
     const row = ws.addRow([
-<<<<<<< Updated upstream
-      idx + 1,
       formatKosovoDate(item.data), // dd.mm.yyyy
       furnLabel,
       item.nrFatures || "-",
-      parseFloat(item.vlPaTvsh || 0), // Passed as pure number
-      parseFloat(item.tvsh18   || 0), // Passed as pure number
-      parseFloat(item.tvsh8    || 0), // Passed as pure number
-      parseFloat(item.total    || 0), // Passed as pure number
-=======
-      new Date(item.data).toLocaleDateString("en-GB"),
-      furnLabel,
-      item.nrFatures || "—",
-      parseFloat(item.vlPaTvsh || 0).toFixed(2),
-      parseFloat(item.tvsh18   || 0).toFixed(2),
-      parseFloat(item.tvsh8    || 0).toFixed(2),
->>>>>>> Stashed changes
+      parseFloat(item.vlPaTvsh || 0), // pure number for Excel
+      parseFloat(item.tvsh18   || 0), // pure number for Excel
+      parseFloat(item.tvsh8    || 0), // pure number for Excel
     ]);
     row.height = 19;
 
@@ -182,35 +149,22 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
       cell.fill   = fill(bgArgb);
       cell.font   = font(false, CLR.valueFg);
       cell.border = border();
-<<<<<<< Updated upstream
-      
-      if (["E","F","G","H"].includes(c)) {
+
+      if (["D", "E", "F"].includes(c)) {
         cell.alignment = { horizontal: "right" };
         cell.numFmt = '#,##0.00'; // Formats number dynamically inside Excel
       } else {
         cell.alignment = { horizontal: "left" };
       }
-=======
-      // Right-align numeric columns
-      cell.alignment = { horizontal: ["D", "E", "F"].includes(c) ? "right" : "left" };
->>>>>>> Stashed changes
     });
   });
 
   // ── Totals row ──────────────────────────────────────────────────────────────
   const totRow = ws.addRow([
-<<<<<<< Updated upstream
-    "", "TOTALI", "", "",
+    "TOTALI", "", "",
     totals.paTvsh,
     totals.tvsh18,
     totals.tvsh8,
-    totals.total,
-=======
-    "TOTALI", "", "",
-    totals.paTvsh.toFixed(2),
-    totals.tvsh18.toFixed(2),
-    totals.tvsh8.toFixed(2),
->>>>>>> Stashed changes
   ]);
   totRow.height = 24;
   COLS.forEach((c) => {
@@ -218,43 +172,16 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
     cell.fill   = fill(CLR.totBg);
     cell.font   = font(true, CLR.totFg, 11);
     cell.border = border("FF047857");
-<<<<<<< Updated upstream
-    
-    if (["E","F","G","H"].includes(c)) {
+
+    if (["D", "E", "F"].includes(c)) {
       cell.alignment = { horizontal: "right" };
-      cell.numFmt = '#,##0.00'; 
+      cell.numFmt = '#,##0.00';
     }
-=======
-    if (["D", "E", "F"].includes(c)) cell.alignment = { horizontal: "right" };
->>>>>>> Stashed changes
   });
 
   // ── Branding ────────────────────────────────────────────────────────────────
   ws.addRow([]);
-  
-  // Placed WWW in column 6 (F) so it isn't lost during the merge
   const brandRow = ws.addRow([
-<<<<<<< Updated upstream
-    "© LibriTVSH by Rilind Kyçyku", "", "", "", "", "WWW.RILINDKYCYKU.DEV", "", "",
-  ]);
-  brandRow.height = 20;
-  
-  ws.mergeCells(brandRow.number, 1, brandRow.number, 5); // Merges A-E
-  ws.mergeCells(brandRow.number, 6, brandRow.number, 8); // Merges F-H
-
-  brandRow.getCell(1).font = { italic: true, size: 9, color: { argb: "FF94A3B8" }, name: "Calibri" };
-  brandRow.getCell(1).alignment = { horizontal: "left", vertical: "middle" };
-  
-  brandRow.getCell(6).font = { bold: true, size: 9, color: { argb: "FF10B981" }, name: "Calibri" };
-  brandRow.getCell(6).alignment = { horizontal: "right", vertical: "middle" };
-  
-  // Makes the website a clickable link inside Excel
-  brandRow.getCell(6).value = {
-    text: "WWW.RILINDKYCYKU.DEV",
-    hyperlink: "https://www.rilindkycyku.dev",
-    tooltip: "Visit Website"
-  };
-=======
     "© LibriTVSH by Rilind Kyçyku", "", "", "", "", "WWW.RILINDKYCYKU.DEV",
   ]);
   brandRow.height = 20;
@@ -263,9 +190,15 @@ export async function exportInvoicesExcel(invoices, furnitoriOptions, totals) {
 
   brandRow.getCell(1).font = { italic: true, size: 9, color: { argb: "FF94A3B8" }, name: "Calibri" };
   brandRow.getCell(1).alignment = { horizontal: "left", vertical: "middle" };
+
   brandRow.getCell(6).font = { bold: true, size: 9, color: { argb: "FF10B981" }, name: "Calibri" };
   brandRow.getCell(6).alignment = { horizontal: "right", vertical: "middle" };
->>>>>>> Stashed changes
+  // Makes the website a clickable link inside Excel
+  brandRow.getCell(6).value = {
+    text: "WWW.RILINDKYCYKU.DEV",
+    hyperlink: "https://www.rilindkycyku.dev",
+    tooltip: "Visit Website",
+  };
 
   // ── Save ────────────────────────────────────────────────────────────────────
   const buffer = await wb.xlsx.writeBuffer();
