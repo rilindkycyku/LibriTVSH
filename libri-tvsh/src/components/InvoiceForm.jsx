@@ -178,7 +178,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </Form.Group>
 
             <div className="row">
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="dataEFatures">
                   <Form.Label className="fw-semibold text-muted mb-2">
                     Data <span className="text-danger">*</span>
@@ -193,7 +193,10 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   />
                 </Form.Group>
               </div>
-              <div className="col-md-6 mb-4">
+            </div>
+
+            <div className="row">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="nrFatures">
                   <Form.Label className="fw-semibold text-muted mb-2">
                     Nr. Faturës <span className="text-danger">*</span>
