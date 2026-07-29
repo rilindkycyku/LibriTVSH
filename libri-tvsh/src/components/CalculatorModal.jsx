@@ -39,13 +39,13 @@ function CalculatorModal({
           </Alert>
         )}
         <Form.Group>
-          <Form.Label className="text-muted fw-medium mb-2">Shprehja matematike</Form.Label>
+          <Form.Label className="mb-2">Shprehja matematike</Form.Label>
           <Form.Control
             type="text"
             value={calculatorValue}
             onChange={onInputChange}
             onKeyDown={onKeyDown}
-            className="form-control-lg rounded-4 shadow-sm"
+            className="form-control-lg font-monospace"
             ref={calculatorInputRef}
             placeholder="Psh. 12.5 + 3 * 2"
           />
