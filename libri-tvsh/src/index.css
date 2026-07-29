@@ -229,3 +229,17 @@ body {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+/* Prefikset e sugjeruara nën fushën "Nr. Faturës" */
+.prefix-chip {
+  border-radius: 9999px;
+  padding: 2px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.02em;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prefix-chip:hover {
+  transform: translateY(-1px);
+}

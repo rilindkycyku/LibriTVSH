@@ -1,8 +1,21 @@
 import { useState } from "react";
 import { evaluate } from "mathjs";
 import { validateNumericInput, validateCalculatorInput } from "../utils";
+import { prefiksetPer, resolvePrefix } from "../utils/prefikset";
 
-function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInvoice, setEditingInvoice) {
+/**
+ * Vlera e re e Nr. Faturës kur ndryshon prefiksi.
+ * Kthen `null` nëse përdoruesi e ka shkruar vetë numrin — atëherë nuk e prekim.
+ */
+function swapPrefix(nrFatures, appliedPrefix, newPrefix) {
+  if (appliedPrefix && nrFatures.startsWith(appliedPrefix)) {
+    return newPrefix + nrFatures.slice(appliedPrefix.length);
+  }
+  if (!nrFatures.trim()) return newPrefix;
+  return null;
+}
+
+function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInvoice, setEditingInvoice, prefiksetIndex) {
   const {
     furnitoriRef,
     datePickerRef,
@@ -23,13 +36,83 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
     currentInput: null,
   });
 
-  const handleFurnitoriChange = async (partneri) => {
+  /** Vendos kursorin në fund të Nr. Faturës, që përdoruesi të shkruajë pjesën që mbetet. */
+  const caretToEnd = () => {
+    setTimeout(() => {
+      const input = nrFaturesRef.current;
+      if (!input) return;
+      const end = input.value.length;
+      try {
+        input.setSelectionRange(end, end);
+      } catch {
+        /* disa lloje input-esh nuk e mbështesin */
+      }
+    }, 0);
+  };
+
+  const selectFurnitori = (partneri) => {
+    const prefikset = prefiksetPer(prefiksetIndex, partneri.value, partneri.label);
+    const prefiksi = prefikset.length ? resolvePrefix(prefikset[0].prefiksi, state.data) : "";
+    const nrFatures = swapPrefix(state.nrFatures, state.nrFaturesPrefix, prefiksi);
+
     dispatch({
       type: "SET_FURNITORI",
       value: partneri.value,
       selected: partneri,
+      prefikset,
+      // `null` = numri është shkruar me dorë, nuk e mbishkruajmë
+      nrFatures: nrFatures === null ? state.nrFatures : nrFatures,
+      nrFaturesPrefix: nrFatures === null ? state.nrFaturesPrefix : prefiksi,
     });
+  };
+
+  const handleFurnitoriChange = async (partneri) => {
+    selectFurnitori(partneri);
     document.getElementById("dataEFatures").focus();
+  };
+
+  /** Prefiksi përmban vitin ({YY}/{YYYY}), ndaj rifreskohet kur ndryshon data. */
+  const handleDataChange = (value) => {
+    const template = state.prefiksetOptions.find(
+      (p) => resolvePrefix(p.prefiksi, state.data) === state.nrFaturesPrefix
+    );
+    const prefiksi = template ? resolvePrefix(template.prefiksi, value) : state.nrFaturesPrefix;
+    const nrFatures = swapPrefix(state.nrFatures, state.nrFaturesPrefix, prefiksi);
+
+    dispatch({
+      type: "SET_DATA",
+      value,
+      nrFatures: nrFatures === null ? state.nrFatures : nrFatures,
+      nrFaturesPrefix: nrFatures === null ? state.nrFaturesPrefix : prefiksi,
+    });
+  };
+
+  const handleNrFaturesChange = (value) => {
+    dispatch({
+      type: "SET_NR_FATURES",
+      value,
+      // nëse përdoruesi e fshin prefiksin, ndalojmë ta ndjekim
+      nrFaturesPrefix:
+        state.nrFaturesPrefix && value.startsWith(state.nrFaturesPrefix)
+          ? state.nrFaturesPrefix
+          : "",
+    });
+  };
+
+  /** Klik mbi një prefiks alternativ: ruhet pjesa e shkruar, ndërrohet vetëm prefiksi. */
+  const applyPrefiks = (template) => {
+    const prefiksi = resolvePrefix(template, state.data);
+    const rest =
+      state.nrFaturesPrefix && state.nrFatures.startsWith(state.nrFaturesPrefix)
+        ? state.nrFatures.slice(state.nrFaturesPrefix.length)
+        : "";
+    dispatch({
+      type: "SET_NR_FATURES",
+      value: prefiksi + rest,
+      nrFaturesPrefix: prefiksi,
+    });
+    nrFaturesRef.current?.focus();
+    caretToEnd();
   };
 
   const handleNumericInput = (e, field) => {
@@ -93,6 +176,7 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
       e.preventDefault();
       if (nextRef && nextRef.current) {
         nextRef.current.focus();
+        if (nextRef === nrFaturesRef) caretToEnd();
       } else {
         handleAdd();
       }
@@ -107,11 +191,7 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
         selectInstance.state.menuIsOpen &&
         selectInstance.state.focusedOption
       ) {
-        dispatch({
-          type: "SET_FURNITORI",
-          value: selectInstance.state.focusedOption.value,
-          selected: selectInstance.state.focusedOption,
-        });
+        selectFurnitori(selectInstance.state.focusedOption);
         setTimeout(() => datePickerRef.current.focus(), 0);
       } else if (state.furnitori) {
         datePickerRef.current.focus();
@@ -215,6 +295,10 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
 
   return {
     handleFurnitoriChange,
+    handleDataChange,
+    handleNrFaturesChange,
+    applyPrefiks,
+    caretToEnd,
     handleNumericInput,
     handleAdd,
     handleKeyDown,

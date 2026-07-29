@@ -58,12 +58,41 @@
 <h2>Veçoritë kryesore</h2>
     <ul>
         <li>Shtimi, editimi dhe fshirja e regjistrimeve të faturave të blerjes</li>
+        <li>Plotësim automatik i prefiksit të <strong>Nr. Faturës</strong> sipas furnitorit të zgjedhur</li>
         <li>Llogaritje automatike e TVSH-së kredite</li>
         <li>Ruajtja e të dhënave lokalisht në shfletues (LocalStorage)</li>
         <li>Eksportimi i të dhënave në format CSV</li>
         <li>Ndërfaqe e thjeshtë dhe intuitive, e optimizuar për përdorim në desktop dhe mobile</li>
         <li>Pa nevojë për regjistrim ose server</li>
     </ul>
+
+<h2>Prefikset e Nr. Faturës</h2>
+
+<p>Shumica e furnitorëve e nisin numrin e faturës gjithmonë njësoj. Kur zgjidhet furnitori, fusha <strong>Nr. Faturës</strong> mbushet vetë me atë pjesë fikse dhe mbetet vetëm pjesa ndryshuese për t'u shkruar — psh. për <em>Buçaj SH.P.K.</em> plotësohet <code>F-26-DSD-FE1-</code>.</p>
+
+<ul>
+    <li>Viti merret nga <strong>data e faturës</strong>, jo nga dita e sotme. Nëse ndryshohet data, prefiksi rifreskohet vetë dhe pjesa e shkruar ruhet.</li>
+    <li>Furnitorët që përdorin më shumë se një format (psh. <em>Buçaj</em>: <code>F-{YY}-DSD-FE1-</code> dhe <code>FDM-{YY}-</code>) shfaqin butona të vegjël nën fushë për të ndërruar prefiksin me një klikim.</li>
+    <li>Nëse numri shkruhet me dorë, aplikacioni nuk e mbishkruan.</li>
+</ul>
+
+<p>Lista mbahet te <code>libri-tvsh/public/prefikset.json</code> dhe mund të redaktohet pa u bërë build i ri, njësoj si <code>furnitori.json</code>:</p>
+
+<pre><code>{
+  "key": 22,
+  "Name": "Buçaj SH.P.K.",
+  "prefikset": [
+    { "prefiksi": "F-{YY}-DSD-FE1-", "shembull": "F-26-DSD-FE1-02307", "perdorime": 37 },
+    { "prefiksi": "FDM-{YY}-",       "shembull": "FDM-26-00179462",    "perdorime": 17 }
+  ]
+}</code></pre>
+
+<ul>
+    <li><code>key</code> / <code>Name</code> — duhet të përputhen me një zë të <code>furnitori.json</code> (<code>key</code> ka përparësi; emri përdoret si rezervë).</li>
+    <li><code>prefiksi</code> — teksti fiks; <code>{YY}</code> zëvendësohet me vitin dyshifror dhe <code>{YYYY}</code> me vitin katërshifror.</li>
+    <li><code>shembull</code> — një numër i plotë real, shfaqet si ndihmë (placeholder / tooltip).</li>
+    <li><code>perdorime</code> — sa herë është hasur ky format; përcakton radhën, i pari plotësohet automatikisht.</li>
+</ul>
 
 <h2>Pamja e LibriTVSH</h2>
 

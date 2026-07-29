@@ -1,0 +1,672 @@
+[
+  {
+    "key": 3,
+    "Name": "Afri Trade N.P.T.",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/",
+        "shembull": "1-2/81812",
+        "perdorime": 13
+      }
+    ]
+  },
+  {
+    "key": 5,
+    "Name": "Albi Commerce SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "P-M-{YY}",
+        "shembull": "P-M-251217-520878",
+        "perdorime": 22
+      }
+    ]
+  },
+  {
+    "key": 6,
+    "Name": "Albulena Impex SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FAL-{YY}",
+        "shembull": "FAL-26008290",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 8,
+    "Name": "Alma Kos SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-6/{YY}",
+        "shembull": "1-6/2505401",
+        "perdorime": 10
+      },
+      {
+        "prefiksi": "1-1/{YY}",
+        "shembull": "1-1/2513291",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 9,
+    "Name": "Alma SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "168-82/",
+        "shembull": "168-82/500662",
+        "perdorime": 21
+      }
+    ]
+  },
+  {
+    "key": 13,
+    "Name": "Arbana Unique SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "A2-",
+        "shembull": "A2-4290",
+        "perdorime": 6
+      }
+    ]
+  },
+  {
+    "key": 14,
+    "Name": "Arjeta Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "20-2/",
+        "shembull": "20-2/157290",
+        "perdorime": 8
+      }
+    ]
+  },
+  {
+    "key": 16,
+    "Name": "Atlantik Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "AG{YY}",
+        "shembull": "AG25032011",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 19,
+    "Name": "Best - BT SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/",
+        "shembull": "1-2/26457",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 20,
+    "Name": "Beta Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FSH-",
+        "shembull": "FSH-2312250020",
+        "perdorime": 6
+      }
+    ]
+  },
+  {
+    "key": 22,
+    "Name": "Buçaj SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "F-{YY}-DSD-FE1-",
+        "shembull": "F-24-DSD-FE1-09230",
+        "perdorime": 37
+      },
+      {
+        "prefiksi": "FDM-{YY}-",
+        "shembull": "FDM-25-00179462",
+        "perdorime": 17
+      }
+    ]
+  },
+  {
+    "key": 23,
+    "Name": "Burimi VDD SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-FR-",
+        "shembull": "25-SHV01-FR-49353",
+        "perdorime": 32
+      },
+      {
+        "prefiksi": "FR-",
+        "shembull": "FR-9959",
+        "perdorime": 7
+      }
+    ]
+  },
+  {
+    "key": 24,
+    "Name": "Dauti Komerc SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "3-1/",
+        "shembull": "3-1/27092",
+        "perdorime": 70
+      },
+      {
+        "prefiksi": "1-1/",
+        "shembull": "1-1/1007644",
+        "perdorime": 23
+      }
+    ]
+  },
+  {
+    "key": 25,
+    "Name": "Delfin LTD SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/",
+        "shembull": "1-2/0202345",
+        "perdorime": 25
+      }
+    ]
+  },
+  {
+    "key": 28,
+    "Name": "Division Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV06-001-",
+        "shembull": "26-SHV06-001-3135",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 30,
+    "Name": "Durmart L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "6-2/",
+        "shembull": "6-2/140178",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 31,
+    "Name": "Edona Company L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "1-8/",
+        "shembull": "1-8/85192-2025",
+        "perdorime": 8
+      }
+    ]
+  },
+  {
+    "key": 32,
+    "Name": "Edona Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "100-2/",
+        "shembull": "100-2/42409",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 33,
+    "Name": "EGES SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/{YY}",
+        "shembull": "1-2/251205008",
+        "perdorime": 11
+      }
+    ]
+  },
+  {
+    "key": 35,
+    "Name": "Elkos SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "500-2/{YY}",
+        "shembull": "500-2/26014464",
+        "perdorime": 43
+      },
+      {
+        "prefiksi": "731-2/{YY}",
+        "shembull": "731-2/25028621",
+        "perdorime": 42
+      }
+    ]
+  },
+  {
+    "key": 36,
+    "Name": "Emona SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "21-",
+        "shembull": "21-35424/2025",
+        "perdorime": 7
+      }
+    ]
+  },
+  {
+    "key": 39,
+    "Name": "EUROFOOD SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "2-2/",
+        "shembull": "2-2/15314",
+        "perdorime": 14
+      }
+    ]
+  },
+  {
+    "key": 45,
+    "Name": "FRESH-C.O. SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FDP{YY}-",
+        "shembull": "FDP25-006757",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 46,
+    "Name": "Frutex SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "313-82/",
+        "shembull": "313-82/4837",
+        "perdorime": 26
+      },
+      {
+        "prefiksi": "336-82/",
+        "shembull": "336-82/1259",
+        "perdorime": 26
+      }
+    ]
+  },
+  {
+    "key": 48,
+    "Name": "Gllareva SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "2-5/",
+        "shembull": "2-5/379834",
+        "perdorime": 20
+      }
+    ]
+  },
+  {
+    "key": 50,
+    "Name": "GSD SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "S081-{YY}-8895-",
+        "shembull": "S081-25-8895-02458",
+        "perdorime": 7
+      },
+      {
+        "prefiksi": "S081-{YY}-8901-",
+        "shembull": "S081-26-8901-01006",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 58,
+    "Name": "Jaffa Plus L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-001-",
+        "shembull": "25-SHV01-001-13557",
+        "perdorime": 7
+      }
+    ]
+  },
+  {
+    "key": 60,
+    "Name": "Jeta SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-6/",
+        "shembull": "1-6/104389",
+        "perdorime": 20
+      }
+    ]
+  },
+  {
+    "key": 62,
+    "Name": "Koral Corporation SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-001-",
+        "shembull": "25-SHV01-001-25845",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 63,
+    "Name": "Kosmonte Foods SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "115-81/",
+        "shembull": "115-81/3726",
+        "perdorime": 60
+      },
+      {
+        "prefiksi": "302-82/",
+        "shembull": "302-82/10170",
+        "perdorime": 27
+      },
+      {
+        "prefiksi": "115-82/",
+        "shembull": "115-82/14552",
+        "perdorime": 17
+      }
+    ]
+  },
+  {
+    "key": 65,
+    "Name": "Liri L.L.C",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/",
+        "shembull": "1-2/109350",
+        "perdorime": 14
+      }
+    ]
+  },
+  {
+    "key": 66,
+    "Name": "Magic Ice Joint Stock Company",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-L01-",
+        "shembull": "25-SHV01-L01-24736",
+        "perdorime": 7
+      }
+    ]
+  },
+  {
+    "key": 70,
+    "Name": "MC Food SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-2/",
+        "shembull": "1-2/564040",
+        "perdorime": 11
+      },
+      {
+        "prefiksi": "5-2/",
+        "shembull": "5-2/268260",
+        "perdorime": 3
+      }
+    ]
+  },
+  {
+    "key": 73,
+    "Name": "Migros Group SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "1-1/",
+        "shembull": "1-1/240232",
+        "perdorime": 81
+      },
+      {
+        "prefiksi": "411-82/",
+        "shembull": "411-82/1950",
+        "perdorime": 18
+      }
+    ]
+  },
+  {
+    "key": 77,
+    "Name": "New CO \"MINEX\" L.L.C",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV07-001-",
+        "shembull": "25-SHV07-001-19763",
+        "perdorime": 11
+      }
+    ]
+  },
+  {
+    "key": 78,
+    "Name": "Next SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FDP{YY}-",
+        "shembull": "FDP25-010509",
+        "perdorime": 9
+      }
+    ]
+  },
+  {
+    "key": 79,
+    "Name": "Oaza Company SH.P.K",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-001-",
+        "shembull": "25-SHV01-001-17594",
+        "perdorime": 6
+      }
+    ]
+  },
+  {
+    "key": 80,
+    "Name": "Orbico SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "SI{YY}-",
+        "shembull": "SI25-25433",
+        "perdorime": 12
+      }
+    ]
+  },
+  {
+    "key": 82,
+    "Name": "Passable SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "PSI-{YY}-",
+        "shembull": "PSI-25-0017195",
+        "perdorime": 16
+      }
+    ]
+  },
+  {
+    "key": 83,
+    "Name": "Pestova SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "pes018A",
+        "shembull": "pes018A1711184",
+        "perdorime": 22
+      },
+      {
+        "prefiksi": "pes031A",
+        "shembull": "pes031A261211",
+        "perdorime": 19
+      }
+    ]
+  },
+  {
+    "key": 84,
+    "Name": "Prima Tobacco L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "211-90/",
+        "shembull": "211-90/1418",
+        "perdorime": 18
+      },
+      {
+        "prefiksi": "211-81/",
+        "shembull": "211-81/19267",
+        "perdorime": 16
+      }
+    ]
+  },
+  {
+    "key": 87,
+    "Name": "Rino Pack SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-302-",
+        "shembull": "25-302-002788",
+        "perdorime": 17
+      }
+    ]
+  },
+  {
+    "key": 88,
+    "Name": "Royal Beverage L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-004-",
+        "shembull": "25-SHV01-004-5017",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 89,
+    "Name": "S & F - N.T.SH. \"S & F\" -  Selajdin Rexhepi B.I.",
+    "prefikset": [
+      {
+        "prefiksi": "FAT-AG02-",
+        "shembull": "FAT-AG02-0912-3",
+        "perdorime": 16
+      }
+    ]
+  },
+  {
+    "key": 91,
+    "Name": "Setegusti SA SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-006-",
+        "shembull": "25-SHV01-006-12264",
+        "perdorime": 20
+      }
+    ]
+  },
+  {
+    "key": 92,
+    "Name": "Swiss Product AG SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-001-",
+        "shembull": "25-SHV01-001-12169",
+        "perdorime": 16
+      }
+    ]
+  },
+  {
+    "key": 94,
+    "Name": "Toska Group L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-TGR-",
+        "shembull": "25-TGR-1961",
+        "perdorime": 6
+      }
+    ]
+  },
+  {
+    "key": 95,
+    "Name": "Union SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "SO-{YY}-",
+        "shembull": "SO-25-33877",
+        "perdorime": 19
+      }
+    ]
+  },
+  {
+    "key": 96,
+    "Name": "Vitaminka Trade SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YYYY}-",
+        "shembull": "2025-560229",
+        "perdorime": 21
+      }
+    ]
+  },
+  {
+    "key": 106,
+    "Name": "KORAL DAIRY SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "{YY}-SHV01-002-",
+        "shembull": "25-SHV01-002-33144",
+        "perdorime": 4
+      }
+    ]
+  },
+  {
+    "key": 110,
+    "Name": "ALBI DISTRIBUTION L.L.C.",
+    "prefikset": [
+      {
+        "prefiksi": "P-M-{YY}",
+        "shembull": "P-M-260429-261763",
+        "perdorime": 15
+      }
+    ]
+  },
+  {
+    "key": 113,
+    "Name": "MEDITERAN N SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "19-21-",
+        "shembull": "19-21-400/2026",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 115,
+    "Name": "DONIFRUITS GROUP SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FDP-FM-{YY}-",
+        "shembull": "FDP-FM-26-00001415",
+        "perdorime": 5
+      }
+    ]
+  },
+  {
+    "key": 118,
+    "Name": "KRU BIFURKACIONI SH.A.",
+    "prefikset": [
+      {
+        "prefiksi": "BILL",
+        "shembull": "BILL00004372497",
+        "perdorime": 12
+      }
+    ]
+  },
+  {
+    "key": 122,
+    "Name": "FRUTARIA SH.P.K.",
+    "prefikset": [
+      {
+        "prefiksi": "FDP-P-{YY}-",
+        "shembull": "FDP-P-26-000545",
+        "perdorime": 4
+      }
+    ]
+  }
+]

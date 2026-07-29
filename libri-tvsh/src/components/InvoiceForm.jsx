@@ -3,6 +3,7 @@ import { Form, Card, Button, InputGroup, Alert } from "react-bootstrap";
 import Select from "react-select";
 import CalculatorModal from "./CalculatorModal";
 import useInvoiceForm from "../hooks/useInvoiceForm";
+import { prefiksetPer, resolvePrefix } from "../utils/prefikset";
 
 const selectStyles = {
   menu: (provided) => ({
@@ -15,6 +16,9 @@ const initialState = {
   furnitori: "",
   data: new Date().toLocaleDateString("en-CA"),
   nrFatures: "",
+  // prefiksi i plotësuar automatikisht (me vitin e zgjidhur) dhe alternativat e furnitorit
+  nrFaturesPrefix: "",
+  prefiksetOptions: [],
   vlPaTvsh: 0,
   vlPaTvshInput: "",
   vlPaTvshError: "",
@@ -29,12 +33,14 @@ const initialState = {
   optionsSelected: null,
 };
 
-function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading, editingInvoice, setEditingInvoice }) {
+function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading, prefiksetIndex, editingInvoice, setEditingInvoice }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const {
     furnitori,
     data,
     nrFatures,
+    nrFaturesPrefix,
+    prefiksetOptions,
     vlPaTvsh,
     vlPaTvshInput,
     vlPaTvshError,
@@ -62,6 +68,10 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
 
   const {
     handleFurnitoriChange,
+    handleDataChange,
+    handleNrFaturesChange,
+    applyPrefiks,
+    caretToEnd,
     handleNumericInput,
     handleAdd,
     handleKeyDown,
@@ -90,18 +100,36 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
       tvsh8CalcButtonRef,
     },
     editingInvoice,
-    setEditingInvoice
+    setEditingInvoice,
+    prefiksetIndex
   );
 
   useEffect(() => {
     if (editingInvoice) {
+      const option = furnitoriOptions.find((opt) => opt.value === editingInvoice.furnitori);
+      const prefikset = prefiksetPer(prefiksetIndex, editingInvoice.furnitori, option?.label);
+      // e njohim prefiksin ekzistues që të ndriçohet chip-i dhe të ndjekë ndryshimin e datës
+      const applied = prefikset
+        .map((p) => resolvePrefix(p.prefiksi, editingInvoice.data))
+        .filter((p) => (editingInvoice.nrFatures || "").startsWith(p))
+        .sort((a, b) => b.length - a.length)[0];
+
       dispatch({
         type: "SET_EDIT_INVOICE",
-        payload: editingInvoice,
+        payload: {
+          ...editingInvoice,
+          prefiksetOptions: prefikset,
+          nrFaturesPrefix: applied || "",
+        },
       });
       furnitoriRef.current.focus();
     }
-  }, [editingInvoice]);
+  }, [editingInvoice, furnitoriOptions, prefiksetIndex]);
+
+  // shembull real nga historiku i furnitorit, që të dihet çfarë vjen pas prefiksit
+  const nrFaturesPlaceholder = prefiksetOptions[0]?.shembull
+    ? `Psh. ${prefiksetOptions[0].shembull}`
+    : "Psh. 123/2026";
 
   const handleCancelEdit = useCallback(() => {
     dispatch({ type: "RESET_FORM" });
@@ -151,13 +179,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   <Form.Control
                     type="date"
                     value={data}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_FIELD",
-                        field: "data",
-                        value: e.target.value,
-                      })
-                    }
+                    onChange={(e) => handleDataChange(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, nrFaturesRef)}
                     ref={datePickerRef}
                     className="form-control-premium"
@@ -171,18 +193,36 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Psh. 123/2026"
+                    placeholder={nrFaturesPlaceholder}
                     value={nrFatures}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_FIELD",
-                        field: "nrFatures",
-                        value: e.target.value,
-                      })
-                    }
+                    onChange={(e) => handleNrFaturesChange(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, vlPaTvshRef)}
+                    onFocus={() => {
+                      if (nrFaturesPrefix && nrFatures === nrFaturesPrefix) caretToEnd();
+                    }}
                     ref={nrFaturesRef}
                   />
+                  {prefiksetOptions.length > 0 && (
+                    <div className="d-flex flex-wrap gap-2 mt-2" role="group" aria-label="Prefikset e njohura">
+                      {prefiksetOptions.map((p) => {
+                        const resolved = resolvePrefix(p.prefiksi, data);
+                        return (
+                          <Button
+                            key={p.prefiksi}
+                            type="button"
+                            size="sm"
+                            tabIndex={-1}
+                            variant={resolved === nrFaturesPrefix ? "primary" : "outline-secondary"}
+                            className="prefix-chip"
+                            title={p.shembull ? `Psh. ${p.shembull}` : undefined}
+                            onClick={() => applyPrefiks(p.prefiksi)}
+                          >
+                            {resolved}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </Form.Group>
               </div>
             </div>
@@ -334,6 +374,22 @@ function formReducer(state, action) {
         ...state,
         furnitori: action.value,
         optionsSelected: action.selected,
+        prefiksetOptions: action.prefikset,
+        nrFatures: action.nrFatures,
+        nrFaturesPrefix: action.nrFaturesPrefix,
+      };
+    case "SET_DATA":
+      return {
+        ...state,
+        data: action.value,
+        nrFatures: action.nrFatures,
+        nrFaturesPrefix: action.nrFaturesPrefix,
+      };
+    case "SET_NR_FATURES":
+      return {
+        ...state,
+        nrFatures: action.value,
+        nrFaturesPrefix: action.nrFaturesPrefix,
       };
     case "SET_NUMERIC":
       return {
