@@ -131,6 +131,13 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
     ? `Psh. ${prefiksetOptions[0].shembull}`
     : "Psh. 123/2026";
 
+  // Kur furnitori ka vetëm një format dhe ai është plotësuar tashmë, butoni nuk
+  // shton asgjë — e fshehim që forma të mbetet e pastër.
+  const showPrefikset =
+    prefiksetOptions.length > 1 ||
+    (prefiksetOptions.length === 1 &&
+      resolvePrefix(prefiksetOptions[0].prefiksi, data) !== nrFaturesPrefix);
+
   const handleCancelEdit = useCallback(() => {
     dispatch({ type: "RESET_FORM" });
     setEditingInvoice(null);
@@ -171,7 +178,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </Form.Group>
 
             <div className="row">
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="dataEFatures">
                   <Form.Label className="fw-semibold text-muted mb-2">
                     Data <span className="text-danger">*</span>
@@ -186,7 +193,10 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   />
                 </Form.Group>
               </div>
-              <div className="col-md-6 mb-4">
+            </div>
+
+            <div className="row">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="nrFatures">
                   <Form.Label className="fw-semibold text-muted mb-2">
                     Nr. Faturës <span className="text-danger">*</span>
@@ -202,25 +212,31 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                     }}
                     ref={nrFaturesRef}
                   />
-                  {prefiksetOptions.length > 0 && (
-                    <div className="d-flex flex-wrap gap-2 mt-2" role="group" aria-label="Prefikset e njohura">
-                      {prefiksetOptions.map((p) => {
-                        const resolved = resolvePrefix(p.prefiksi, data);
-                        return (
-                          <Button
-                            key={p.prefiksi}
-                            type="button"
-                            size="sm"
-                            tabIndex={-1}
-                            variant={resolved === nrFaturesPrefix ? "primary" : "outline-secondary"}
-                            className="prefix-chip"
-                            title={p.shembull ? `Psh. ${p.shembull}` : undefined}
-                            onClick={() => applyPrefiks(p.prefiksi)}
-                          >
-                            {resolved}
-                          </Button>
-                        );
-                      })}
+                  {showPrefikset && (
+                    <div className="prefix-picker mt-2">
+                      <span className="prefix-picker-label">
+                        {prefiksetOptions.length > 1 ? "Formatet" : "Prefiksi"}
+                      </span>
+                      <div className="prefix-chips" role="group" aria-label="Prefikset e njohura">
+                        {prefiksetOptions.map((p) => {
+                          const resolved = resolvePrefix(p.prefiksi, data);
+                          const active = resolved === nrFaturesPrefix;
+                          return (
+                            <button
+                              key={p.prefiksi}
+                              type="button"
+                              tabIndex={-1}
+                              aria-pressed={active}
+                              className={`prefix-chip${active ? " is-active" : ""}`}
+                              title={p.shembull ? `Psh. ${p.shembull}` : undefined}
+                              onClick={() => applyPrefiks(p.prefiksi)}
+                            >
+                              {active && <span className="prefix-chip-check" aria-hidden="true">✓</span>}
+                              <span className="prefix-chip-text">{resolved}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                 </Form.Group>

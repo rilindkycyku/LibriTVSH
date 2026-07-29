@@ -4,6 +4,9 @@ function Footer() {
       <div className="premium-card d-inline-block px-5 py-3 bg-white">
         <p className="m-0 text-muted fw-medium">
           &copy; {new Date().getFullYear()} <span className="text-dark fw-bold">Blerjet me TVSH</span>
+          <span className="app-version ms-2" title={`Versioni ${__APP_VERSION__}`}>
+            v{__APP_VERSION__}
+          </span>
         </p>
         <p className="m-0 small text-muted mt-1">
           Produkt i <span className="fw-semibold">BESA NJË SH.P.K.</span>
