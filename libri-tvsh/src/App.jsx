@@ -5,6 +5,7 @@ import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTable from "./components/InvoiceTable";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { fetchFurnitori } from "./utils";
+import { fetchPrefikset } from "./utils/prefikset";
 
 const Footer = lazy(() => import("./components/Footer"));
 
@@ -17,6 +18,7 @@ function App() {
   const [furnitoriLoading, setFurnitoriLoading] = useState(true);
   const [furnitoriError, setFurnitoriError] = useState(false);
   const [editingInvoice, setEditingInvoice] = useState(null);
+  const [prefiksetIndex, setPrefiksetIndex] = useState(null);
 
   useEffect(() => {
     fetchFurnitori()
@@ -26,6 +28,13 @@ function App() {
         setFurnitoriError(true);
       })
       .finally(() => setFurnitoriLoading(false));
+  }, []);
+
+  // Prefikset e Nr. Faturës janë ndihmë opsionale — një gabim këtu nuk e bllokon formën.
+  useEffect(() => {
+    fetchPrefikset()
+      .then((index) => setPrefiksetIndex(index))
+      .catch((error) => console.error("Error fetching prefikset:", error));
   }, []);
 
   useEffect(() => {
@@ -73,6 +82,7 @@ function App() {
                   setInvoices={setInvoices}
                   furnitoriOptions={furnitoriOptions}
                   furnitoriLoading={furnitoriLoading}
+                  prefiksetIndex={prefiksetIndex}
                   editingInvoice={editingInvoice}
                   setEditingInvoice={setEditingInvoice}
                 />
