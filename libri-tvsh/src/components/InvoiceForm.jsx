@@ -5,6 +5,8 @@ import CalculatorModal from "./CalculatorModal";
 import useInvoiceForm from "../hooks/useInvoiceForm";
 import { prefiksetPer, resolvePrefix } from "../utils/prefikset";
 
+// Vetëm shtresa; ngjyrat vijnë nga `index.css` përmes `classNamePrefix`, që
+// paleta të mbetet në një vend të vetëm.
 const selectStyles = {
   menu: (provided) => ({
     ...provided,
@@ -161,7 +163,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
           )}
           <Form>
             <Form.Group controlId="idDheEmri" className="mb-4">
-              <Form.Label className="fw-semibold text-muted mb-2">
+              <Form.Label className="mb-2">
                 Furnitori <span className="text-danger">*</span>
               </Form.Label>
               <Select
@@ -172,6 +174,8 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                 id="furnitoriSelect"
                 inputId="furnitoriSelect-input"
                 styles={selectStyles}
+                className="sp-select-container"
+                classNamePrefix="sp-select"
                 ref={furnitoriRef}
                 placeholder={furnitoriLoading ? "Duke ngarkuar..." : "Zgjidh furnitorin..."}
               />
@@ -180,7 +184,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             <div className="row">
               <div className="col-12 mb-4">
                 <Form.Group controlId="dataEFatures">
-                  <Form.Label className="fw-semibold text-muted mb-2">
+                  <Form.Label className="mb-2">
                     Data <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
@@ -189,7 +193,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                     onChange={(e) => handleDataChange(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, nrFaturesRef)}
                     ref={datePickerRef}
-                    className="form-control-premium"
                   />
                 </Form.Group>
               </div>
@@ -198,7 +201,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             <div className="row">
               <div className="col-12 mb-4">
                 <Form.Group controlId="nrFatures">
-                  <Form.Label className="fw-semibold text-muted mb-2">
+                  <Form.Label className="mb-2">
                     Nr. Faturës <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
@@ -246,7 +249,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             <div className="row">
               <div className="col-12 mb-4">
                 <Form.Group controlId="vlPaTvsh">
-                  <Form.Label className="fw-semibold text-muted mb-2">VL. Pa TVSH (€)</Form.Label>
+                  <Form.Label className="mb-2">VL. Pa TVSH (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -268,7 +271,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                     >
                       <span aria-hidden="true">🧮</span>
                     </Button>
-                    <InputGroup.Text className="bg-light text-muted border-start-0">€</InputGroup.Text>
+                    <InputGroup.Text>€</InputGroup.Text>
                   </InputGroup>
                   {vlPaTvshError && (
                     <div className="error-message text-danger mt-1">{vlPaTvshError}</div>
@@ -280,7 +283,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             <div className="row">
               <div className="col-md-6 mb-4">
                 <Form.Group controlId="tvsh18">
-                  <Form.Label className="fw-semibold text-muted mb-2">TVSH 18% (€)</Form.Label>
+                  <Form.Label className="mb-2">TVSH 18% (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -302,14 +305,14 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                     >
                       <span aria-hidden="true">🧮</span>
                     </Button>
-                    <InputGroup.Text className="bg-light text-muted">€</InputGroup.Text>
+                    <InputGroup.Text>€</InputGroup.Text>
                   </InputGroup>
                   {tvsh18Error && <div className="error-message text-danger mt-1">{tvsh18Error}</div>}
                 </Form.Group>
               </div>
               <div className="col-md-6 mb-4">
                 <Form.Group controlId="tvsh8">
-                  <Form.Label className="fw-semibold text-muted mb-2">TVSH 8% (€)</Form.Label>
+                  <Form.Label className="mb-2">TVSH 8% (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -331,17 +334,17 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                     >
                       <span aria-hidden="true">🧮</span>
                     </Button>
-                    <InputGroup.Text className="bg-light text-muted">€</InputGroup.Text>
+                    <InputGroup.Text>€</InputGroup.Text>
                   </InputGroup>
                   {tvsh8Error && <div className="error-message text-danger mt-1">{tvsh8Error}</div>}
                 </Form.Group>
               </div>
             </div>
 
-            <Form.Group controlId="total" className="mb-5">
-              <Form.Label className="fw-bold text-dark fs-5 mb-2">Totali i Faturës</Form.Label>
-              <div className="p-3 bg-light rounded-4 border text-center">
-                <span className="fs-3 fw-bold gradient-text">{total.toFixed(2)} €</span>
+            <Form.Group controlId="total" className="mb-4">
+              <Form.Label className="mb-2">Totali i Faturës</Form.Label>
+              <div className="form-total">
+                <span className="form-total__value gradient-text">{total.toFixed(2)} €</span>
               </div>
             </Form.Group>
 

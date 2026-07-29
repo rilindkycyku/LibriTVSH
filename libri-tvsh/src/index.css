@@ -1,235 +1,881 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ══════════════════════════════════════════════════════════════
+   BLERJET ME TVSH — tema e FinanCare-s
+
+   Sipërfaqe blu-nate të shtresuara, theks smerald→cian, etiketa të
+   vogla me shkronja të mëdha, dhe numra me JetBrains Mono që kolonat
+   e vlerave të rreshtohen. Tokenat `--sp-*` janë të njëjtët si te
+   FinanCare, që të dyja aplikacionet të mbeten një familje.
+
+   Tema ndjek sistemin. Kontrollet e Bootstrap-it (modalet, format,
+   dropdown-at) e marrin ngjyrën nga `data-bs-theme`, të cilin e vë
+   `main.jsx` sipas `prefers-color-scheme`; këtu vetëm i lidhim
+   ndryshoret e Bootstrap-it me paletën tonë, që të mos ketë dy burime
+   të vërteta për të njëjtën ngjyrë.
+   ══════════════════════════════════════════════════════════════ */
 
 :root {
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --secondary: #ec4899;
-  --success: #10b981;
-  --info: #3b82f6;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --sp-bg: #080f1a;
+  --sp-surface: #0f1827;
+  --sp-surface-2: #162033;
+  --sp-surface-3: #1e2d45;
+
+  --sp-border: rgb(255 255 255 / 10%);
+  --sp-border-glow: rgb(16 185 129 / 25%);
+
+  --sp-emerald: #10b981;
+  --sp-emerald-rgb: 16, 185, 129;
+  --sp-emerald-glow: rgb(16 185 129 / 15%);
+  --sp-cyan: #06b6d4;
+  --sp-cyan-rgb: 6, 182, 212;
+  --sp-cyan-glow: rgb(6 182 212 / 12%);
+  --sp-amber: #f59e0b;
+  --sp-red: #ef4444;
+  --sp-red-glow: rgb(239 68 68 / 12%);
+
+  --sp-text: #f1f5f9;
+  --sp-text-soft: #e2e8f0;
+  --sp-text-muted: #94a3b8;
+
+  --sp-radius-lg: 16px;
+  --sp-radius-md: 12px;
+  --sp-radius-sm: 8px;
+
+  --sp-shadow-card: 0 20px 50px rgb(0 0 0 / 30%);
+  --sp-shadow-soft: 0 4px 15px rgb(0 0 0 / 15%);
+
+  --sp-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Tema e çelët e FinanCare-s. Theksat janë një shkallë më të thellë se ata të
+   temës së errët, sepse mbi të bardhën `#10b981` bie nën 4.5:1. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --sp-bg: #f1f5f9;
+    --sp-surface: #ffffff;
+    --sp-surface-2: #f8fafc;
+    --sp-surface-3: #e2e8f0;
+
+    --sp-border: rgb(0 0 0 / 8%);
+    --sp-border-glow: rgb(4 120 87 / 35%);
+
+    --sp-emerald: #047857;
+    --sp-emerald-rgb: 4, 120, 87;
+    --sp-emerald-glow: rgb(4 120 87 / 15%);
+    --sp-cyan: #0369a1;
+    --sp-cyan-rgb: 3, 105, 161;
+    --sp-cyan-glow: rgb(3 105 161 / 12%);
+    --sp-amber: #b45309;
+    --sp-red: #dc2626;
+    --sp-red-glow: rgb(220 38 38 / 10%);
+
+    --sp-text: #0f172a;
+    --sp-text-soft: #334155;
+    --sp-text-muted: #5b6779;
+
+    --sp-shadow-card: 0 4px 24px rgb(15 23 42 / 6%);
+    --sp-shadow-soft: 0 2px 8px rgb(15 23 42 / 6%);
+  }
+}
+
+/* ── Ura me Bootstrap-in ─────────────────────────────────────────
+   Bootstrap 5.3 i lexon vetë këto ndryshore, prandaj modalet, format
+   dhe tabelat dalin në temën e duhur pa u mbishkruar me `!important`. */
+[data-bs-theme] {
+  --bs-body-bg: var(--sp-bg);
+  --bs-body-color: var(--sp-text);
+  --bs-emphasis-color: var(--sp-text);
+  --bs-secondary-color: var(--sp-text-muted);
+  --bs-tertiary-color: var(--sp-text-muted);
+  --bs-border-color: var(--sp-border);
+  --bs-primary: var(--sp-emerald);
+  --bs-primary-rgb: var(--sp-emerald-rgb);
+  /* Bootstrap-i i ndërton lidhjet me `rgba(var(--bs-link-color-rgb), …)`,
+     prandaj vetëm varianti `-rgb` ka efekt. */
+  --bs-link-color-rgb: var(--sp-emerald-rgb);
+  --bs-link-hover-color-rgb: var(--sp-cyan-rgb);
+  --bs-code-color: var(--sp-cyan);
+  --bs-modal-bg: var(--sp-surface);
+  --bs-modal-border-color: var(--sp-border);
+  --bs-tooltip-bg: var(--sp-surface-3);
+  --bs-tooltip-color: var(--sp-text);
+  --bs-tooltip-opacity: 1;
+}
+
+/* ── Baza ────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg-gradient);
   min-height: 100vh;
-  color: var(--text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--sp-bg);
+  color: var(--sp-text);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.2);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.4);
+/* Shkëlqim smerald nga kreu, si te paneli i FinanCare-s. */
+body::before {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  inset: -20vh 0 auto;
+  height: 60vh;
+  background: radial-gradient(60% 60% at 50% 0%, var(--sp-emerald-glow), transparent 70%);
+  pointer-events: none;
 }
 
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sp-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sp-surface-3);
+  border: 2px solid var(--sp-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sp-text-muted);
+}
+
+/* ── Ndihmëset që Tailwind-i s'i jep ─────────────────────────────
+   Direktivat `@tailwind` u hoqën bashkë me `tailwind.config.js`:
+   paketa nuk ishte e instaluar dhe as PostCSS-i i konfiguruar, prandaj
+   këto klasa te JSX-i nuk bënin asgjë. Këtu janë ato pak që përdoren. */
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.select-none {
+  user-select: none;
+}
+
+/* ── Kreu ────────────────────────────────────────────────────── */
+
+.animate-fade-in {
+  animation: shfaqu 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes shfaqu {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+.app-logo {
+  max-width: 180px;
+  width: 42%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px var(--sp-emerald-glow));
+}
+
+header h1 {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--sp-emerald) 0%, var(--sp-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Kartelat ────────────────────────────────────────────────── */
+
 .premium-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  box-shadow: var(--shadow-premium);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--sp-surface);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: var(--sp-shadow-card);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .premium-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--sp-border-glow);
 }
 
+.card {
+  --bs-card-bg: var(--sp-surface);
+  --bs-card-color: var(--sp-text);
+  --bs-card-border-color: var(--sp-border);
+}
+
+.card-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--sp-text);
+}
+
+/* ── Kartelat e shumave ──────────────────────────────────────── */
+
+/* Katër shumat lart: etiketë e vogël me shkronja të mëdha, vlerë me
+   shkronja njëgjerësie, që kolonat të rreshtohen mes kartelave. */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--sp-surface-2);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-soft);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--sp-emerald);
+  box-shadow: 0 8px 22px -6px var(--sp-emerald-glow);
+}
+
+.stat-card__label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sp-text-muted);
+}
+
+.stat-card__value {
+  font-family: var(--sp-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--sp-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card--total {
+  border-color: var(--sp-border-glow);
+  background: linear-gradient(135deg, var(--sp-surface-3), var(--sp-surface-2));
+}
+
+.stat-card--total .stat-card__value {
+  background: linear-gradient(135deg, var(--sp-emerald) 0%, var(--sp-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Titujt e paneleve ───────────────────────────────────────── */
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.1rem 1.35rem;
+  background: var(--sp-surface-2);
+  border-bottom: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg) var(--sp-radius-lg) 0 0;
+}
+
+.panel-head__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sp-text-soft);
+}
+
+.panel-head__icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--sp-radius-sm);
+  background: var(--sp-surface-3);
+  color: var(--sp-emerald);
+}
+
+.panel-count {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--sp-border);
+  border-radius: 999px;
+  background: var(--sp-surface-3);
+  font-family: var(--sp-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--sp-text-muted);
+  white-space: nowrap;
+}
+
+/* ── Butonat ─────────────────────────────────────────────────── */
+
 .premium-button {
-  border-radius: 12px;
-  padding: 8px 20px;
-  font-weight: 600;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-}
-
-.premium-button-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
-  color: white !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-}
-
-.premium-button-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
-}
-
-.premium-table-container {
-  background: white;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.premium-table thead th {
-  background: #f8fafc !important;
-  color: var(--text-muted);
+  padding: 0.6rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: var(--sp-radius-md);
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  padding: 12px 16px;
-  border-bottom: 2px solid #f1f5f9 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.premium-table tbody td {
-  padding: 10px 16px;
-  font-size: 0.875rem;
-  border-bottom: 1px solid #f1f5f9;
-  transition: all 0.15s ease;
+.premium-button-primary,
+.btn-primary {
+  background: linear-gradient(135deg, var(--sp-emerald) 0%, var(--sp-cyan) 100%);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 6px 18px -4px var(--sp-emerald-glow);
 }
 
-.premium-row:hover {
-  background-color: #f8fafc !important;
+.premium-button-primary:hover:not(:disabled),
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  color: #fff;
+  box-shadow: 0 12px 26px -6px var(--sp-emerald-glow);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.premium-button-primary:disabled,
+.btn-primary:disabled {
+  opacity: 0.45;
+  box-shadow: none;
 }
 
-.stat-pill {
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
+/* Butonat „e lehtë" të Bootstrap-it dalin bardhë mbi sfond të errët. */
+.btn-light {
+  --bs-btn-bg: var(--sp-surface-2);
+  --bs-btn-color: var(--sp-text-soft);
+  --bs-btn-border-color: var(--sp-border);
+  --bs-btn-hover-bg: var(--sp-surface-3);
+  --bs-btn-hover-color: var(--sp-text);
+  --bs-btn-hover-border-color: var(--sp-text-muted);
+  --bs-btn-active-bg: var(--sp-surface-3);
+  --bs-btn-active-color: var(--sp-text);
+  --bs-btn-active-border-color: var(--sp-text-muted);
 }
 
-.stat-pill-primary { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
-.stat-pill-success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
-.stat-pill-danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
-
-.animate-in {
-  animation: slideUp 0.5s ease-out forwards;
+.btn-danger {
+  --bs-btn-bg: var(--sp-red);
+  --bs-btn-border-color: var(--sp-red);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--sp-red);
+  --bs-btn-hover-border-color: var(--sp-red);
+  --bs-btn-hover-color: #fff;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn-danger:hover {
+  filter: brightness(1.1);
 }
 
 .btn-icon-action {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: var(--sp-radius-sm);
+  background: transparent;
+  color: var(--sp-text-muted);
   transition: all 0.2s ease;
-  color: var(--text-muted);
 }
 
 .btn-icon-action:hover {
-  background: #f1f5f9;
-  color: var(--text-main);
-  border-color: #e2e8f0;
+  background: var(--sp-surface-3);
+  color: var(--sp-text);
+  border-color: var(--sp-border);
 }
 
 .btn-icon-action.delete:hover {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger);
-  border-color: rgba(239, 68, 68, 0.2);
+  background: var(--sp-red-glow);
+  color: var(--sp-red);
+  border-color: var(--sp-red);
 }
 
 .btn-icon-action.edit:hover {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning);
-  border-color: rgba(245, 158, 11, 0.2);
+  background: var(--sp-cyan-glow);
+  color: var(--sp-cyan);
+  border-color: var(--sp-cyan);
 }
 
 .premium-action-chip {
-  padding: 6px 14px;
-  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  background: var(--sp-surface-2);
+  color: var(--sp-text-soft);
   font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  background: white;
-  color: var(--text-muted);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.premium-action-chip:hover {
+.premium-action-chip:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: var(--sp-surface-3);
 }
 
-.premium-action-chip.csv { color: var(--success); border-color: rgba(16, 185, 129, 0.1); }
-.premium-action-chip.csv:hover { background: rgba(16, 185, 129, 0.05); }
-
-.premium-action-chip.excel { color: var(--primary); border-color: rgba(99, 102, 241, 0.1); }
-.premium-action-chip.excel:hover { background: rgba(99, 102, 241, 0.05); }
-
-.premium-action-chip.delete { color: var(--danger); border-color: rgba(239, 68, 68, 0.1); }
-.premium-action-chip.delete:hover { background: rgba(239, 68, 68, 0.05); }
-
-.app-logo {
-  max-width: 220px;
-  width: 50%;
-  height: auto;
+.premium-action-chip.excel:hover:not(:disabled) {
+  border-color: var(--sp-emerald);
+  color: var(--sp-emerald);
 }
+
+.premium-action-chip.delete:hover:not(:disabled) {
+  border-color: var(--sp-red);
+  color: var(--sp-red);
+}
+
+.premium-action-chip:disabled {
+  opacity: 0.5;
+}
+
+/* ── Format ──────────────────────────────────────────────────── */
+
+.form-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sp-text-muted);
+}
+
+.form-control,
+.form-select {
+  background: var(--sp-surface-2);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  padding: 0.65rem 0.9rem;
+  color: var(--sp-text);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: var(--sp-surface-3);
+  border-color: var(--sp-emerald);
+  box-shadow: 0 0 0 3px var(--sp-emerald-glow);
+  color: var(--sp-text);
+}
+
+.form-control::placeholder {
+  color: var(--sp-text-muted);
+  opacity: 0.8;
+}
+
+.form-control.is-invalid {
+  border-color: var(--sp-red);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px var(--sp-red-glow);
+}
+
+/* Ikona e kalendarit vjen e zezë; mbi sfondin e errët duhet përmbysur. */
+@media (prefers-color-scheme: dark) {
+  .form-control[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  .form-control[type='date']::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+}
+
+/* Vlerat në euro shkruhen me shkronja njëgjerësie, si te tabela. */
+#vlPaTvsh,
+#tvsh18,
+#tvsh8,
+#nrFatures {
+  font-family: var(--sp-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.input-group-text {
+  background: var(--sp-surface-3);
+  border-color: var(--sp-border);
+  color: var(--sp-text-muted);
+  font-weight: 700;
+}
+
+.error-message {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sp-red);
+}
+
+.form-total {
+  padding: 1rem;
+  text-align: center;
+  background: var(--sp-surface-2);
+  border: 1px solid var(--sp-border-glow);
+  border-radius: var(--sp-radius-md);
+}
+
+.form-total__value {
+  font-family: var(--sp-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── react-select ────────────────────────────────────────────── */
+
+.sp-select__control {
+  background: var(--sp-surface-2) !important;
+  border: 1px solid var(--sp-border) !important;
+  border-radius: var(--sp-radius-md) !important;
+  min-height: 46px !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.sp-select__control--is-focused {
+  background: var(--sp-surface-3) !important;
+  border-color: var(--sp-emerald) !important;
+  box-shadow: 0 0 0 3px var(--sp-emerald-glow) !important;
+}
+
+.sp-select__single-value {
+  color: var(--sp-text) !important;
+  font-weight: 600;
+}
+
+.sp-select__input-container,
+.sp-select__input {
+  color: var(--sp-text) !important;
+}
+
+.sp-select__placeholder {
+  color: var(--sp-text-muted) !important;
+}
+
+.sp-select__indicator-separator {
+  background-color: var(--sp-border) !important;
+}
+
+.sp-select__dropdown-indicator,
+.sp-select__loading-indicator {
+  color: var(--sp-text-muted) !important;
+}
+
+.sp-select__menu {
+  background: var(--sp-surface-2) !important;
+  border: 1px solid var(--sp-border) !important;
+  border-radius: var(--sp-radius-md) !important;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 45%) !important;
+}
+
+.sp-select__option {
+  padding: 0.7rem 1rem !important;
+  color: var(--sp-text-soft) !important;
+  cursor: pointer !important;
+}
+
+.sp-select__option--is-focused {
+  background: var(--sp-surface-3) !important;
+  color: var(--sp-text) !important;
+}
+
+.sp-select__option--is-selected {
+  background: var(--sp-emerald) !important;
+  color: #fff !important;
+}
+
+.sp-select__no-options-message {
+  color: var(--sp-text-muted) !important;
+}
+
+/* ── Tabela ──────────────────────────────────────────────────── */
 
 .table-scroll {
-  max-height: 420px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding: 0 0.75rem 0.75rem;
 }
 
 @media (max-width: 576px) {
   .table-scroll {
-    max-height: 320px;
+    max-height: 340px;
   }
 }
 
-.search-input-group {
-  width: 220px;
-  max-width: 100%;
-  flex: 1 1 160px;
+/* Rreshtat si kartela të ndara, si te `sp-table` i FinanCare-s. */
+.premium-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--sp-text);
+  border-collapse: separate !important;
+  border-spacing: 0 4px;
+  margin: 0;
+  color: var(--sp-text);
 }
 
-.btn-icon-action:focus-visible,
-.premium-action-chip:focus-visible,
-.cursor-pointer:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+.premium-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.85rem 0.6rem;
+  background: var(--sp-surface-2);
+  border: none;
+  box-shadow: inset 0 -2px 0 var(--sp-border);
+  color: var(--sp-text-muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-/* Prefikset e sugjeruara nën fushën "Nr. Faturës" */
+
+.premium-table thead th[role='button']:hover {
+  color: var(--sp-emerald);
+}
+
+.premium-table tbody td {
+  padding: 0.8rem 0.6rem;
+  background: var(--sp-surface);
+  border: none;
+  border-block: 1px solid var(--sp-border);
+  color: var(--sp-text);
+  font-size: 0.875rem;
+  vertical-align: middle;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.premium-table tbody td:first-child {
+  border-left: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md) 0 0 var(--sp-radius-md);
+}
+
+.premium-table tbody td:last-child {
+  border-right: 1px solid var(--sp-border);
+  border-radius: 0 var(--sp-radius-md) var(--sp-radius-md) 0;
+}
+
+.premium-table tbody tr:hover td {
+  background: var(--sp-surface-2);
+  border-color: var(--sp-emerald);
+}
+
+/* Rreshti që sapo u dërgua te forma për modifikim. */
+.premium-table tbody tr.is-highlighted td {
+  background: var(--sp-surface-3);
+  border-color: var(--sp-cyan);
+}
+
+.cell-num {
+  font-family: var(--sp-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.cell-num--total {
+  font-weight: 700;
+  color: var(--sp-text);
+}
+
+.cell-num--tvsh18 {
+  color: var(--sp-emerald);
+}
+
+.cell-num--tvsh8 {
+  color: var(--sp-cyan);
+}
+
+.cell-supplier {
+  max-width: 130px;
+  font-weight: 700;
+  color: var(--sp-text);
+}
+
+.cell-invoice {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-sm);
+  background: var(--sp-surface-2);
+  color: var(--sp-cyan);
+  font-family: var(--sp-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.cell-date {
+  font-family: var(--sp-mono);
+  font-size: 0.82rem;
+  color: var(--sp-text-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.table-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--sp-text-muted);
+}
+
+.table-empty__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--sp-border);
+  border-radius: 50%;
+  background: var(--sp-surface-2);
+  color: var(--sp-text-muted);
+  opacity: 0.7;
+}
+
+.table-hint {
+  padding: 0.7rem 1.35rem;
+  background: var(--sp-surface-2);
+  border-top: 1px solid var(--sp-border);
+  border-radius: 0 0 var(--sp-radius-lg) var(--sp-radius-lg);
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--sp-text-muted);
+}
+
+/* ── Kërkimi ─────────────────────────────────────────────────── */
+
+.search-input-group {
+  width: 230px;
+  max-width: 100%;
+  flex: 1 1 160px;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  background: var(--sp-surface-2);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.search-input-group:focus-within {
+  border-color: var(--sp-emerald);
+  box-shadow: 0 0 0 3px var(--sp-emerald-glow);
+}
+
+.search-input-group .input-group-text {
+  background: transparent;
+  border: none;
+  color: var(--sp-text-muted);
+}
+
+.search-input-group .form-control {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+.search-input-group .form-control:focus {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ── Modalet ─────────────────────────────────────────────────── */
+
+.modal-content {
+  background: var(--sp-surface);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  color: var(--sp-text);
+  box-shadow: var(--sp-shadow-card);
+}
+
+.modal-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--sp-text);
+}
+
+.modal-backdrop.show {
+  opacity: 0.7;
+}
+
+.modal-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--sp-red-glow);
+  color: var(--sp-red);
+}
+
+/* ── Njoftimet ───────────────────────────────────────────────── */
+
+.alert {
+  border-radius: var(--sp-radius-md);
+  border-width: 1px;
+}
+
+.alert-danger {
+  --bs-alert-bg: var(--sp-red-glow);
+  --bs-alert-border-color: var(--sp-red);
+  --bs-alert-color: var(--sp-red);
+}
+
+.alert-warning {
+  --bs-alert-bg: rgb(245 158 11 / 12%);
+  --bs-alert-border-color: var(--sp-amber);
+  --bs-alert-color: var(--sp-amber);
+}
+
+/* ── Prefikset e Nr. Faturës ─────────────────────────────────── */
+
 .prefix-picker {
   display: flex;
   flex-wrap: wrap;
@@ -238,13 +884,13 @@ body {
 }
 
 .prefix-picker-label {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #94a3b8;
-  line-height: 1.2;
   flex-shrink: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--sp-text-muted);
+  line-height: 1.2;
 }
 
 .prefix-chips {
@@ -258,17 +904,17 @@ body {
   align-items: center;
   gap: 4px;
   max-width: 100%;
-  padding: 3px 9px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 4px 10px;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-sm);
+  background: var(--sp-surface-2);
+  color: var(--sp-text-muted);
+  font-family: var(--sp-mono);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .prefix-chip-text {
@@ -280,36 +926,76 @@ body {
 .prefix-chip-check {
   font-size: 0.62rem;
   line-height: 1;
-  opacity: 0.9;
 }
 
 .prefix-chip:hover {
-  border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.06);
-  color: var(--primary-hover);
+  border-color: var(--sp-emerald);
+  background: var(--sp-surface-3);
+  color: var(--sp-emerald);
 }
 
 .prefix-chip.is-active {
-  border-color: rgba(99, 102, 241, 0.45);
-  background: rgba(99, 102, 241, 0.1);
-  color: var(--primary-hover);
+  border-color: var(--sp-emerald);
+  background: var(--sp-emerald-glow);
+  color: var(--sp-emerald);
 }
 
-.prefix-chip:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 1px;
+/* ── Fundfaqja ───────────────────────────────────────────────── */
+
+footer .premium-card {
+  padding: 1.25rem 2.5rem;
 }
 
-/* Versioni i aplikacionit në footer */
 .app-version {
   display: inline-block;
-  padding: 1px 8px;
-  border-radius: 9999px;
-  background: rgba(99, 102, 241, 0.1);
-  color: var(--primary);
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: var(--sp-emerald-glow);
+  color: var(--sp-emerald);
+  font-family: var(--sp-mono);
   font-size: 0.7rem;
   font-weight: 700;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: 0.02em;
   vertical-align: middle;
+}
+
+/* ── Të përgjithshme ─────────────────────────────────────────── */
+
+.text-muted {
+  color: var(--sp-text-muted) !important;
+}
+
+.tooltip-inner {
+  border-radius: var(--sp-radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.animate-in {
+  animation: ngrihu 0.5s ease-out both;
+}
+
+@keyframes ngrihu {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--sp-emerald);
+  outline-offset: 2px;
+}
+
+.spinner-border {
+  color: var(--sp-emerald);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

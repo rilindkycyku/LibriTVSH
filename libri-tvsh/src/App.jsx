@@ -1,6 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTable from "./components/InvoiceTable";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -63,8 +62,8 @@ function App() {
             alt="Logoja e Blerjet me TVSH"
             className="d-block mx-auto mb-4 app-logo"
           />
-          <h1 className="display-4 fw-bold gradient-text mb-2">Blerjet me TVSH</h1>
-          <p className="text-muted fs-5">Menaxhoni faturat tuaja me thjeshtësi dhe stil!</p>
+          <h1 className="display-5 gradient-text mb-2">Blerjet me TVSH</h1>
+          <p className="text-muted">Menaxhoni faturat tuaja me thjeshtësi dhe stil!</p>
         </header>
 
         {furnitoriError && (

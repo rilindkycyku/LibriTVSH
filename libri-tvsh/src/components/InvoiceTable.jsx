@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Card, Table, Button, OverlayTrigger, Tooltip, Modal, Form, Badge } from "react-bootstrap";
+import { Card, Table, Button, OverlayTrigger, Tooltip, Modal, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencilAlt,
@@ -11,7 +11,6 @@ import {
   faCalendarAlt,
   faBuilding,
   faHashtag,
-  faEuroSign,
   faFilter,
   faUndo
 } from "@fortawesome/free-solid-svg-icons";
@@ -141,35 +140,38 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
       {/* Quick Stats Dashboard */}
       <div className="row g-3">
         {[
-          { label: "Baza (€)", val: totals.paTvsh, color: "stat-pill-primary" },
-          { label: "TVSH 18%", val: totals.tvsh18, color: "stat-pill-primary" },
-          { label: "TVSH 8%", val: totals.tvsh8, color: "stat-pill-primary" },
-          { label: "Gjithsej", val: totals.total, color: "stat-pill-success", bold: true },
+          { label: "Baza", val: totals.paTvsh },
+          { label: "TVSH 18%", val: totals.tvsh18 },
+          { label: "TVSH 8%", val: totals.tvsh8 },
+          { label: "Gjithsej", val: totals.total, total: true },
         ].map((stat, idx) => (
           <div key={idx} className="col-6 col-md-3">
-            <div className="premium-card p-3 text-center h-100 animate-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-              <div className="small text-muted mb-1 text-uppercase fw-bold" style={{ fontSize: '0.65rem' }}>{stat.label}</div>
-              <div className={`fs-5 fw-bold ${stat.bold ? 'gradient-text' : ''}`}>
-                {stat.val.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €
-              </div>
+            <div
+              className={`stat-card animate-in${stat.total ? " stat-card--total" : ""}`}
+              style={{ animationDelay: `${idx * 0.08}s` }}
+            >
+              <span className="stat-card__label">{stat.label}</span>
+              <span className="stat-card__value">
+                {stat.val.toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
+              </span>
             </div>
           </div>
         ))}
       </div>
 
-      <Card className="premium-card border-0 shadow-sm overflow-hidden flex-grow-1">
+      <Card className="premium-card border-0 overflow-hidden flex-grow-1">
         <Card.Body className="p-0 d-flex flex-column">
           {/* Header & Controls */}
-          <div className="p-4 bg-white border-bottom">
-            <div className="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+          <div className="panel-head">
+            <div className="d-flex justify-content-between align-items-center gap-3 flex-wrap w-100">
               <div className="d-flex align-items-center gap-2">
-                <div className="p-2 bg-primary bg-opacity-10 rounded-3 text-primary">
+                <span className="panel-head__icon">
                   <FontAwesomeIcon icon={faFilter} size="sm" />
-                </div>
-                <Card.Title className="fw-bold fs-5 m-0 lh-1">Regjistri i Faturave</Card.Title>
-                <Badge pill bg="light" text="muted" className="border ms-2">
-                  Nr. Faturave: {filteredAndSortedInvoices.length}
-                </Badge>
+                </span>
+                <h2 className="panel-head__title">Regjistri i Faturave</h2>
+                <span className="panel-count">
+                  {filteredAndSortedInvoices.length} fatura
+                </span>
               </div>
 
               <div className="d-flex gap-2 align-items-center">
@@ -188,8 +190,8 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                   </OverlayTrigger>
                 )}
 
-                <div className="input-group input-group-sm rounded-pill overflow-hidden border shadow-sm search-input-group">
-                  <span className="input-group-text bg-white border-0 text-muted ps-3">
+                <div className="input-group input-group-sm search-input-group">
+                  <span className="input-group-text ps-3">
                     <FontAwesomeIcon icon={faSearch} />
                   </span>
                   <Form.Control
@@ -198,7 +200,6 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                     aria-label="Kërko faturën"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="border-0 shadow-none py-2"
                   />
                 </div>
 
@@ -239,14 +240,17 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
             <Table hover className="premium-table m-0 align-middle">
               <thead className="sticky-top z-2">
                 <tr>
+                  {/* Kolonat e vlerave nuk mbajnë ikonë e as „€": të tetë kolonat
+                      duhet të hyjnë pa rrëshqitje anash, dhe vetë shifrat e
+                      thonë se janë euro. */}
                   {[
                     { label: "Data", key: "data", icon: faCalendarAlt },
                     { label: "Furnitori", key: "furnitori", icon: faBuilding },
-                    { label: "Nr. Fatures", key: "nrFatures", icon: faHashtag },
-                    { label: "VL. Pa TVSH €", key: "vlPaTvsh", icon: faEuroSign, align: "end" },
-                    { label: "TVSH 18% €", key: "tvsh18", icon: faEuroSign, align: "end" },
-                    { label: "TVSH 8% €", key: "tvsh8", icon: faEuroSign, align: "end" },
-                    { label: "Totali €", key: "total", icon: faEuroSign, align: "end" },
+                    { label: "Nr. Faturës", key: "nrFatures", icon: faHashtag },
+                    { label: "Pa TVSH", key: "vlPaTvsh", align: "end" },
+                    { label: "TVSH 18%", key: "tvsh18", align: "end" },
+                    { label: "TVSH 8%", key: "tvsh8", align: "end" },
+                    { label: "Totali", key: "total", align: "end" },
                     { label: "Veprime", key: null, align: "center" },
                   ].map((h, i) => (
                     <th
@@ -268,7 +272,9 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                       }
                     >
                       <div className={`d-flex align-items-center gap-2 ${h.align === 'end' ? 'justify-content-end' : h.align === 'center' ? 'justify-content-center' : ''}`}>
-                        <FontAwesomeIcon icon={h.icon || faHashtag} style={{ fontSize: '0.7rem', opacity: 0.5 }} />
+                        {h.icon && (
+                          <FontAwesomeIcon icon={h.icon} style={{ fontSize: '0.7rem', opacity: 0.5 }} />
+                        )}
                         {h.label}
                         {getSortIcon(h.key)}
                       </div>
@@ -279,10 +285,10 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
               <tbody>
                 {filteredAndSortedInvoices.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="text-center py-5">
-                      <div className="py-4 text-muted">
-                        <div className="bg-light rounded-circle d-inline-flex p-4 mb-3">
-                          <FontAwesomeIcon icon={faSearch} size="2x" className="opacity-25" />
+                    <td colSpan="8">
+                      <div className="table-empty">
+                        <div className="table-empty__icon">
+                          <FontAwesomeIcon icon={faSearch} size="2x" />
                         </div>
                         <h6 className="fw-bold">Nuk u gjet asgjë</h6>
                         <p className="small mb-0">Nuk ka rezultate për kërkimin tuaj.</p>
@@ -291,22 +297,20 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                   </tr>
                 ) : (
                   filteredAndSortedInvoices.map((item) => (
-                    <tr key={item.id} className={`${item.id === highlightedId ? 'table-primary shadow-sm' : 'premium-row'}`}>
+                    <tr key={item.id} className={item.id === highlightedId ? "is-highlighted" : undefined}>
                       <td>
-                        <div className="d-flex align-items-center gap-2">
-                          <span className="text-nowrap fw-medium">{new Date(item.data).toLocaleDateString("en-GB")}</span>
-                        </div>
+                        <span className="cell-date">{new Date(item.data).toLocaleDateString("en-GB")}</span>
                       </td>
                       <td>
-                        <div className="fw-bold text-dark truncate" style={{ maxWidth: '140px' }}>
+                        <div className="cell-supplier truncate">
                           {furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori}
                         </div>
                       </td>
-                      <td><code className="text-primary small fw-bold">{item.nrFatures}</code></td>
-                      <td className="text-end font-monospace">{item.vlPaTvsh.toFixed(2)}</td>
-                      <td className="text-end font-monospace text-primary">{item.tvsh18.toFixed(2)}</td>
-                      <td className="text-end font-monospace text-info">{item.tvsh8.toFixed(2)}</td>
-                      <td className="text-end fw-bold text-dark">
+                      <td><span className="cell-invoice">{item.nrFatures}</span></td>
+                      <td className="cell-num">{item.vlPaTvsh.toFixed(2)}</td>
+                      <td className="cell-num cell-num--tvsh18">{item.tvsh18.toFixed(2)}</td>
+                      <td className="cell-num cell-num--tvsh8">{item.tvsh8.toFixed(2)}</td>
+                      <td className="cell-num cell-num--total">
                         {item.total.toFixed(2)} €
                       </td>
                       <td>
@@ -330,10 +334,8 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
             </Table>
           </div>
 
-          <div className="px-4 py-2 bg-light text-center border-top">
-            <span className="small text-muted" style={{ fontSize: '0.7rem' }}>
-              Sugjerim: Klikoni mbi koka e tabelës për të renditur faturat.
-            </span>
+          <div className="table-hint">
+            Sugjerim: Klikoni mbi koka e tabelës për të renditur faturat.
           </div>
         </Card.Body>
       </Card>
@@ -341,7 +343,7 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
       {/* Delete Confirmation Modals */}
       <Modal show={showDeleteModal} onHide={handleDeleteCancel} centered className="premium-modal">
         <Modal.Body className="p-4 text-center">
-          <div className="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex p-3 mb-3">
+          <div className="modal-icon">
             <FontAwesomeIcon icon={faTrash} size="lg" />
           </div>
           <h5 className="fw-bold mb-2">Konfirmo Fshirjen</h5>
@@ -355,7 +357,7 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
 
       <Modal show={showClearAllModal} onHide={handleDeleteAllCancel} centered className="premium-modal">
         <Modal.Body className="p-4 text-center">
-          <div className="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex p-3 mb-3">
+          <div className="modal-icon">
             <FontAwesomeIcon icon={faTrash} size="lg" />
           </div>
           <h5 className="fw-bold mb-2">Pastro gjithë Regjistrin</h5>
