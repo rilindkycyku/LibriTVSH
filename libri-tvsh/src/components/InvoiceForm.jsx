@@ -37,19 +37,17 @@ const initialState = {
 
 function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading, prefiksetIndex, editingInvoice, setEditingInvoice }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
+  // Vlerat numerike (`furnitori`, `vlPaTvsh`, `tvsh18`, `tvsh8`) rrinë te
+  // `state` për llogaritjet — forma vizaton vetëm variantet `…Input`.
   const {
-    furnitori,
     data,
     nrFatures,
     nrFaturesPrefix,
     prefiksetOptions,
-    vlPaTvsh,
     vlPaTvshInput,
     vlPaTvshError,
-    tvsh18,
     tvsh18Input,
     tvsh18Error,
-    tvsh8,
     tvsh8Input,
     tvsh8Error,
     total,
@@ -77,7 +75,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
     handleNumericInput,
     handleAdd,
     handleKeyDown,
-    handleFurnitoriKeyDown,
     openCalculator,
     applyCalculatorValue,
     closeCalculator,
@@ -301,8 +298,11 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
               </div>
             </div>
 
+            {/* Gjerësi e plotë si te VL. Pa TVSH: krah për krah, gjysma e
+                kolonës i linte këto fusha nën 105px — sa për „1234.56" e jo
+                më shumë — dhe shuma pritej pa u parë. */}
             <div className="row">
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="tvsh18">
                   <Form.Label className="mb-2">TVSH 18% (€)</Form.Label>
                   <InputGroup>
@@ -331,7 +331,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   {tvsh18Error && <div className="error-message text-danger mt-1">{tvsh18Error}</div>}
                 </Form.Group>
               </div>
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="tvsh8">
                   <Form.Label className="mb-2">TVSH 8% (€)</Form.Label>
                   <InputGroup>

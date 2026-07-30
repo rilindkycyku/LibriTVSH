@@ -20,8 +20,9 @@ import { exportInvoicesExcel } from "../utils/exportExcel";
 /** Gjerësitë e kolonave — `table-layout: fixed` i mban të pandryshuara sado të
     gjata të jenë emrat, kështu që Furnitori merr gjithë hapësirën që tepron.
     Shumat janë matur me vlerën më të gjatë reale („-12375.96 €"), që as në
-    laptop 1366px të mos duhet rrëshqitje anash. */
-const COLUMN_WIDTHS = ["88px", "auto", "132px", "88px", "82px", "72px", "104px", "80px"];
+    laptop 1366px të mos duhet rrëshqitje anash. Nr. i Faturës ka aq sa i
+    nxë 18 shenja — numri më i gjatë te `prefikset.json` — në një rresht. */
+const COLUMN_WIDTHS = ["88px", "auto", "158px", "88px", "82px", "72px", "104px", "80px"];
 
 function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit, footer }) {
   const [highlightedId, setHighlightedId] = useState(null);

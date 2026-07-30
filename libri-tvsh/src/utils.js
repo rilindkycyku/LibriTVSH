@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function validateNumericInput(value, field) {
+export function validateNumericInput(value) {
   const validPattern = /^-?\d*\.?\d*$/;
   return validPattern.test(value) || value === "";
 }
