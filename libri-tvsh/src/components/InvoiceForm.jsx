@@ -140,6 +140,22 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
     (prefiksetOptions.length === 1 &&
       resolvePrefix(prefiksetOptions[0].prefiksi, data) !== nrFaturesPrefix);
 
+  // Formatet janë të arritshme me Tab; brenda grupit lëvizet edhe me shigjeta,
+  // dhe Enter/Hapësira e kthen kursorin në fund të Nr. Faturës për ta plotësuar.
+  const prefixChipsRef = useRef(null);
+  const handlePrefixChipsKeyDown = useCallback((e) => {
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+    const chips = Array.from(prefixChipsRef.current?.querySelectorAll("button") || []);
+    const current = chips.indexOf(document.activeElement);
+    if (current === -1) return;
+    e.preventDefault();
+    const next =
+      e.key === "ArrowRight" ? (current + 1) % chips.length :
+      e.key === "ArrowLeft" ? (current - 1 + chips.length) % chips.length :
+      e.key === "Home" ? 0 : chips.length - 1;
+    chips[next].focus();
+  }, []);
+
   const handleCancelEdit = useCallback(() => {
     dispatch({ type: "RESET_FORM" });
     setEditingInvoice(null);
@@ -220,7 +236,13 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                       <span className="prefix-picker-label">
                         {prefiksetOptions.length > 1 ? "Formatet" : "Prefiksi"}
                       </span>
-                      <div className="prefix-chips" role="group" aria-label="Prefikset e njohura">
+                      <div
+                        className="prefix-chips"
+                        role="group"
+                        aria-label="Formatet e njohura — lëvizni me Tab ose me shigjeta, zgjidhni me Enter"
+                        ref={prefixChipsRef}
+                        onKeyDown={handlePrefixChipsKeyDown}
+                      >
                         {prefiksetOptions.map((p) => {
                           const resolved = resolvePrefix(p.prefiksi, data);
                           const active = resolved === nrFaturesPrefix;
@@ -228,7 +250,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                             <button
                               key={p.prefiksi}
                               type="button"
-                              tabIndex={-1}
                               aria-pressed={active}
                               className={`prefix-chip${active ? " is-active" : ""}`}
                               title={p.shembull ? `Psh. ${p.shembull}` : undefined}

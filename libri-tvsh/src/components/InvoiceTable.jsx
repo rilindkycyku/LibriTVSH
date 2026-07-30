@@ -12,11 +12,18 @@ import {
   faBuilding,
   faHashtag,
   faFilter,
-  faUndo
+  faUndo,
+  faRotateLeft
 } from "@fortawesome/free-solid-svg-icons";
 import { exportInvoicesExcel } from "../utils/exportExcel";
 
-function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
+/** Gjerësitë e kolonave — `table-layout: fixed` i mban të pandryshuara sado të
+    gjata të jenë emrat, kështu që Furnitori merr gjithë hapësirën që tepron.
+    Shumat janë matur me vlerën më të gjatë reale („-12375.96 €"), që as në
+    laptop 1366px të mos duhet rrëshqitje anash. */
+const COLUMN_WIDTHS = ["88px", "auto", "132px", "88px", "82px", "72px", "104px", "80px"];
+
+function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit, footer }) {
   const [highlightedId, setHighlightedId] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [invoiceToDelete, setInvoiceToDelete] = useState(null);
@@ -47,11 +54,23 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
     setSortConfig({ key, direction });
   };
 
+  // Një Map në vend të një `find()` për çdo rresht: kërkimi shkruhet shkronjë
+  // pas shkronje, ndaj lista rifiltrohet shpesh.
+  const furnitoriLabels = useMemo(
+    () => new Map(furnitoriOptions.map((opt) => [opt.value, opt.label])),
+    [furnitoriOptions]
+  );
+
+  const emriFurnitorit = useCallback(
+    (item) => furnitoriLabels.get(item.furnitori) || item.furnitori || "",
+    [furnitoriLabels]
+  );
+
   // Logic for filtering and sorting
   const filteredAndSortedInvoices = useMemo(() => {
     return [...invoices]
       .filter((item) => {
-        const furnitori = (furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori || "").toString();
+        const furnitori = (furnitoriLabels.get(item.furnitori) || item.furnitori || "").toString();
         const nrFatures = (item.nrFatures || "").toString();
         const data = (item.data || "").toString();
         const term = (searchTerm || "").toLowerCase();
@@ -72,7 +91,7 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
         }
         return 0;
       });
-  }, [invoices, furnitoriOptions, searchTerm, sortConfig]);
+  }, [invoices, furnitoriLabels, searchTerm, sortConfig]);
 
   const totals = useMemo(
     () =>
@@ -151,7 +170,7 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
               style={{ animationDelay: `${idx * 0.08}s` }}
             >
               <span className="stat-card__label">{stat.label}</span>
-              <span className="stat-card__value">
+              <span className={`stat-card__value${stat.val < 0 ? " is-negative" : ""}`}>
                 {stat.val.toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
               </span>
             </div>
@@ -236,8 +255,13 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
             </div>
           </div>
 
-          <div className="table-responsive flex-grow-1 table-scroll">
+          <div className="table-responsive table-scroll">
             <Table hover className="premium-table m-0 align-middle">
+              <colgroup>
+                {COLUMN_WIDTHS.map((w, i) => (
+                  <col key={i} style={w === "auto" ? undefined : { width: w }} />
+                ))}
+              </colgroup>
               <thead className="sticky-top z-2">
                 <tr>
                   {/* Kolonat e vlerave nuk mbajnë ikonë e as „€": të tetë kolonat
@@ -296,46 +320,75 @@ function InvoiceTable({ invoices, setInvoices, furnitoriOptions, onEdit }) {
                     </td>
                   </tr>
                 ) : (
-                  filteredAndSortedInvoices.map((item) => (
-                    <tr key={item.id} className={item.id === highlightedId ? "is-highlighted" : undefined}>
-                      <td>
-                        <span className="cell-date">{new Date(item.data).toLocaleDateString("en-GB")}</span>
-                      </td>
-                      <td>
-                        <div className="cell-supplier truncate">
-                          {furnitoriOptions.find((opt) => opt.value === item.furnitori)?.label || item.furnitori}
-                        </div>
-                      </td>
-                      <td><span className="cell-invoice">{item.nrFatures}</span></td>
-                      <td className="cell-num">{item.vlPaTvsh.toFixed(2)}</td>
-                      <td className="cell-num cell-num--tvsh18">{item.tvsh18.toFixed(2)}</td>
-                      <td className="cell-num cell-num--tvsh8">{item.tvsh8.toFixed(2)}</td>
-                      <td className="cell-num cell-num--total">
-                        {item.total.toFixed(2)} €
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-center gap-1">
-                          <OverlayTrigger placement="top" overlay={<Tooltip>Edito</Tooltip>}>
-                            <button className="btn-icon-action edit" onClick={() => handleEditClick(item)}>
-                                <FontAwesomeIcon icon={faPencilAlt} size="sm" />
-                            </button>
-                          </OverlayTrigger>
-                          <OverlayTrigger placement="top" overlay={<Tooltip>Fshi</Tooltip>}>
-                            <button className="btn-icon-action delete" onClick={() => handleDeleteClick(item.id)}>
-                                <FontAwesomeIcon icon={faTrash} size="sm" />
-                            </button>
-                          </OverlayTrigger>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
+                  filteredAndSortedInvoices.map((item) => {
+                    // Faturat kreditore (kthimet) shënohen me kuq që të mos
+                    // ngatërrohen me blerjet e zakonshme kur skanohet tabela.
+                    const isNegative = item.total < 0;
+                    const furnitori = emriFurnitorit(item);
+                    const rowClass = [
+                      item.id === highlightedId ? "is-highlighted" : "",
+                      isNegative ? "is-negative" : "",
+                    ].filter(Boolean).join(" ");
+
+                    return (
+                      <tr key={item.id} className={rowClass || undefined}>
+                        <td>
+                          <span className="cell-date">{new Date(item.data).toLocaleDateString("en-GB")}</span>
+                        </td>
+                        {/* Emri dhe numri shkruhen të plotë — mbështillen në disa
+                            rreshta e nuk priten me tri pika. */}
+                        <td>
+                          <div className="cell-supplier">{furnitori}</div>
+                        </td>
+                        <td>
+                          <div className="cell-invoice-wrap">
+                            <span className="cell-invoice">{item.nrFatures}</span>
+                            {isNegative && (
+                              <OverlayTrigger
+                                placement="top"
+                                overlay={<Tooltip>Vlerë negative — kthim ose korrigjim</Tooltip>}
+                              >
+                                <span className="neg-tag" tabIndex={0}>
+                                  <FontAwesomeIcon icon={faRotateLeft} />
+                                  Kthim
+                                </span>
+                              </OverlayTrigger>
+                            )}
+                          </div>
+                        </td>
+                        <td className={`cell-num${item.vlPaTvsh < 0 ? " cell-num--neg" : ""}`}>{item.vlPaTvsh.toFixed(2)}</td>
+                        <td className={`cell-num cell-num--tvsh18${item.tvsh18 < 0 ? " cell-num--neg" : ""}`}>{item.tvsh18.toFixed(2)}</td>
+                        <td className={`cell-num cell-num--tvsh8${item.tvsh8 < 0 ? " cell-num--neg" : ""}`}>{item.tvsh8.toFixed(2)}</td>
+                        <td className={`cell-num cell-num--total${isNegative ? " cell-num--neg" : ""}`}>
+                          {item.total.toFixed(2)} €
+                        </td>
+                        <td>
+                          <div className="d-flex justify-content-center gap-1">
+                            <OverlayTrigger placement="top" overlay={<Tooltip>Edito</Tooltip>}>
+                              <button className="btn-icon-action edit" onClick={() => handleEditClick(item)}>
+                                  <FontAwesomeIcon icon={faPencilAlt} size="sm" />
+                              </button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement="top" overlay={<Tooltip>Fshi</Tooltip>}>
+                              <button className="btn-icon-action delete" onClick={() => handleDeleteClick(item.id)}>
+                                  <FontAwesomeIcon icon={faTrash} size="sm" />
+                              </button>
+                            </OverlayTrigger>
+                          </div>
+                        </td>
+                      </tr>
+                      );
+                  })
                 )}
               </tbody>
             </Table>
           </div>
 
-          <div className="table-hint">
-            Sugjerim: Klikoni mbi koka e tabelës për të renditur faturat.
+          <div className="panel-foot">
+            <span className="panel-foot__hint">
+              Sugjerim: Klikoni mbi kokën e tabelës për të renditur faturat.
+            </span>
+            {footer}
           </div>
         </Card.Body>
       </Card>

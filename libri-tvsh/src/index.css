@@ -170,18 +170,17 @@ body::before {
   margin-top: 3rem;
 }
 
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
 
 .select-none {
   user-select: none;
+}
+
+.app-container {
+  max-width: 1560px;
+  padding-inline: clamp(0.75rem, 2vw, 2rem);
 }
 
 /* ── Kreu ────────────────────────────────────────────────────── */
@@ -197,11 +196,13 @@ body::before {
   }
 }
 
+/* Logoja vjen me sfond të tejdukshëm — pa pllakë me gradient nën të. Hija e
+   butë mjafton ta ndajë nga sfondi si në temën e errët ashtu edhe në të çelët. */
 .app-logo {
-  max-width: 180px;
-  width: 42%;
+  max-width: 210px;
+  width: 46%;
   height: auto;
-  filter: drop-shadow(0 10px 30px var(--sp-emerald-glow));
+  filter: drop-shadow(0 8px 22px rgb(0 0 0 / 22%));
 }
 
 header h1 {
@@ -299,6 +300,14 @@ header h1 {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+/* Shuma negative del e kuqe edhe këtu lart, si te rreshtat e tabelës. */
+.stat-card__value.is-negative,
+.stat-card--total .stat-card__value.is-negative {
+  background: none;
+  -webkit-text-fill-color: var(--sp-red);
+  color: var(--sp-red);
 }
 
 /* ── Titujt e paneleve ───────────────────────────────────────── */
@@ -417,8 +426,9 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  flex: none;
+  width: 30px;
+  height: 30px;
   border: 1px solid transparent;
   border-radius: var(--sp-radius-sm);
   background: transparent;
@@ -637,15 +647,27 @@ header h1 {
 
 /* ── Tabela ──────────────────────────────────────────────────── */
 
-.table-scroll {
-  max-height: 460px;
-  overflow-y: auto;
-  padding: 0 0.75rem 0.75rem;
+/* Kartela e regjistrit e ndan lartësinë në tri pjesë: kreu dhe shiriti i
+   fundit sa u duhet, tabela merr gjithçka që mbetet. Kështu nuk mbetet bosh
+   poshtë tabelës kur kolona e formës është më e gjatë. */
+.premium-card > .card-body {
+  min-height: 0;
 }
 
-@media (max-width: 576px) {
+.table-scroll {
+  flex: 1 1 auto;
+  min-height: 220px;
+  overflow-y: auto;
+  padding: 0 0.75rem 0.75rem;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+
+/* Pa kolonë krah saj, kartela s'ka lartësi të dhënë — atëherë tabela nuk
+   guxon të rritet pafund, se shiriti i fundit del jashtë ekranit. */
+@media (max-width: 991.98px) {
   .table-scroll {
-    max-height: 340px;
+    max-height: 65vh;
   }
 }
 
@@ -655,6 +677,10 @@ header h1 {
   --bs-table-color: var(--sp-text);
   border-collapse: separate !important;
   border-spacing: 0 4px;
+  /* Gjerësitë vijnë nga `<colgroup>`: kolonat rrinë në vend sado i gjatë të
+     jetë emri i furnitorit, dhe nën 780px tabela rrëshqet anash e nuk ngjishet. */
+  table-layout: fixed;
+  min-width: 700px;
   margin: 0;
   color: var(--sp-text);
 }
@@ -663,14 +689,14 @@ header h1 {
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 0.85rem 0.6rem;
+  padding: 0.85rem 0.45rem;
   background: var(--sp-surface-2);
   border: none;
   box-shadow: inset 0 -2px 0 var(--sp-border);
   color: var(--sp-text-muted);
   font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -680,7 +706,7 @@ header h1 {
 }
 
 .premium-table tbody td {
-  padding: 0.8rem 0.6rem;
+  padding: 0.7rem 0.45rem;
   background: var(--sp-surface);
   border: none;
   border-block: 1px solid var(--sp-border);
@@ -713,11 +739,32 @@ header h1 {
   border-color: var(--sp-cyan);
 }
 
-.cell-num {
+/* Faturat kreditore: nuancë e kuqe dhe vijë majtas, që të bien në sy pa u
+   lexuar shifrat një nga një. */
+.premium-table tbody tr.is-negative td {
+  background: linear-gradient(var(--sp-red-glow), var(--sp-red-glow)), var(--sp-surface);
+}
+
+.premium-table tbody tr.is-negative td:first-child {
+  box-shadow: inset 3px 0 0 var(--sp-red);
+}
+
+.premium-table tbody tr.is-negative:hover td {
+  background: linear-gradient(var(--sp-red-glow), var(--sp-red-glow)), var(--sp-surface-2);
+  border-color: var(--sp-red);
+}
+
+/* Selektori mban `tbody td` që të mundë rregullin e përgjithshëm të qelizave. */
+.premium-table tbody td.cell-num {
   font-family: var(--sp-mono);
+  font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
   text-align: end;
   white-space: nowrap;
+  /* Rrjedha e fundit e sigurisë: një shumë jashtëzakonisht e gjatë pritet, jo
+     të shkelë mbi kolonën ngjitur. */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cell-num--total {
@@ -733,27 +780,65 @@ header h1 {
   color: var(--sp-cyan);
 }
 
-.cell-supplier {
-  max-width: 130px;
-  font-weight: 700;
-  color: var(--sp-text);
+.cell-num--neg {
+  color: var(--sp-red);
 }
 
+/* Numri i faturës dhe etiketa e kthimit rrinë njëri poshtë tjetrit. */
+.cell-invoice-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* Etiketa e kthimit: shpjegon me fjalë atë që e kuqja e tregon me ngjyrë. */
+.neg-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border: 1px solid var(--sp-red);
+  border-radius: 999px;
+  background: var(--sp-red-glow);
+  color: var(--sp-red);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: help;
+}
+
+/* Emri i furnitorit shkruhet i plotë — mbështillet në sa rreshta t'i duhen,
+   sepse gjysma e emrit nuk e dallon dot furnitorin. */
+.cell-supplier {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--sp-text);
+  overflow-wrap: anywhere;
+}
+
+/* Nr. i faturës mund të jetë i gjatë („E-26-DSD-EE1-8895-000123"): thyhet në
+   disa rreshta brenda etiketës në vend që të pritet me tri pika. */
 .cell-invoice {
   display: inline-block;
+  max-width: 100%;
   padding: 0.15rem 0.5rem;
   border: 1px solid var(--sp-border);
   border-radius: var(--sp-radius-sm);
   background: var(--sp-surface-2);
   color: var(--sp-cyan);
   font-family: var(--sp-mono);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .cell-date {
   font-family: var(--sp-mono);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   color: var(--sp-text-soft);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -778,14 +863,31 @@ header h1 {
   opacity: 0.7;
 }
 
-.table-hint {
-  padding: 0.7rem 1.35rem;
+/* Shiriti i fundit: sugjerimi i renditjes majtas, fundfaqja djathtas — një
+   bllok i vetëm në vend të dy të tillëve njëri poshtë tjetrit. */
+.panel-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  padding: 0.65rem 1.35rem;
   background: var(--sp-surface-2);
   border-top: 1px solid var(--sp-border);
   border-radius: 0 0 var(--sp-radius-lg) var(--sp-radius-lg);
-  text-align: center;
   font-size: 0.7rem;
   color: var(--sp-text-muted);
+}
+
+.panel-foot__hint {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 767.98px) {
+  .panel-foot {
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 /* ── Kërkimi ─────────────────────────────────────────────────── */
@@ -942,8 +1044,17 @@ header h1 {
 
 /* ── Fundfaqja ───────────────────────────────────────────────── */
 
-footer .premium-card {
-  padding: 1.25rem 2.5rem;
+.app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem 0.5rem;
+  color: var(--sp-text-muted);
+}
+
+.app-footer__sep {
+  opacity: 0.45;
 }
 
 .app-version {
