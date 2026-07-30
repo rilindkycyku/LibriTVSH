@@ -4,6 +4,7 @@ import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTable from "./components/InvoiceTable";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
+import useFitToViewport from "./hooks/useFitToViewport";
 import { fetchFurnitori } from "./utils";
 import { fetchPrefikset } from "./utils/prefikset";
 
@@ -17,6 +18,7 @@ function App() {
   const [furnitoriError, setFurnitoriError] = useState(false);
   const [editingInvoice, setEditingInvoice] = useState(null);
   const [prefiksetIndex, setPrefiksetIndex] = useState(null);
+  const fitRef = useFitToViewport();
 
   useEffect(() => {
     fetchFurnitori()
@@ -53,61 +55,69 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen pb-12">
-      {/* `fluid` me kufi të vetin: në 1366px kontejneri fiks i Bootstrap-it
+    // `min-h-screen` rri jashtë elementit që zvogëlohet, që lartësia e tij të
+    // mos e prishë matjen e `useFitToViewport`.
+    <div className="min-h-screen">
+      <div ref={fitRef}>
+        {/* `fluid` me kufi të vetin: në 1366px kontejneri fiks i Bootstrap-it
           linte mbi 200px anash bosh, hapësirë që i takon tabelës. */}
-      <Container fluid className="app-container py-5 animate-fade-in">
-        <header className="text-center mb-10">
-          <img
-            src="/logo-besa.png"
-            alt="BESA Supermarket"
-            width="500"
-            height="271"
-            fetchPriority="high"
-            decoding="async"
-            className="d-block mx-auto mb-4 app-logo"
-          />
-          <h1 className="display-5 gradient-text mb-2">Blerjet me TVSH</h1>
-          <p className="text-muted">Menaxhoni faturat tuaja me thjeshtësi dhe stil!</p>
-        </header>
+        <Container fluid className="app-container animate-fade-in">
+          <header className="app-header text-center">
+            <img
+              src="/logo-besa.png"
+              alt="BESA Supermarket"
+              width="500"
+              height="271"
+              fetchPriority="high"
+              decoding="async"
+              className="d-block mx-auto app-logo"
+            />
+            <h1 className="gradient-text">Blerjet me TVSH</h1>
+            <p className="text-muted m-0">
+              Menaxhoni faturat tuaja me thjeshtësi dhe stil!
+            </p>
+          </header>
 
-        {furnitoriError && (
-          <div className="alert alert-warning text-center" role="alert">
-            Furnitorët nuk u ngarkuan. Provoni të rifreskoni faqen.
-          </div>
-        )}
+          {furnitoriError && (
+            <div className="alert alert-warning text-center" role="alert">
+              Furnitorët nuk u ngarkuan. Provoni të rifreskoni faqen.
+            </div>
+          )}
 
-        <ErrorBoundary>
-          <Row className="g-4">
-            <Col lg={4} className="mb-4">
-              <div className="h-100">
-                <InvoiceForm
-                  invoices={invoices}
-                  setInvoices={setInvoices}
-                  furnitoriOptions={furnitoriOptions}
-                  furnitoriLoading={furnitoriLoading}
-                  prefiksetIndex={prefiksetIndex}
-                  editingInvoice={editingInvoice}
-                  setEditingInvoice={setEditingInvoice}
-                />
-              </div>
-            </Col>
-            <Col lg={8}>
-              <div className="h-100">
-                {/* Fundfaqja rri brenda kartelës së tabelës: një shirit i vetëm
+          <ErrorBoundary>
+            <Row className="g-4">
+              {/* Krah për krah hapësirën e jep `g-4` i rreshtit — margjina e
+                  poshtme duhet vetëm kur kolonat grumbullohen. */}
+              <Col lg={4} className="mb-4 mb-lg-0">
+                <div className="h-100">
+                  <InvoiceForm
+                    invoices={invoices}
+                    setInvoices={setInvoices}
+                    furnitoriOptions={furnitoriOptions}
+                    furnitoriLoading={furnitoriLoading}
+                    prefiksetIndex={prefiksetIndex}
+                    editingInvoice={editingInvoice}
+                    setEditingInvoice={setEditingInvoice}
+                  />
+                </div>
+              </Col>
+              <Col lg={8}>
+                <div className="h-100">
+                  {/* Fundfaqja rri brenda kartelës së tabelës: një shirit i vetëm
                     poshtë regjistrit e shkurton faqen me një ekran të tërë. */}
-                <InvoiceTable
-                  invoices={invoices}
-                  setInvoices={setInvoices}
-                  furnitoriOptions={furnitoriOptions}
-                  onEdit={handleEdit}
-                  footer={<Footer />}
-                />
-              </div>
-            </Col>
-          </Row>
-        </ErrorBoundary>
-      </Container>
+                  <InvoiceTable
+                    invoices={invoices}
+                    setInvoices={setInvoices}
+                    furnitoriOptions={furnitoriOptions}
+                    onEdit={handleEdit}
+                    footer={<Footer />}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </ErrorBoundary>
+        </Container>
+      </div>
     </div>
   );
 }

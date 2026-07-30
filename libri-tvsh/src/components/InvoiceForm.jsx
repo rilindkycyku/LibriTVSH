@@ -162,8 +162,8 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
   return (
     <>
       <Card className="premium-card">
-        <Card.Body className="p-4">
-          <Card.Title className="fw-bold mb-4 fs-4">{editingInvoice ? "Modifiko Faturën" : "Shto Faturë të Re"}</Card.Title>
+        <Card.Body className="p-3 p-xl-4">
+          <Card.Title className="fw-bold mb-3 fs-5">{editingInvoice ? "Modifiko Faturën" : "Shto Faturë të Re"}</Card.Title>
           {showAlert && (
             <Alert
               variant="danger"
@@ -175,8 +175,8 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </Alert>
           )}
           <Form>
-            <Form.Group controlId="idDheEmri" className="mb-4">
-              <Form.Label className="mb-2">
+            <Form.Group controlId="idDheEmri" className="mb-3">
+              <Form.Label className="mb-1">
                 Furnitori <span className="text-danger">*</span>
               </Form.Label>
               <Select
@@ -195,9 +195,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </Form.Group>
 
             <div className="row">
-              <div className="col-12 mb-4">
+              <div className="col-12 mb-3">
                 <Form.Group controlId="dataEFatures">
-                  <Form.Label className="mb-2">
+                  <Form.Label className="mb-1">
                     Data <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
@@ -212,9 +212,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </div>
 
             <div className="row">
-              <div className="col-12 mb-4">
+              <div className="col-12 mb-3">
                 <Form.Group controlId="nrFatures">
-                  <Form.Label className="mb-2">
+                  <Form.Label className="mb-1">
                     Nr. Faturës <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
@@ -265,9 +265,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
             </div>
 
             <div className="row">
-              <div className="col-12 mb-4">
+              <div className="col-12 mb-3">
                 <Form.Group controlId="vlPaTvsh">
-                  <Form.Label className="mb-2">VL. Pa TVSH (€)</Form.Label>
+                  <Form.Label className="mb-1">VL. Pa TVSH (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -302,9 +302,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                 kolonës i linte këto fusha nën 105px — sa për „1234.56" e jo
                 më shumë — dhe shuma pritej pa u parë. */}
             <div className="row">
-              <div className="col-12 mb-4">
+              <div className="col-12 mb-3">
                 <Form.Group controlId="tvsh18">
-                  <Form.Label className="mb-2">TVSH 18% (€)</Form.Label>
+                  <Form.Label className="mb-1">TVSH 18% (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -331,9 +331,9 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   {tvsh18Error && <div className="error-message text-danger mt-1">{tvsh18Error}</div>}
                 </Form.Group>
               </div>
-              <div className="col-12 mb-4">
+              <div className="col-12 mb-3">
                 <Form.Group controlId="tvsh8">
-                  <Form.Label className="mb-2">TVSH 8% (€)</Form.Label>
+                  <Form.Label className="mb-1">TVSH 8% (€)</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -362,18 +362,18 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
               </div>
             </div>
 
-            <Form.Group controlId="total" className="mb-4">
-              <Form.Label className="mb-2">Totali i Faturës</Form.Label>
+            <Form.Group controlId="total" className="mb-3">
+              <Form.Label className="mb-1">Totali i Faturës</Form.Label>
               <div className="form-total">
                 <span className="form-total__value gradient-text">{total.toFixed(2)} €</span>
               </div>
             </Form.Group>
 
-            <div className="d-flex flex-column gap-3">
+            <div className="d-flex flex-column gap-2">
               <Button
                 variant="primary"
                 onClick={handleAdd}
-                className="premium-button premium-button-primary w-100 py-3 fs-5 shadow-sm"
+                className="premium-button premium-button-primary w-100 py-2 fs-6 shadow-sm"
                 disabled={!!vlPaTvshError || !!tvsh18Error || !!tvsh8Error}
                 ref={addButtonRef}
               >
