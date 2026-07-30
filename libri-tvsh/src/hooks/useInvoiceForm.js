@@ -20,7 +20,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
     furnitoriRef,
     datePickerRef,
     nrFaturesRef,
-    vlPaTvshRef,
     tvsh18Ref,
     tvsh8Ref,
     addButtonRef,
@@ -66,9 +65,9 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
     });
   };
 
-  const handleFurnitoriChange = async (partneri) => {
+  const handleFurnitoriChange = (partneri) => {
     selectFurnitori(partneri);
-    document.getElementById("dataEFatures").focus();
+    datePickerRef.current?.focus();
   };
 
   /** Prefiksi përmban vitin ({YY}/{YYYY}), ndaj rifreskohet kur ndryshon data. */
@@ -117,7 +116,7 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
 
   const handleNumericInput = (e, field) => {
     const value = e.target.value;
-    const isValid = validateNumericInput(value, field);
+    const isValid = validateNumericInput(value);
     const num = parseFloat(value);
     const numericValue = isNaN(num) ? 0 : num;
     dispatch({
@@ -179,22 +178,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
         if (nextRef === nrFaturesRef) caretToEnd();
       } else {
         handleAdd();
-      }
-    }
-  };
-
-  const handleFurnitoriKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const selectInstance = furnitoriRef.current;
-      if (
-        selectInstance.state.menuIsOpen &&
-        selectInstance.state.focusedOption
-      ) {
-        selectFurnitori(selectInstance.state.focusedOption);
-        setTimeout(() => datePickerRef.current.focus(), 0);
-      } else if (state.furnitori) {
-        datePickerRef.current.focus();
       }
     }
   };
@@ -302,7 +285,6 @@ function useInvoiceForm(state, dispatch, setInvoices, invoices, refs, editingInv
     handleNumericInput,
     handleAdd,
     handleKeyDown,
-    handleFurnitoriKeyDown,
     openCalculator,
     applyCalculatorValue,
     closeCalculator,

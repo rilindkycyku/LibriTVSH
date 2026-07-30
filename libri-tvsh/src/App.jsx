@@ -1,12 +1,11 @@
-import { useState, useEffect, lazy, Suspense } from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTable from "./components/InvoiceTable";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Footer from "./components/Footer";
 import { fetchFurnitori } from "./utils";
 import { fetchPrefikset } from "./utils/prefikset";
-
-const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
   const [invoices, setInvoices] = useState(() => {
@@ -55,11 +54,17 @@ function App() {
 
   return (
     <div className="min-h-screen pb-12">
-      <Container className="py-5 animate-fade-in">
+      {/* `fluid` me kufi të vetin: në 1366px kontejneri fiks i Bootstrap-it
+          linte mbi 200px anash bosh, hapësirë që i takon tabelës. */}
+      <Container fluid className="app-container py-5 animate-fade-in">
         <header className="text-center mb-10">
           <img
-            src="/logo.png"
-            alt="Logoja e Blerjet me TVSH"
+            src="/logo-besa.png"
+            alt="BESA Supermarket"
+            width="500"
+            height="271"
+            fetchPriority="high"
+            decoding="async"
             className="d-block mx-auto mb-4 app-logo"
           />
           <h1 className="display-5 gradient-text mb-2">Blerjet me TVSH</h1>
@@ -89,22 +94,19 @@ function App() {
             </Col>
             <Col lg={8}>
               <div className="h-100">
+                {/* Fundfaqja rri brenda kartelës së tabelës: një shirit i vetëm
+                    poshtë regjistrit e shkurton faqen me një ekran të tërë. */}
                 <InvoiceTable
                   invoices={invoices}
                   setInvoices={setInvoices}
                   furnitoriOptions={furnitoriOptions}
                   onEdit={handleEdit}
+                  footer={<Footer />}
                 />
               </div>
             </Col>
           </Row>
         </ErrorBoundary>
-
-        <div className="mt-12">
-          <Suspense fallback={<div className="text-center py-4"><Spinner animation="border" size="sm" /></div>}>
-            <Footer />
-          </Suspense>
-        </div>
       </Container>
     </div>
   );

@@ -37,19 +37,17 @@ const initialState = {
 
 function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading, prefiksetIndex, editingInvoice, setEditingInvoice }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
+  // Vlerat numerike (`furnitori`, `vlPaTvsh`, `tvsh18`, `tvsh8`) rrinë te
+  // `state` për llogaritjet — forma vizaton vetëm variantet `…Input`.
   const {
-    furnitori,
     data,
     nrFatures,
     nrFaturesPrefix,
     prefiksetOptions,
-    vlPaTvsh,
     vlPaTvshInput,
     vlPaTvshError,
-    tvsh18,
     tvsh18Input,
     tvsh18Error,
-    tvsh8,
     tvsh8Input,
     tvsh8Error,
     total,
@@ -77,7 +75,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
     handleNumericInput,
     handleAdd,
     handleKeyDown,
-    handleFurnitoriKeyDown,
     openCalculator,
     applyCalculatorValue,
     closeCalculator,
@@ -139,6 +136,22 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
     prefiksetOptions.length > 1 ||
     (prefiksetOptions.length === 1 &&
       resolvePrefix(prefiksetOptions[0].prefiksi, data) !== nrFaturesPrefix);
+
+  // Formatet janë të arritshme me Tab; brenda grupit lëvizet edhe me shigjeta,
+  // dhe Enter/Hapësira e kthen kursorin në fund të Nr. Faturës për ta plotësuar.
+  const prefixChipsRef = useRef(null);
+  const handlePrefixChipsKeyDown = useCallback((e) => {
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+    const chips = Array.from(prefixChipsRef.current?.querySelectorAll("button") || []);
+    const current = chips.indexOf(document.activeElement);
+    if (current === -1) return;
+    e.preventDefault();
+    const next =
+      e.key === "ArrowRight" ? (current + 1) % chips.length :
+      e.key === "ArrowLeft" ? (current - 1 + chips.length) % chips.length :
+      e.key === "Home" ? 0 : chips.length - 1;
+    chips[next].focus();
+  }, []);
 
   const handleCancelEdit = useCallback(() => {
     dispatch({ type: "RESET_FORM" });
@@ -220,7 +233,13 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                       <span className="prefix-picker-label">
                         {prefiksetOptions.length > 1 ? "Formatet" : "Prefiksi"}
                       </span>
-                      <div className="prefix-chips" role="group" aria-label="Prefikset e njohura">
+                      <div
+                        className="prefix-chips"
+                        role="group"
+                        aria-label="Formatet e njohura — lëvizni me Tab ose me shigjeta, zgjidhni me Enter"
+                        ref={prefixChipsRef}
+                        onKeyDown={handlePrefixChipsKeyDown}
+                      >
                         {prefiksetOptions.map((p) => {
                           const resolved = resolvePrefix(p.prefiksi, data);
                           const active = resolved === nrFaturesPrefix;
@@ -228,7 +247,6 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                             <button
                               key={p.prefiksi}
                               type="button"
-                              tabIndex={-1}
                               aria-pressed={active}
                               className={`prefix-chip${active ? " is-active" : ""}`}
                               title={p.shembull ? `Psh. ${p.shembull}` : undefined}
@@ -280,8 +298,11 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
               </div>
             </div>
 
+            {/* Gjerësi e plotë si te VL. Pa TVSH: krah për krah, gjysma e
+                kolonës i linte këto fusha nën 105px — sa për „1234.56" e jo
+                më shumë — dhe shuma pritej pa u parë. */}
             <div className="row">
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="tvsh18">
                   <Form.Label className="mb-2">TVSH 18% (€)</Form.Label>
                   <InputGroup>
@@ -310,7 +331,7 @@ function InvoiceForm({ invoices, setInvoices, furnitoriOptions, furnitoriLoading
                   {tvsh18Error && <div className="error-message text-danger mt-1">{tvsh18Error}</div>}
                 </Form.Group>
               </div>
-              <div className="col-md-6 mb-4">
+              <div className="col-12 mb-4">
                 <Form.Group controlId="tvsh8">
                   <Form.Label className="mb-2">TVSH 8% (€)</Form.Label>
                   <InputGroup>
